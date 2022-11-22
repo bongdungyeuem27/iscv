@@ -1,0 +1,56 @@
+@import '../variable.scss';
+%leftRightComponent {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-customcv-header-primary);
+  height: $headerHeight;
+  z-index: 7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-text-secondary);
+  .left {
+    @extend %leftRightComponent;
+    justify-content: flex-start;
+    flex: 1;
+  }
+  .targetContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+    .target {
+      padding: 2px 25px;
+      border-radius: 7px;
+      width: 200px;
+      height: 25px;
+
+      cursor: pointer;
+      border: 1px solid var(--color-text-secondary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p {
+        text-align: center;
+      }
+      &:hover {
+        background-color: rgb(79, 79, 79);
+      }
+    }
+  }
+  .right {
+    @extend %leftRightComponent;
+    justify-content: flex-end;
+    flex: 1;
+    margin: 0px 20px 0px 0px;
+  }
+}

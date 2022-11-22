@@ -1,0 +1,23 @@
+@use '../variable.scss' as variable;
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  .top {
+    width: 100%;
+    .title {
+      @include variable.title;
+    }
+    .time {
+      @include variable.time;
+    }
+  }
+  .group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+   
+  }
+}

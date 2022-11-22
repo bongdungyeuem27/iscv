@@ -1,0 +1,10 @@
+{
+    "delete": "Delete",
+    "upload": "Upload",
+    "name": "Name",
+    "phone": "Phone",
+    "professional": "Professional",
+    "save": "Save",
+    "invalid": "Invalid",
+    "required": "Required"
+}

@@ -1,0 +1,40 @@
+.container {
+  margin: 0px auto;
+//   width: 80%;
+  position: relative;
+  height: 100px;
+    overflow: hidden;
+
+  .loop {
+    display: flex;
+    height: 100%;
+    position: absolute;
+    overflow-x: hidden;
+    top: 0;
+    left: 0;
+    animation: hm-clients-track-move 5s linear infinite;
+    will-change: transform;
+    .image {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      height: 100px;
+      padding: 0 30px;
+      img {
+        max-width: 100%;
+        width: auto;
+        // object-fit: scale-down;
+      }
+    }
+  }
+}
+@keyframes hm-clients-track-move {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

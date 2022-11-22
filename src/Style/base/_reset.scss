@@ -1,0 +1,107 @@
+@use '../abtracts/mixins' as mixin;
+@use '../globalType/function' as function;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+
+html {
+  ::-webkit-scrollbar {
+    // -webkit-appearance:;
+    // width: 10px;
+    // background: red;
+    display: block;
+    width: 7px;
+    height: 5px;
+    -ms-overflow-style: none;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+    // -ms-overflow-style: none;
+  }
+  @include mixin.md {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+body {
+  background-color: var(--color-theme-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  font-family: var(--font-family-primary);
+  line-height: var(--theme-lineheight-primary);
+  text-decoration: none;
+  overflow-y: overlay;
+  overflow-x: auto;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  outline: none;
+  border: none;
+  background: inherit;
+  color: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type='number'] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+section {
+  margin: 60px 0 0px 0px;
+  scroll-padding-top: 60px;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  cursor: pointer;
+}
+
+textarea {
+  background: transparent;
+}
+
+ul {
+  list-style: none;
+}

@@ -1,0 +1,93 @@
+@use '../../../../Style/globalType/function' as function;
+$itemBorderRadius: 15px;
+$boxShadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px,
+  rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px,
+  rgba(0, 0, 0, 0.09) 0px -3px 5px;
+.container {
+  width: 100%;
+  margin: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-background-primary);
+    box-shadow: $boxShadow;
+    padding: 5px 10px;
+    .icon {
+      width: 35px;
+      aspect-ratio: 1/1;
+      flex-shrink: 0;
+      img {
+        @include function.imageRound;
+      }
+    }
+    .text {
+      display: flex;
+      flex-direction: column;
+
+      .name {
+        color: var(--color-text-primary);
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+      .time {
+        font-weight: 500;
+        font-size: 0.7rem;
+      }
+    }
+  }
+  .group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-width: 40%;
+    .item {
+      padding: 5px 15px;
+      background: var(--color-background-primary);
+      box-shadow: $boxShadow;
+      p {
+        word-break: break-word;
+      }
+    }
+  }
+}
+
+.guess {
+  align-items: flex-start;
+  .info {
+    border-top-right-radius: $itemBorderRadius;
+    border-bottom-right-radius: $itemBorderRadius;
+    border-bottom-left-radius: $itemBorderRadius;
+  }
+  .group {
+    .item {
+      border-top-right-radius: $itemBorderRadius;
+      border-bottom-right-radius: $itemBorderRadius;
+      border-bottom-left-radius: $itemBorderRadius;
+    }
+  }
+}
+.owner {
+  align-items: flex-end;
+  .info {
+    flex-direction: row-reverse;
+    border-top-left-radius: $itemBorderRadius;
+    border-bottom-left-radius: $itemBorderRadius;
+    border-bottom-right-radius: $itemBorderRadius;
+    .text {
+      align-items: flex-end;
+    }
+  }
+  .group {
+    align-items: flex-end;
+    .item {
+      flex-direction: row-reverse;
+      border-top-left-radius: $itemBorderRadius;
+      border-bottom-left-radius: $itemBorderRadius;
+      border-bottom-right-radius: $itemBorderRadius;
+    }
+  }
+}

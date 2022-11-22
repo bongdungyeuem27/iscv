@@ -1,0 +1,12 @@
+{
+    "register": "Register",
+    "login_into_your_account": "Login into your account",
+    "employee": "Employee",
+    "business": "Business",
+    "address": "Address",
+    "password": "Password",
+    "remember_me": "Remember me",
+    "forgot_your_password": "Forgot your password",
+    "login": "Login",
+    "require": "Require"
+}

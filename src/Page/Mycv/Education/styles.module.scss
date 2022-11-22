@@ -1,0 +1,11 @@
+@use '../variable.scss' as variable;
+
+.container {
+  width: 100%;
+  .school {
+    @include variable.title;
+  }
+  .time {
+    @include variable.time;
+  }
+}

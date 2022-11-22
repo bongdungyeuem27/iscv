@@ -1,0 +1,6 @@
+export { default as uit } from './uit.png'
+export { default as is } from './is.png'
+export { default as iig } from './iig.png'
+export { default as iscv } from './iscv.png'
+export { default as oep } from './oep.png'
+export { default as dhqg } from './dhqg.png'

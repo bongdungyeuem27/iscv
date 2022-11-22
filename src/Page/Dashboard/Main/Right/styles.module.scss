@@ -1,0 +1,12 @@
+@import '../../variables.scss';
+.container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: overlay;
+  width: $rightWidth;
+  flex-shrink: 0;
+  border-left: 1px solid var(--color-border);
+  background: inherit;
+}

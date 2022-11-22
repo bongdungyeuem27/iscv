@@ -1,0 +1,25 @@
+$leftWidth: 300px;
+$rightWidth: 350px;
+$borderRadiusItem: 10px;
+$space: 10px;
+
+@mixin title {
+  padding: 20px 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  a {
+    font-size: 22px;
+    cursor: pointer;
+  }
+  p {
+    font-weight: bold;
+    font-size: 23px;
+  }
+}
+
+@mixin dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: $space;
+}

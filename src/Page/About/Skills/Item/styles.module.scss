@@ -1,0 +1,80 @@
+@use '../../../../Style/globalType/function' as function;
+.itemWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  width: 100%;
+  gap: 20px;
+  .item {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+    .iconWrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-basis: 0;
+      flex-grow: 0.25;
+      i {
+        font-size: 20px;
+      }
+      label {
+        text-transform: capitalize;
+        min-width: 70px;
+        font-weight: bold;
+      }
+    }
+    .percent {
+      width: 40px;
+    }
+    .progressBar {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+  .tool {
+    display: flex;
+    gap: 15px;
+    i {
+      @include function.textGradient;
+      cursor: pointer;
+      &:nth-child(1) {
+        background: var(--color-button-heptan);
+      }
+      &:nth-child(2) {
+        background: var(--color-button-primary);
+      }
+    }
+  }
+  &:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    // border-bottom-left-radius: $borderRadius;
+    // border-bottom-right-radius: $borderRadius;
+  }
+}
+
+.delete {
+  padding: 20px 20px 0px 20px;
+  width: 400px;
+}
+
+.editContainer {
+  padding: 20px 20px 0px 20px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  label {
+    padding: 5px 20px;
+  }
+  input {
+    @include function.inputStyle;
+  }
+  p {
+    @include function.errorInput;
+  }
+}

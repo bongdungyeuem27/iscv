@@ -1,0 +1,29 @@
+@import '../../variable.scss';
+.layer {
+  display: flex;
+  flex-direction: column;
+  border-top: $borderStyle;
+  height: 100%;
+  width: 100%;
+  background: var(--color-background-primary);
+  .layerTitle {
+    height: $tabTitle;
+    border-top: $borderStyle;
+    border-bottom: $borderStyle;
+
+    .layerContainer {
+      padding: 7px 13px;
+      background: var(--color-background-primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .layerText {
+      }
+    }
+  }
+  .layerWrapper {
+    overflow-x: hidden;
+    overflow-y: overlay;
+    height: 100%;
+  }
+}

@@ -1,0 +1,31 @@
+@import '../../variable.scss';
+.container {
+  display: flex;
+  flex-direction: column;
+  border-top: $borderStyle;
+  width: 100%;
+  .title {
+    width: 100%;
+    height: $tabTitle;
+    border-top: $borderStyle;
+    border-bottom: $borderStyle;
+    .titleContainer {
+      padding: 7px 13px;
+      background: var(--color-background-primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  .toolbox {
+    width: 100%;
+    overflow-y: overlay;
+    .toolboxScrollContainer {
+      width: 100%;
+      display: grid;
+      grid-gap: 5px;
+      padding: 5px 5px;
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    }
+  }
+}

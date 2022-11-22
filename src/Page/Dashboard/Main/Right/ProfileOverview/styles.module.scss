@@ -1,0 +1,77 @@
+@use '../../../../../Style/globalType/function' as function;
+.container {
+  width: 100%;
+  padding: 20px 20px;
+  background: inherit;
+  color: var(--color-text-primary);
+
+  .top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+    .titleWrapper {
+      .title {
+        label {
+          font-size: 17px;
+          font-weight: bold;
+          color: var(--color-text-primary);
+        }
+        p {
+          font-size: 13px;
+          font-weight: 500;
+
+          color: var(--color-text-grey);
+        }
+      }
+    }
+    .tool {
+      display: flex;
+      gap: 10px;
+      flex-direction: row-reverse;
+      button {
+        @include function.buttonRound;
+        background: var(--color-button-secondary);
+        i {
+          font-size: 115%;
+          color: var(--color-background-primary);
+        }
+      }
+    }
+  }
+  .middle {
+    padding: 40px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      border-radius: 100%;
+      width: 100px;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    }
+  }
+  .bottom {
+    padding: 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      label {
+        font-weight: bold;
+      }
+      p {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--color-text-grey);
+      }
+    }
+  }
+}

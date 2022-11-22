@@ -1,0 +1,22 @@
+{
+    "register_your_account": "Register your account",
+    "employee": "Employee",
+    "business": "Business",
+    "address": "Address",
+    "id": "Id",
+    "name": "Name",
+    "phone": "Phone",
+    "professional": "Professional",
+    "email": "Email",
+    "github": "Github",
+    "linkedin": "Linkedin",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "register": "Register",
+    "category": "Category",
+    "require": "Require",
+    "invalid": "Invalid",
+    "had_register": "Had register",
+    "idcard_must_be_12": "Idcard must be 1",
+    "phone_must_be_10": "Phone must be 10"
+}

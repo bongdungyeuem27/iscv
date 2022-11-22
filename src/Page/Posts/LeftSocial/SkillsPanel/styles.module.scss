@@ -1,0 +1,30 @@
+@use '../../../../Style/globalType/function' as function;
+@import '../../variables.scss';
+.container {
+  @include function.panel;
+  padding: 10px 15px;
+  .title {
+    @include function.panelTitle;
+    padding: 5px 10px;
+  }
+  .item {
+    color: var(--color-text-grey);
+    margin: 7px 0px;
+    .skillTextWrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    
+      label {
+        min-width: 50px;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+      a {
+        font-size: 13px;
+        width: 15px;
+      }
+    }
+  }
+}

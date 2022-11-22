@@ -1,0 +1,28 @@
+@use '../../../Style/globalType/function' as function;
+@import '../variable.scss';
+@import './variable.scss';
+
+.container {
+  position: relative;
+  background: var(--color-background-primary);
+  width: 100%;
+  height: 100%;
+  color: var(--color-customcv-text-primary);
+  display: flex;
+  // flex-direction: column;
+  border-right: $borderStyle;
+  @include function.disableselect;
+
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-customcv-header-primary);
+
+  }
+  // .tab {
+  //   width: 100%;
+  //   border-right: $borderStyle;
+  //   border-top: $borderStyle;
+  //   border-bottom: $borderStyle;
+  // }
+}

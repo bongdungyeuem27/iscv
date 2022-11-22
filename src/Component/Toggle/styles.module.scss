@@ -1,0 +1,48 @@
+$height: 20px;
+$paddingGap: 2px;
+.switch {
+  position: relative;
+  display: inline-block;
+  width: calc($height * 2);
+  height: $height;
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50px;
+    .round {
+      border-radius: 50px;
+      &:before {
+        border-radius: 50%;
+      }
+    }
+    &:before {
+      position: absolute;
+      content: '';
+      border-radius: 50px;
+      width: 16px;
+      aspect-ratio: 1/1;
+      left: 0px;
+      bottom: $paddingGap;
+      transform: translateX($paddingGap);
+      background-color: white;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+    }
+  }
+  .checked {
+    background: var(--color-active-primary);
+    &:before {
+      -webkit-transform: translateX($height + $paddingGap);
+      -ms-transform: translateX($height + $paddingGap);
+      transform: translateX($height + $paddingGap);
+    }
+  }
+}

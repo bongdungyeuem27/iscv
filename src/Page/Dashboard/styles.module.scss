@@ -1,0 +1,20 @@
+@use '../../Style/globalType/function' as function;
+@use '../../Style/abtracts/mixins' as mixin;
+@use '../.../../../Style/globalType/internal' as internal;
+@import './variables.scss';
+.container {
+  width: 100%;
+  background: var(--color-background-primary);
+  color: var(--color-text-primary);
+  .right {
+    @include internal.dashboardContainer;
+    position: fixed;
+    top: 0;
+    left: $leftWidth;
+    bottom: 0;
+    right: 0;
+    // width: 100%;
+    background: inherit;
+    overflow: overlay;
+  }
+}

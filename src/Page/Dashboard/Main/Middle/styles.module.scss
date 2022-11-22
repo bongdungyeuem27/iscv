@@ -1,0 +1,7 @@
+@import '../../variables.scss';
+.container {
+  position: absolute;
+  top: 0;
+  right: $rightWidth;
+  left: 0;
+}

@@ -1,0 +1,43 @@
+.container {
+  width: 100%;
+  .wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .round {
+      width: 70%;
+      aspect-ratio: 1/1;
+      border-radius: 100%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      outline: 10px solid var(--color-background-primary);
+   
+      img {
+        width: 90%;
+        height: 90%;
+        border-radius: 100%;
+        object-fit: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 3;
+        outline: 1px solid var(--color-background-primary);
+      }
+    }
+  }
+  .qr {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    .qrItem {
+      width: 80px;
+      aspect-ratio: 1/1;
+      outline: 2px solid var(--color-background-primary);
+      outline-offset: 3px;
+    }
+  }
+}

@@ -1,0 +1,63 @@
+$width: 400px;
+
+.languageButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin: 0px 10px 0px 0px;
+    flex-shrink: 0;
+  }
+  .buttonSelect {
+    width: 100px;
+    text-align: left;
+  }
+}
+
+.ulLanguage {
+  width: $width;
+  padding: 7px 13px;
+  color: var(--color-text-primary);
+  font-weight: 500;
+  .buttonWrapper {
+    cursor: pointer;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .languageButtonList {
+      width: 100%;
+      padding: 2px 5px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      img {
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        margin: 0px 10px 0px 0px;
+        flex-shrink: 0;
+      }
+      .buttonSelect {
+        text-align: left;
+      }
+      &:hover {
+        outline: 1px solid var(--color-border);
+      }
+    }
+    .active {
+      outline: 1px solid var(--color-customcv-border-secondary);
+      &:hover {
+        outline: 1px solid var(--color-customcv-border-secondary);
+      }
+    }
+  }
+  // hr {
+  //   z-index: 1;
+  //   width: calc($width - 40px);
+  // }
+}

@@ -1,0 +1,17 @@
+@mixin title {
+  width: 100%;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--color-text-primary);
+  line-height: 1.2rem;
+}
+@mixin time {
+  font-weight: 550;
+  font-size: 1rem;
+  color: var(--color-customcv-active-primary);
+}
+
+@mixin content {
+  font-size: 1rem;
+  color: var(--color-text-grey);
+}

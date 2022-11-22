@@ -1,0 +1,36 @@
+@use '../../../Style/globalType/function' as function;
+@import '../variable.scss';
+@import './variable.scss';
+
+.container {
+  position: fixed;
+  top: $headerHeight;
+  right: 0;
+  bottom: 0;
+  background: var(--color-background-primary);
+  color: var(--color-customcv-text-primary);
+  border-left: $borderStyle;
+  font-size: 13px;
+  @include function.borderBox;
+  .tabContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .tab {
+      flex: 1;
+      //   height: $tabHeight;
+      text-align: center;
+      padding: 3px 0px;
+      color: var(--color-customcv-title-secondary);
+      cursor: pointer;
+      &:not(:first-child) {
+        border-left: $borderStyle;
+      }
+      border-bottom: $borderStyle;
+    }
+    .active {
+      border-bottom: $borderStyleLargerActive;
+      color: var(--color-customcv-title-primary);
+    }
+  }
+}

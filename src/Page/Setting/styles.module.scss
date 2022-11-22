@@ -1,0 +1,13 @@
+@import './variable.scss';
+.container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  background: var(--color-background-primary);
+}
+.right {
+  width: 100%;
+  overflow-y: overlay;
+  margin: 0px 0px 0px $leftWidth;
+  padding: 20px 30px;
+}

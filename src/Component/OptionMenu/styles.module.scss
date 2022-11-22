@@ -1,0 +1,47 @@
+$toggleWidth: 40px;
+.container {
+  position: relative;
+  .toggle {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+      font-size: 20px;
+    }
+    width: $toggleWidth;
+    height: $toggleWidth;
+    border-radius: 100%;
+    &:hover {
+      background: var(--color-hover-primary);
+    }
+  }
+  .menu {
+    position: absolute;
+    top: $toggleWidth;
+    right: 0;
+    background: var(--color-background-primary);
+    padding: 5px 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    transition: all 0.2s cubic-bezier(0.35, 0, 0.25, 1);
+    transform-origin: top right;
+    visibility: hidden;
+    border-radius: 10px;
+    opacity: 0;
+    .content {
+      .item {
+        white-space: nowrap;
+        padding: 3px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+        &:hover {
+          background: var(--color-hover-primary);
+        }
+      }
+    }
+  }
+  .open {
+    visibility: visible;
+    opacity: 1;
+  }
+}

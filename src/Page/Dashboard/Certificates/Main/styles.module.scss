@@ -1,0 +1,222 @@
+@use '../../../../Style/globalType/function' as function;
+@use '../../../../Style/globalType/internal' as internal;
+@use "../../variables.scss" as variables;
+$width: 230px;
+$dateWidth: 150px;
+$dropdownIconWidth: 50px;
+%theaderStyle {
+  font-weight: 600;
+  padding: 20px 20px;
+  color: var(--color-text-secondary);
+}
+%inputStyle {
+  padding: 5px 10px;
+  font-size: 15px;
+
+  height: 40px;
+}
+%thStyle {
+  padding: 5px 10px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+
+  // background: purple;
+}
+%dropdownStyle {
+  // padding: 5px 5px;
+  color: rgb(85, 85, 85);
+  height: 40px;
+  width: $dropdownIconWidth;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.container {
+  @include internal.dashboardContainer;
+  margin: variables.$space;
+  position: relative;
+  background: var(--color-background-primary);
+  width: 100%;
+  height: 100%;
+
+  .titleWrapper {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .title {
+      font-size: 40px;
+      font-weight: 400;
+      text-align: center;
+      color: var(--color-text-primary);
+    }
+  }
+
+  .filterWrapper {
+    padding: 10px 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .inputWrapper {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0px 0px 0px 10px;
+      box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+      background: var(--color-hover-primary);
+      border-radius: 10px;
+      .filterDate {
+        @extend %inputStyle;
+        border-radius: 10px;
+        width: $dateWidth;
+      }
+      .filterLocation {
+        @extend %inputStyle;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        width: calc($width - $dropdownIconWidth);
+      }
+      .filterStatus {
+        @extend %inputStyle;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        width: calc($width - $dropdownIconWidth);
+      }
+      .filterDropdown {
+        @extend %dropdownStyle;
+      }
+    }
+  }
+
+  .tableWrapper {
+    box-shadow: 0 0 40px 0rgba (0, 0, 0, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .table {
+      width: 100%;
+      height: 100%;
+      box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+      border-radius: 10px;
+      .thead {
+        background: var(--color-button-heptan);
+        tr {
+          word-break: break-word;
+        }
+        &:first-child {
+          th {
+            &:first-child {
+              border-radius: 10px 0 0 10px;
+            }
+            &:last-child {
+              border-radius: 0 10px 10px 0;
+            }
+          }
+        }
+        .theaderStyle {
+          @extend %theaderStyle;
+        }
+        .body {
+          height: 60px;
+          text-align: center;
+          vertical-align: middle;
+        }
+      }
+      tbody {
+        // border: solid 1px #545454;
+        // border-radius: 10px;
+        tr {
+          &:nth-child(even) {
+            background-color: #f5f5f5;
+          }
+        }
+      }
+    }
+    .column1 {
+      @extend %thStyle;
+      flex: 0.5;
+    }
+    .column2 {
+      @extend %thStyle;
+      flex: 4;
+    }
+    .column3 {
+      @extend %thStyle;
+      flex: 3;
+    }
+    .column4 {
+      @extend %thStyle;
+      flex: 1;
+    }
+    .column5 {
+      @extend %thStyle;
+      flex: 3;
+    }
+    .column6 {
+      width: 3;
+      @extend %thStyle;
+    }
+  }
+}
+
+.edit {
+  color: var(--color-text-tertiary);
+  margin: 0px 0px 0px 10px;
+  cursor: pointer;
+}
+%button {
+  border-radius: 20px;
+  padding: 5px 15px;
+  margin: 2px 5px;
+}
+.buttonStatus {
+  @extend %button;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  min-width: 130px;
+}
+.buttonWaiting {
+  background: var(--color-button-primary);
+}
+.buttonAccepted {
+  background: var(--color-button-secondary);
+}
+.buttonDeclined {
+  background: var(--color-button-tertiary);
+}
+
+$marginValue: 2px;
+.buttonLR {
+  background: #123fe2;
+  @extend %button;
+  color: var(--color-text-secondary);
+  .iconL {
+    margin: 0px $marginValue 0px 0px;
+  }
+  .iconR {
+    margin: 0px 0px 0px $marginValue;
+  }
+}
+
+.buttonSW {
+  background: var(--color-button-green);
+  @extend %button;
+  color: var(--color-text-secondary);
+  .iconS {
+    margin: 0px $marginValue 0px 0px;
+  }
+  .iconW {
+    margin: 0px 0px 0px $marginValue;
+  }
+}
+
+.TypeLR {
+  @include function.button;
+  background: var(--color-button-heptan);
+}
+.TypeSW {
+  @include function.button;
+  background: var(--color-button-secondary);
+}

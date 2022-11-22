@@ -1,0 +1,94 @@
+@use '../../mixin.scss' as mixin;
+@import '../../variable.scss';
+@import '../../../variable.scss';
+
+%row {
+  margin: calc($itemRowGap / 2) 0px;
+}
+.container {
+  @include mixin.toolContainer;
+  .title {
+    @include mixin.title;
+  }
+  .wrapper {
+    @include mixin.wrapper;
+    span {
+      cursor: pointer;
+      &:hover {
+        color: var(--color-customcv-hover-secondary);
+      }
+    }
+    .active {
+      color: var(--color-customcv-active-primary);
+      &:hover {
+        color: var(--color-customcv-active-primary);
+      }
+    }
+    .font {
+      @extend %row;
+    }
+    .font2 {
+      @extend %row;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+      .fontWeight {
+        width: 150px;
+      }
+      .fontSize {
+        flex: 1;
+      }
+    }
+    .font3 {
+      @extend %row;
+      margin: 5px 10px;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+
+      .item {
+        @include mixin.item;
+      }
+      .underline {
+        flex-direction: column;
+        gap: 1px;
+        align-items: center;
+
+        .underlineText {
+          font-size: 10px;
+        }
+      }
+    }
+    .font4 {
+      @extend %row;
+      margin: 10px 10px;
+      display: flex;
+      align-items: center;
+      gap: 35px;
+      .item {
+        @include mixin.item;
+      }
+    }
+    .font5 {
+      @extend %row;
+      margin: 10px 10px;
+      display: flex;
+      align-items: center;
+      gap: 35px;
+      .item {
+        @include mixin.item;
+        .colorBox {
+          width: 20px;
+          height: 20px;
+          background: black;
+          border: $borderStyle;
+        }
+        i {
+          font-size: 18px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

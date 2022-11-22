@@ -1,0 +1,22 @@
+{
+    "register_your_account": "Đăng kí tài khoản",
+    "employee": "Nhân viên",
+    "business": "Doanh nghiệp",
+    "address": "Địa chỉ",
+    "id": "CCCD",
+    "name": "Tên",
+    "phone": "SĐT",
+    "professional": "Chuyên môn",
+    "email": "Email",
+    "github": "Github",
+    "linkedin": "Linkedin",
+    "password": "Mật khẩu",
+    "confirm_password": "Nhập lại mật khẩu",
+    "register": "Đăng ký",
+    "category": "Loại doanh nghiệp",
+    "require": "Bắt buộc",
+    "invalid": "Không phù hợp",
+    "had_register": "Đã đăng ký",
+    "idcard_must_be_12": "CCCD phải có 12 số",
+    "phone_must_be_10": "SĐT Phải 10 số"
+}

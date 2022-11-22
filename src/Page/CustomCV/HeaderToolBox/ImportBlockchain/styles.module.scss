@@ -1,0 +1,19 @@
+.container {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: overlay;
+  padding: 10px 20px;
+  color: var(--color-text-primary);
+  gap: 5px;
+  .item {
+    border: 1px solid var(--color-border);
+    padding: 3px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    a {
+      margin: 0px 0px 0px 10px;
+    }
+  }
+}

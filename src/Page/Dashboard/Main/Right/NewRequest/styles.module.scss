@@ -1,0 +1,72 @@
+@use '../../../../../Style/globalType/function' as function;
+@use '../../../../../Style/globalType/internal' as internal;
+@import '../../../variables.scss';
+.container {
+  @include internal.dashboardContainer;
+  .boxTitle {
+    @include internal.title;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 5px;
+      border-radius: $borderRadiusItem;
+      border: 1px solid var(--color-border);
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+      &:hover {
+        background: var(--color-hover-primary);
+      }
+      .iconTextWrapper {
+        display: flex;
+        gap: 7px;
+        img {
+          width: 30px;
+          height: 30px;
+        }
+        .textWrapper {
+          display: flex;
+          flex-direction: column;
+          .title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            a {
+              color: var(--color-text-primary);
+              font-weight: bold;
+              font-size: 15px;
+            }
+            .follow {
+              color: var(--color-follow-primary);
+              font-weight: bold;
+              font-size: 13px;
+              cursor: pointer;
+            }
+          }
+          .content {
+            font-size: 13px;
+            white-space: wrap;
+          }
+        }
+      }
+      .moreInfo {
+        i {
+          @include function.textGradient;
+          font-size: 20px;
+          background: var(--color-button-tertiary);
+          cursor: pointer;
+        }
+      }
+      .time {
+        color: var(--color-active-primary);
+        font-size: 13px;
+      }
+    }
+  }
+}

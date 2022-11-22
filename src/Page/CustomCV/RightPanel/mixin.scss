@@ -1,0 +1,41 @@
+@import '../variable.scss';
+@import './variable.scss';
+@mixin title {
+  padding: 0px 10px;
+  color: var(--color-customcv-title-primary);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 13px;
+}
+
+@mixin wrapper {
+  row-gap: $itemRowGap;
+  padding: 5px 0px;
+}
+
+@mixin toolContainer {
+  padding: 10px 10px;
+  border-top: $borderStyleLarger;
+}
+
+@mixin item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  label {
+    flex-shrink: 0;
+  }
+  input {
+    width: 40px;
+    border-bottom: $borderStyle;
+    &:focus {
+      border-bottom: $borderStyleActive;
+    }
+  }
+}
+
+@mixin borderRadiusStyle {
+  border-radius: 5px;
+  border: $borderStyle;
+}

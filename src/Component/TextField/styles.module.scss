@@ -1,0 +1,16 @@
+@use '../../Style/globalType/function' as function;
+.container {
+  @include function.panel;
+  width: 100%;
+  resize: none;
+  padding: 5px 5px;
+  outline: 1px solid var(--color-border);
+  background: var(--color-input-primary);
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:focus {
+    outline: 1px solid var(--color-active-secondary);
+  }
+}

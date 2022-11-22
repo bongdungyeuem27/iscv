@@ -1,0 +1,46 @@
+@use '../variable.scss' as variable;
+.container {
+  width: 100%;
+  white-space: wrap;
+  .item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 25px;
+    align-content: stretch;
+    justify-content: stretch;
+    .title {
+      @include variable.title;
+      width: unset;
+      color: var(--color-text-secondary);
+      display: flex;
+      width: 70px;
+      flex-shrink: 0;
+      flex-direction: row;
+      align-items: center;
+      .string {
+        flex: 1;
+        float: left;
+        text-align: left;
+        text-transform: capitalize;
+
+        // word-wrap: break-word;
+      }
+
+      &::after {
+        content: ':';
+        margin: 0px 0px 0px 0px;
+        color: inherit;
+
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+    }
+    .content {
+      word-break: break-all;
+    }
+    .info {
+      @include variable.content;
+    }
+  }
+}

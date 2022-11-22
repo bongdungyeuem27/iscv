@@ -1,0 +1,38 @@
+@use '../../../../Style/globalType/function' as function;
+.group {
+  margin: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .iconGroupName {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .icon {
+        @include function.buttonRound;
+        width: 30px;
+        height: 30px;
+        flex-shrink: 0;
+        background: var(--color-button-octane);
+        i {
+          color: var(--color-background-primary);
+        }
+      }
+      .name {
+        font-weight: 500;
+        color: var(--color-text-primary);
+      }
+    }
+  }
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+  }
+}

@@ -1,0 +1,19 @@
+@use '../../mixin.scss' as mixin;
+@import '../../../variable.scss';
+
+.container {
+  @include mixin.toolContainer;
+  .title {
+    @include mixin.title;
+  }
+  .wrapper {
+    display: grid;
+
+    grid-template-columns: 40% 40%;
+    @include mixin.wrapper;
+    padding: 5px 10px;
+    .item {
+      @include mixin.item;
+    }
+  }
+}

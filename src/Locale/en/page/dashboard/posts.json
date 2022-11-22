@@ -1,0 +1,19 @@
+{
+    "manager_posts": "Manage posts",
+    "create_post": "Create post",
+    "post_name": "Post title",
+    "date": "Date",
+    "status": "Status",
+    "content": "Content",
+    "applied": "Applied",
+    "view_post": "View post",
+    "request": "Request",
+    "follow": "Follow",
+    "confirm_appointment_with": "Confirm appointment with",
+    "time": "Time",
+    "add_appointment": "Add appointment",
+    "applied_into_post": "Requested to recruit",
+    "applier": "Applier",
+    "new": "New",
+    "seen": "Seen"
+}

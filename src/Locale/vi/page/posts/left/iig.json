@@ -1,0 +1,6 @@
+{
+    "request_certificate": "Yêu cầu cấp chứng chỉ",
+    "certificate": "Chứng chỉ",
+    "has_request_lr": "Đã yêu cầu Listening & Reading",
+    "has_request_sw": "Đã yêu cầu Speaking & Writing"
+}

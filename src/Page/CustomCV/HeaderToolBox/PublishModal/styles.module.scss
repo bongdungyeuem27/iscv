@@ -1,0 +1,18 @@
+@use "../../../../Style/globalType/function" as function;
+.container{
+    padding: 10px;
+    min-width: 30vw;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .item{
+        display: flex;
+        flex-direction: column;
+        input{
+            @include function.inputStyle;
+        }
+        p{
+            @include function.errorInput;
+        }
+    }
+}

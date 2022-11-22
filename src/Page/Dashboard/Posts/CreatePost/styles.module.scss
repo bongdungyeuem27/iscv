@@ -1,0 +1,120 @@
+@use '../../../../Style/globalType/function' as function;
+@use '../../../../Style/globalType/internal' as internal;
+@use '../../variables.scss' as variables;
+@import '../../variables.scss';
+$paddingWrapperItem: 5px 10px;
+%item {
+  @include function.panel;
+  border: 1px solid var(--color-hover-primary);
+  box-shadow: var(--box-shadow-primary);
+  padding: $paddingWrapperItem;
+  a {
+    font-weight: bold;
+    color: var(--color-text-primary);
+  }
+}
+.container {
+  margin: variables.$space;
+  .title {
+    @include internal.title;
+  }
+
+  .group {
+    display: flex;
+
+    gap: 10px;
+    .left {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 17px;
+      flex: 1;
+
+      color: var(--color-text-grey);
+      .image {
+        @extend %item;
+        .imageTool {
+          padding: 10px 20px;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          background: inherit;
+          i {
+            font-size: 1.5em;
+            @include function.textGradient;
+            background: var(--color-button-tertiary);
+          }
+          a {
+            font-weight: 500;
+            @include function.textGradient;
+
+            background: var(--color-button-tertiary);
+          }
+        }
+      }
+      .content {
+        @extend %item;
+        .hashtag {
+          display: flex;
+          gap: 5px;
+          cursor: pointer;
+          align-items: center;
+          i {
+            @include function.textGradient;
+            background: var(--color-button-hexatiary);
+          }
+          a {
+            font-weight: 450;
+            color: inherit;
+            text-decoration: capitalize;
+          }
+        }
+        .contentDropdown {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          align-content: stretch;
+          span {
+            cursor: pointer;
+            text-align: left;
+          }
+        }
+        .tool {
+          display: flex;
+          align-items: center;
+        }
+      }
+      .job {
+        @extend %item;
+        input {
+          @include function.inputStyle;
+        }
+      }
+      .button {
+        @extend %item;
+        display: flex;
+        gap: 10px;
+        flex-direction: row-reverse;
+        .cancel {
+          @include function.button;
+          background: var(--color-background-primary);
+          border: 2px solid var(--color-border);
+          color: var(--color-text-primary);
+        }
+        .publish {
+          @include function.button;
+        }
+      }
+      .panelTitle {
+        padding: $paddingWrapperItem;
+        font-size: 1rem;
+        color: var(--color-text-primary);
+      }
+    }
+    .right {
+      @include function.panel;
+      flex: 1.7;
+      // box-shadow: var(--box-shadow-primary);
+    }
+  }
+}

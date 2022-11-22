@@ -1,0 +1,79 @@
+@use '../external.scss' as external;
+@use "../../../Style/globalType/function" as function;
+@import '../variable.scss';
+.container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .avatarWrapper {
+    padding: 20px 10px;
+    display: flex;
+    gap: 70px;
+    border-bottom: 1px solid var(--color-border);
+    width: 100%;
+    .iconWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      .buttonImport {
+        // left: 0;
+        font-size: 1.5rem;
+        z-index: 5;
+        i {
+          @include function.textGradient;
+          background: var(--color-button-primary);
+          cursor: pointer;
+        }
+      }
+      justify-content: center;
+      img {
+        width: 140px;
+        height: 140px;
+        border-radius: 100%;
+        object-fit: cover;
+
+      }
+    }
+
+    .buttonWrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .delete {
+        @include external.button;
+        background: var(--color-button-primary);
+        color: var(--color-text-secondary);
+      }
+      .upload {
+        @include external.button;
+        background: var(--color-button-secondary);
+        color: var(--color-text-secondary);
+      }
+    }
+  }
+  .itemWrapper {
+    @include external.group;
+    // align-items: center;
+    .inputGroup {
+      width: 100%;
+    }
+  }
+  .saveWrapper {
+    padding: 20px 10px;
+    display: flex;
+    gap: 70px;
+    border-bottom: 1px solid var(--color-border);
+    width: 100%;
+
+    justify-content: center;
+    button {
+      @include external.button;
+      background: var(--color-button-secondary);
+      color: var(--color-text-secondary);
+    }
+  }
+}

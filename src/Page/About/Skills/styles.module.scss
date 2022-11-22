@@ -1,0 +1,62 @@
+@use '../../../Style/globalType/function' as function;
+@import '../variables.scss';
+
+.container {
+  margin: 20px 0px;
+  background: var(--color-background-primary);
+  border-radius: $borderRadius;
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 10px 0px;
+    .titleText {
+      @include title;
+    }
+    .toolTitle {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin: 0px 20px 0px 0px;
+      .toolTitleWrapper {
+        @include function.buttonRound;
+        i {
+          @include function.textGradient;
+          background: var(--color-button-secondary);
+        }
+      }
+    }
+  }
+  .skills {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.addSkillContainer {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  padding: 10px 20px;
+  .itemWrapper {
+    // padding: 5px 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    label {
+      padding: 0px 15px;
+      margin: 5px 0px;
+      font-weight: 500;
+    }
+    input {
+      @include function.inputStyle;
+      width: 100%;
+      color: var(--color-text-grey);
+      text-transform: uppercase;
+    }
+    p {
+      @include function.errorInput;
+    }
+  }
+}

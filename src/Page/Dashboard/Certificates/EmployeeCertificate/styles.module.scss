@@ -1,0 +1,298 @@
+@use '../../../../Style/abtracts/mixins' as mixin;
+@use '../../../../Style/globalType/function' as function;
+@use "../../variables.scss" as variables;
+$margin: 20px;
+$width: 230px;
+$dateWidth: 150px;
+$dropdownIconWidth: 50px;
+$minInputWidth: 300px;
+$tableScrollHeight: 500px;
+%theaderStyle {
+  font-weight: 600;
+  padding: 20px 20px;
+
+  color: var(--color-text-secondary);
+}
+%inputStyle {
+  padding: 5px 10px;
+  font-size: 15px;
+  color: var(--color-text-grey);
+  height: 40px;
+}
+%thStyle {
+  padding: 5px 10px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+
+  // background: purple;
+}
+%dropdownStyle {
+  // padding: 5px 5px;
+  color: var(--color-text-grey);
+  height: 40px;
+  width: $dropdownIconWidth;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+%button {
+  margin: 0px 10px;
+  background: red;
+  padding: 5px 10px;
+  border-radius: 0.25rem;
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+%group {
+  background: var(--color-theme-primary);
+  box-shadow: var(--box-shadown-primary);
+  border: var(--border-primary);
+  border-radius: 0.25rem;
+  width: 100%;
+}
+.container {
+  margin: variables.$space;
+  position: relative;
+  background: var(--color-background-primary);
+  // background: blue;
+  width: 100%;
+  height: 100%;
+  .titleWrapper {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    .title {
+      font-size: 40px;
+      font-weight: 400;
+      text-align: center;
+      color: var(--color-text-primary);
+    }
+  }
+
+  .filterWrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    .inputWrapper {
+      display: flex;
+      justify-content: flex-end;
+      background: var(--color-hover-primary);
+      border-radius: 10px;
+      box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+      .filterDate {
+        @extend %inputStyle;
+        border-radius: 10px;
+        width: $dateWidth;
+      }
+      .filterLocation {
+        @extend %inputStyle;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        width: calc($width - $dropdownIconWidth);
+      }
+      .filterStatus {
+        @extend %inputStyle;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        width: calc($width - $dropdownIconWidth);
+      }
+      .filterDropdown {
+        @extend %dropdownStyle;
+      }
+    }
+  }
+
+  .group {
+    .tableWrapper {
+      box-shadow: 0 0 40px 0rgba (0, 0, 0, 0.15);
+
+      display: flex;
+      background: white;
+      justify-content: center;
+      align-items: center;
+
+      .table {
+        width: 100%;
+        height: 100%;
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+        border-radius: 10px;
+        .thead {
+          position: relative;
+          display: block;
+          text-align: center;
+          &:first-child {
+            border-radius: 10px 0 0 10px;
+          }
+          &:last-child {
+            border-radius: 0 10px 10px 0;
+          }
+          tr {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            align-content: center;
+            background-color: var(--color-background-secondary);
+            border-radius: 10px;
+          }
+          .theaderStyle {
+            @extend %theaderStyle;
+          }
+        }
+        tbody {
+          display: block;
+          max-height: $tableScrollHeight;
+          overflow: auto;
+          tr {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            &:nth-child(even) {
+              background-color: #f5f5f5;
+            }
+            td {
+              display: block;
+              height: 60px;
+              text-align: center;
+            }
+          }
+        }
+      }
+      .column1 {
+        width: 5%;
+        @extend %thStyle;
+      }
+      .column2 {
+        width: 20%;
+        @extend %thStyle;
+      }
+      .column3 {
+        width: 10%;
+        @extend %thStyle;
+      }
+      .column4 {
+        width: 10%;
+        @extend %thStyle;
+      }
+      .column5 {
+        width: 20%;
+        @extend %thStyle;
+      }
+      .column6 {
+        width: 20%;
+        @extend %thStyle;
+      }
+      .column7 {
+        width: 20%;
+        @extend %thStyle;
+      }
+    }
+
+    .groupTitleWrapper {
+      display: flex;
+      justify-content: space-between;
+      margin: 0px 0px 10px 0px;
+      .textTitle {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+        .iconWrapper {
+          display: flex;
+          gap: 5px;
+          .icon {
+            background: var(--color-button-primary);
+            @include function.textGradient;
+          }
+        }
+      }
+
+      .buttonAdd {
+        background: var(--color-button-primary);
+        color: var(--color-text-secondary);
+        padding: 6px 15px;
+        border-radius: 12px;
+      }
+    }
+  }
+}
+
+.modalContainer {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  .content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    @include mixin.md {
+      flex-direction: column;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .inputWrapper {
+      position: relative;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      margin: 5px 10px;
+      background: var(--color-input-primary);
+      flex: 1;
+      @include mixin.xl {
+        width: 100%;
+        margin: 5px 0px;
+      }
+
+      .addressTitle {
+        width: 100%;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .label {
+        color: var(--color-text-primary);
+        font-weight: 500;
+      }
+      .input {
+        @include function.inputStyle;
+        margin: 0px 0px 0px 0px;
+        background: var(--color-background-primary);
+        padding: 7px 15px;
+        min-width: $minInputWidth;
+        border-radius: 10px;
+        @include function.truncate();
+        width: 100%;
+      }
+    }
+    .address {
+      width: 100%;
+      flex: unset;
+    }
+  }
+}
+
+%button {
+  border-radius: 20px;
+  padding: 5px 15px;
+  margin: 2px 5px;
+}
+.buttonStatus {
+  @extend %button;
+  color: var(--color-text-secondary);
+}
+.buttonWaiting {
+  background: var(--color-button-primary);
+}
+
+.error {
+  @include function.errorInput;
+}

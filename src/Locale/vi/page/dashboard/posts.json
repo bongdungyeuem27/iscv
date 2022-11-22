@@ -1,0 +1,19 @@
+{
+    "manager_posts": "Quản lý bài viết",
+    "create_post": "Tạo bài viết",
+    "post_name": "Tên bài viết",
+    "date": "Ngày",
+    "status": " Trạng thái",
+    "content": "Nội dung",
+    "applied": "Đã đăng ký",
+    "view_post": "Xem bài viết",
+    "request": "Yêu cầu",
+    "follow": "Theo dõi",
+    "confirm_appointment_with": "Xác nhận cuộc hẹn với",
+    "time": "Thời gian",
+    "add_appointment": "Thêm cuộc hẹn",
+    "applied_into_post": "Đã yêu cầu tuyển dụng",
+    "applier": "Người đăng ký",
+    "new": "Mới",
+    "seen": "Đã xem"
+}

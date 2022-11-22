@@ -1,0 +1,42 @@
+@mixin itemTool {
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  i {
+    width: 15px;
+    height: 15px;
+    font-weight: 500;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &:hover {
+    background: var(--color-hover-primary);
+  }
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  color: var(--color-text-primary);
+  align-items: center;
+  gap: 5px;
+  border-radius: 5px;
+  &:focus-within {
+    outline: 2px solid var(--color-active-primary);
+  }
+  .iconSearch {
+    @include itemTool;
+  }
+  .textInput {
+    flex: 1;
+  }
+  .boxClose {
+    @include itemTool;
+  }
+  .filterBox {
+    @include itemTool;
+  }
+}
