@@ -14,15 +14,15 @@ function Index() {
       >
         {arrayItem.map((key, index) => {
           return (
-            <div style={{ width: '200px' }} className={styles.image}>
-              <img key={index} src={trademark[key]}></img>
+            <div key={index} style={{ width: '200px' }} className={styles.image}>
+              <img  src={trademark[key]}></img>
             </div>
           )
         })}
         {arrayItem.map((key, index) => {
           return (
-            <div style={{ width: '200px' }} className={styles.image}>
-              <img key={2 * index} src={trademark[key]}></img>
+            <div key={2 * index} style={{ width: '200px' }} className={styles.image}>
+              <img  src={trademark[key]}></img>
             </div>
           )
         })}

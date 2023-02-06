@@ -9,7 +9,7 @@ import { useLoading } from '@component/Loading'
 import { useToast } from '@component/Toast'
 import { getContract as getContractEmployee } from '@contract/employeeController'
 import { getContract as getContractBusiness } from '@contract/businessController'
-import { uploadAvatar, getAvatar, deleteAvatar } from '@api/employee/profile'
+import { postAvatar, getAvatar, deleteAvatar } from '@api/employee/profile'
 import Modal from '@component/Modal'
 import { useTranslation } from 'react-i18next'
 
@@ -84,7 +84,7 @@ function Index() {
     loading.open()
     let df = new FormData()
     df.append('image', fileAvatar)
-    await uploadAvatar(df, loginState.id)
+    await postAvatar(df, loginState.id)
       .then((success) => {
         toast.success('success', { pauseOnHover: true, closeOnClick: true })
       })

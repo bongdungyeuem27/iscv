@@ -3,8 +3,15 @@ import styles from './styles.module.scss'
 import clsx from 'clsx'
 import { Modal } from '@iscv/modal'
 import Question from './Question'
+import Webcam from "react-webcam";
 
 type Props = {}
+
+const videoConstraints = {
+  width: 1280,
+  height: 720,
+  facingMode: "user"
+};
 
 const Interview = (props: Props) => {
   const [expandVolume, setExpandVolume] = useState(false)

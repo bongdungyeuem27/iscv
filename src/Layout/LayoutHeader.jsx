@@ -9,7 +9,6 @@ export default function LayoutHeader() {
       <Header></Header>
 
       <Outlet></Outlet>
-
     </>
   )
 }

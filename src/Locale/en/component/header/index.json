@@ -4,5 +4,6 @@
     "connect_metamask": "Connect Metamask",
     "login": "Log in",
     "navigation": "Navigate",
-    "instruction": "Instruction"
+    "instruction": "Instruction",
+    "register": "Register"
 }

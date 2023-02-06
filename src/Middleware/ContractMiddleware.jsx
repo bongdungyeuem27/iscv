@@ -96,15 +96,15 @@ export default function ContractMiddleware(props) {
     setComplete(true)
   }
 
-  useEffect(() => {
-    ;(async () => {
-      if (complete) return
-      await handleCheck()
-    })()
-  }, [complete])
+  // useEffect(() => {
+  //   ;(async () => {
+  //     if (complete) return
+  //     await handleCheck()
+  //   })()
+  // }, [complete])
   return (
     <>
-      {(() => {
+      {/* {(() => {
         let isNavigated = <Navigate key={0} to="/" replace />
         let isStayed = <Outlet key={2}></Outlet>
         if (!complete) return
@@ -118,7 +118,8 @@ export default function ContractMiddleware(props) {
           if (loginState.for == 'business') return isStayed
           else return isNavigated
         } else return isStayed
-      })()}
+      })()} */}
+      <Outlet></Outlet>
     </>
   )
 }

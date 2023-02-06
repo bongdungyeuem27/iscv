@@ -29,9 +29,12 @@
       "@locale/*": ["./src/Locale/*"],
       "@helper/*": ["./src/Helper/*"],
       "@contract/*": ["./src/Contract/*"],
+      "@graphql/*": ["./src/GraphQL/*"],
+      "@redux/*": ["./src/Redux/*"],
       "@/*": ["./src/*"]
     }
   },
   "include": ["**/*.d.js", "**/*.js", "**/*.cjs", "**/*.mjs", "**/*.jsx", "**/*.tsx", "**/*.ts"],
+  "files": ["./declaration.d.ts"],
   "exclude": ["node_modules", "dist", "build"]
 }
