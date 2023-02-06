@@ -1,5 +1,5 @@
 import React, { memo, useRef, useEffect, useContext } from 'react'
-import Modal from '@component/Modal'
+import { Modal } from '@iscv/modal'
 import styles from './styles.module.scss'
 import html2canvas from 'html2canvas'
 import { useReactToPrint } from 'react-to-print'

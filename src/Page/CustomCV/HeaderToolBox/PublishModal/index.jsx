@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styles from './styles.module.scss'
-import Modal from '@component/Modal'
+import { Modal } from '@iscv/modal'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { handlePublishTemplate } from './handleHook'

@@ -20,5 +20,6 @@
     "new_level": "New level",
     "edit_skill": "Edit skill",
     "number": "Number",
-    "integer": "Integer"
+    "integer": "Integer",
+    "user": "Public key"
 }

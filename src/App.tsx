@@ -55,6 +55,11 @@ function App() {
       ;(provider.provider as any).removeListener('chainChanged', () => {})
     }
   }, [])
+  useEffect(() => {
+    ;(async () => {
+      await dispatch<any>(connect({ provider }))
+    })()
+  }, [])
   return (
     <div className="App">
       <LoadingContainer></LoadingContainer>

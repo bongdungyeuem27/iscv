@@ -1,6 +1,6 @@
 import React, { useState, useLayoutEffect, useContext } from 'react'
 import styles from './styles.module.scss'
-import Modal from '@component/Modal'
+import { Modal } from '@iscv/modal'
 import clsx from 'clsx'
 import { awesome } from './dataFont'
 import _ from 'lodash'

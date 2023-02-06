@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import { LANGUAGES } from '@constant/languageConst'
 import * as flag from '../../Asset/image/flag'
 import _ from 'lodash'
-import Modal from '@component/Modal'
+import { Modal } from '@iscv/modal'
 
 const list = [LANGUAGES[0], LANGUAGES[1]]
 
@@ -27,7 +27,7 @@ export default function Index() {
                   })}
                   onClick={() => i18n.changeLanguage(value.value)}
                 >
-                  <img src={flag[value.value]}></img>
+                  <img src={Object(flag)[value.value]}></img>
                   <div className={styles.buttonSelect}>{value.name}</div>
                 </div>
                 <hr></hr>
@@ -42,7 +42,7 @@ export default function Index() {
         })
         return (
           <div onClick={() => setOpen(true)} className={clsx(styles.languageButton)}>
-            <img src={flag[i18n.language]}></img>
+            <img src={Object(flag)[i18n.language]}></img>
             {/* <div className={styles.buttonSelect}>{item.name}</div> */}
           </div>
         )

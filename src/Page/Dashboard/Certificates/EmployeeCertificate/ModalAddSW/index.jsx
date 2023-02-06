@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useContext, useEffect, useReducer } from 'react'
-import Modal from '@component/Modal'
+import { Modal } from '@iscv/modal'
 import styles from '../styles.module.scss'
 import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'

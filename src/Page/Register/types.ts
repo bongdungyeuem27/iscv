@@ -14,6 +14,4 @@ export type FormikData = {
   github: string;
   linkedin: string;
   category: string;
-  password: string;
-  confirmpassword: string;
 };

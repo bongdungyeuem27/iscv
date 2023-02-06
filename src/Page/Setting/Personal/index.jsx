@@ -10,7 +10,7 @@ import { useToast } from '@component/Toast'
 import { getContract as getContractEmployee } from '@contract/employeeController'
 import { getContract as getContractBusiness } from '@contract/businessController'
 import { postAvatar, getAvatar, deleteAvatar } from '@api/employee/profile'
-import Modal from '@component/Modal'
+import { Modal } from '@iscv/modal'
 import { useTranslation } from 'react-i18next'
 
 function Index() {

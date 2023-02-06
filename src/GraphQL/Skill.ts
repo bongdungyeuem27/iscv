@@ -1,48 +1,21 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from '@apollo/client'
 
-export type Employee = {
-  category: number;
-  id: number;
-  user: string;
-  name: string;
-  phone: string;
-  professional: string;
-  email: string;
-  github: string;
-  linkedin: string;
-  sourceImage: string;
-};
-
-export const getEmployeeByUser = gql`
-  query Query($user: String) {
-    employeeByUser(user: $user) {
-      category
+export const getSkillsByEmployeeId = gql`
+  query SkillsByEmployeeId($employeeId: ID!) {
+    skillsByEmployeeId(employeeId: $employeeId) {
       id
-      user
-      name
-      phone
-      professional
-      email
-      github
-      linkedin
-      sourceImage
+      employeeId
+      title
+      level
     }
   }
-`;
+`
 
-export interface EmployeeByUserData {
-  employeeByUser: EmployeeByUser;
-}
-
-export interface EmployeeByUser {
-  category: number;
-  id: string;
-  user: string;
-  name: string;
-  phone: string;
-  professional: string;
-  email: string;
-  github: string;
-  linkedin: string;
-  sourceImage: string;
+export type SkillsByEmployeeId = {
+  skillsByEmployeeId: {
+    id: number
+    employeeId: number
+    title: string
+    level: number
+  }[]
 }

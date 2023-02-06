@@ -26,9 +26,23 @@ export const getEmployeeByUser = gql`
       github
       linkedin
       sourceImage
-    } 
+    }
   }
 `
+
+export const getEmployeeIdByUser = gql`
+  query Query($user: String) {
+    employeeByUser(user: $user) {
+      id
+    }
+  }
+`
+
+export type GetEmployeeIdByUser = {
+  employeeByUser: {
+    id: number
+  }
+}
 
 export interface EmployeeByUserData {
   employeeByUser: Employee

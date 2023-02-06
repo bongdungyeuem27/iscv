@@ -3,13 +3,18 @@ import styles from './styles.module.scss'
 import { splitCamel } from '@helper/splitCamel'
 import { useTranslation } from 'react-i18next'
 
-function Index(props) {
+type Props = {
+  label: string
+  value: number
+}
+function Index(props: Props) {
   const { label, value } = props
   const { t } = useTranslation('page', { keyPrefix: 'about.index' })
   return (
     <div className={styles.itemWrapper}>
       <span className={styles.item}>
         <div className={styles.iconWrapper}>
+          {label == 'user' && <i className="fa-solid fa-hashtag"></i>}
           {label == 'name' && <i className="fa-solid fa-user"></i>}
           {label == 'phone' && <i className="fa-solid fa-phone"></i>}
           {label == 'professional' && <i className="fa-solid fa-credit-card-front"></i>}

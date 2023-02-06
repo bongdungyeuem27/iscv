@@ -10,51 +10,36 @@ import styles from './styles.module.scss'
 import { getContract as getContractEmployee } from '@contract/employeeController'
 import ItemSkill from './Panel/ItemSkill'
 import ItemJobLevel from './Panel/ItemJobLevel'
+import { useQuery } from '@apollo/client'
+import { SkillsByEmployeeId, getSkillsByEmployeeId } from '@graphql/Skill'
 
 function Index() {
   const { profile } = useContext(PostsContext)
-  const { loginState } = useContext(Web3Context)
   const location = useLocation()
   const id = useParams().id
-  const [listSkill, setListSkill] = useState()
-  const [listJobLevel, setListJobLevel] = useState()
-  const [listJobPoints, setListJobPoints] = useState()
-  useEffect(() => {
-    if (location.pathname.includes('profile')) {
-      getContractEmployee()
-        .then((success) => {
-          success.methods
-            .getListSkillOfEmployee(id)
-            .call()
-            .then((success) => {
-              setListSkill(success)
-            })
-            .catch((error) => {
-              console.log(error)
-            })
-        })
-        .catch((error) => console.error(error))
-    }
-  }, [])
-  useEffect(() => {
-    ;(async () => {
-      if (location.pathname.includes('profile')) {
-        const body = await calculate(id).catch((error) => console.error(error))
-        setListJobLevel(body.data.level)
-        setListJobPoints(body.data.point)
-      }
-    })()
-  }, [])
+  const querySkills = useQuery<SkillsByEmployeeId>(getSkillsByEmployeeId, {
+    variables: { employeeId: id },
+  })
+
+  // useEffect(() => {
+  //   ;(async () => {
+  //     if (location.pathname.includes('profile')) {
+  //       const body = await calculate(id).catch((error) => console.error(error))
+  //       setListJobLevel(body.data.level)
+  //       setListJobPoints(body.data.point)
+  //     }
+  //   })()
+  // }, [])
   return (
     <div className={styles.container}>
       {location.pathname.includes('profile') && (
         <Panel type={'skills'}>
-          {listSkill?.map((value, index) => {
+          {querySkills.data?.skillsByEmployeeId?.map((value, index) => {
             return <ItemSkill key={index} title={value.title} level={value.level}></ItemSkill>
           })}
         </Panel>
       )}
-      {location.pathname.includes('profile') && (
+      {/* {location.pathname.includes('profile') && (
         <Panel type={'joblevels'}>
           {listJobLevel &&
             Object.keys(listJobLevel).map(
@@ -64,7 +49,7 @@ function Index() {
                 )
             )}
         </Panel>
-      )}
+      )} */}
       {/* {location.pathname.includes('profile') && (
         <Panel type={'jobpoints'}>
           {listJobLevel &&
@@ -78,7 +63,6 @@ function Index() {
       )} */}
 
       {location.pathname.includes('page') &&
-        loginState.for == 'employee' &&
         profile?.category == CATEGORY.igg.type && <IIGRequestPanel></IIGRequestPanel>}
     </div>
   )

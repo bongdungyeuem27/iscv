@@ -49,8 +49,6 @@ function Index() {
       github: '',
       linkedin: '',
       category: '1',
-      password: '',
-      confirmpassword: '',
     },
     validationSchema: Yup.object({
       avatar: Yup.mixed()
@@ -73,10 +71,6 @@ function Index() {
       github: Yup.string(),
       linkedin: Yup.string(),
       category: Yup.string(),
-      password: Yup.string().required(t('require')),
-      confirmpassword: Yup.string()
-        .oneOf([Yup.ref('password')], t('invalid'))
-        .required(t('require')),
     }),
     onSubmit: async (values) => {
       await registerInfo[0]()
@@ -195,28 +189,6 @@ function Index() {
               onChange={formik?.handleChange}
             ></input>
             <p className={styles.error}>{formik?.errors.linkedin}</p>
-          </div>
-          <div className={styles.boxWrapper}>
-            <label className={styles.label}>{t('password')}</label>
-            <input
-              type="password"
-              name="password"
-              className={styles.input}
-              value={formik?.values.password}
-              onChange={formik?.handleChange}
-            ></input>
-            <p className={styles.error}>{formik?.errors.password}</p>
-          </div>
-          <div className={styles.boxWrapper}>
-            <label className={styles.label}>{t('confirm_password')}</label>
-            <input
-              type="password"
-              name="confirmpassword"
-              className={styles.input}
-              value={formik?.values.confirmpassword}
-              onChange={formik?.handleChange}
-            ></input>
-            <p className={styles.error}>{formik?.errors.confirmpassword}</p>
           </div>
         </div>
         <div className={styles.boxWrapper}>

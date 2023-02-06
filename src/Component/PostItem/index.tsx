@@ -1,20 +1,20 @@
-import React, { useState, useContext, useEffect } from 'react'
-import styles from './styles.module.scss'
-import avatarDefault from '@asset/avatar.png'
-import clsx from 'clsx'
-import CommentItem from '../CommentItem'
-import PostStatus from './PostStatus'
-import { Web3Context } from '@context/Web3ContextProvider'
-import Modal from '@component/Modal'
-import { useLoading } from '@component/Loading'
-import { useToast } from '@component/Toast'
-import { getContract as getContractEmployee } from '@contract/employeeController'
-import { getContract as getContractBusiness } from '@contract/businessController'
-import { useParams, Link } from 'react-router-dom'
+import { getImage as getBusinessPostImage } from '@api/business/post'
 import { getAvatar as getAvatarBusiness } from '@api/business/profile'
 import { getAvatar as getAvatarEmployee } from '@api/employee/profile'
+import avatarDefault from '@asset/avatar.png'
+import { useLoading } from '@component/Loading'
+
+import { useToast } from '@component/Toast'
+import { Web3Context } from '@context/Web3ContextProvider'
+import { getContract as getContractBusiness } from '@contract/businessController'
+import { getContract as getContractEmployee } from '@contract/employeeController'
+import clsx from 'clsx'
+import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getImage as getBusinessPostImage } from '@api/business/post'
+import { Link } from 'react-router-dom'
+import PostStatus from './PostStatus'
+import styles from './styles.module.scss'
+import { Modal } from '@iscv/modal'
 // Component/PostItem
 function Item({
   content,
@@ -28,7 +28,7 @@ function Item({
   disabled,
   imageSource,
   imageName,
-}) {
+}: any) {
   const [forceUpdate, setForceUpdate] = useState(false)
   const [avatar, setAvatar] = useState(avatarDefault)
   const [openClose, setOpenClose] = useState(false)
@@ -44,28 +44,6 @@ function Item({
       return
     }
     loading.open()
-    await getContractEmployee()
-      .then(async (contractEmployee) => {
-        await contractEmployee.methods
-          ._checkExistApply(loginState.id, businessPostId)
-          .call({ from: loginState.address })
-          .then(async (check) => {
-            if (check) {
-              toast.warning('had applied', { pauseOnHover: true, closeOnClick: true })
-              return
-            }
-            await contractEmployee.methods
-              .applyPost(loginState.id, id, businessPostId)
-              .send({ from: loginState.address })
-              .then((success) => {
-                toast.success('success', { pauseOnHover: true, closeOnClick: true })
-                setApplied(true)
-              })
-              .catch((error) => console.error(error))
-          })
-          .catch((error) => console.error(error))
-      })
-      .catch((error) => console.error(error))
 
     loading.close()
   }
@@ -76,42 +54,10 @@ function Item({
     }
     loading.open()
 
-    await getContractBusiness()
-      .then(async (contract) => {
-        await contract.methods
-          .setStatusPost(loginState.id, businessPostId, 2)
-          .send({ from: loginState.address })
-          .then((success) => {
-            toast.success('success', { pauseOnHover: true, closeOnClick: true })
-            setOpenClose(false)
-          })
-          .catch((error) => {
-            toast.error()
-            console.error(error)
-          })
-      })
-      .catch((error) => {
-        toast.error()
-        console.error(error)
-      })
-
     loading.close()
   }
   const [profile, setProfile] = useState()
-  const checkApply = () => {
-    getContractEmployee().then((employeeContract) => {
-      employeeContract.methods
-        ._checkExistApply(loginState.id, businessPostId)
-        .call({ from: loginState.address })
-        .then(async (check) => {
-          if (check) {
-            setApplied(true)
-            return
-          }
-        })
-        .catch((error) => console.error(error))
-    })
-  }
+  const checkApply = () => {}
   const checkAvatarBusiness = () => {
     getAvatarBusiness(id)
       .then((success) => {
@@ -127,17 +73,7 @@ function Item({
       .catch((error) => console.error(error))
   }
 
-  const getProfileBusiness = () => {
-    getContractBusiness().then(async (businessContract) => {
-      businessContract.methods
-        .getProfile(id)
-        .call()
-        .then(async (success) => {
-          setProfile({ ...success })
-        })
-        .catch((error) => console.error(error))
-    })
-  }
+  const getProfileBusiness = () => {}
   const loadImageBusiness = () => {
     if (!imageSource) return
     getBusinessPostImage(id, imageSource)
@@ -159,28 +95,21 @@ function Item({
   }, [])
   return (
     <>
-      <Modal
-        state={[openClose, setOpenClose]}
-        title={t('confirm')}
-        content={
-          <div div className={styles.closeModal}>
-            {t('are_you_sure_to_close_this_post')}
-          </div>
-        }
-        action={handleClosePost}
-      ></Modal>
+      <Modal state={[openClose, setOpenClose]} title={t('confirm')} action={handleClosePost}>
+        <div className={styles.closeModal}>{t('are_you_sure_to_close_this_post')}</div>
+      </Modal>
 
       <div className={clsx(styles.item, { [styles.disabled]: disabled })}>
         <div className={styles.head}>
           <div className={styles.personalWrapper}>
-            <Link to={typeFor == 'business' && `/page/${id}`} className={styles.avatarWrapper}>
+            <Link to={`/page/${id}`} className={styles.avatarWrapper}>
               <img src={avatar}></img>
             </Link>
             <div className={styles.avatarTextWrapper}>
-              <Link to={typeFor == 'business' && `/page/${id}`} className={styles.name}>
-                {profile?.name}
+              <Link to={`/page/${id}`} className={styles.name}>
+                {/* {profile?.name} */}
               </Link>
-              <div className={styles.date}>{new Date(parseInt(time * 1000)).toLocaleString()}</div>
+              {/* <div className={styles.date}>{new Date(parseInt(time * 1000)).toLocaleString()}</div> */}
               <PostStatus
                 type={
                   (status == 1 && 'open') ||
@@ -213,7 +142,10 @@ function Item({
           >
             <img
               className={styles.imageContent}
-              src={image || (typeof imageSource == 'object' && URL.createObjectURL(imageSource))}
+              src={
+                image ??
+                ((typeof imageSource == 'object' && URL.createObjectURL(imageSource)) as any)
+              }
             ></img>
           </Link>
         </div>
