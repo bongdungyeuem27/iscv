@@ -8,7 +8,7 @@ export const getTokenId = (owner, hashId) => {
 }
 export const getNFTMetadata = (owner, tokenId) => {
   return axiosServices.get(
-    `${API_ENDPOINT_NODEJS}/employee/customcv/getnftmetadata/${tokenId}?owner=${owner}`
+    `${API_ENDPOINT_NODEJS}/employee/customcv/getnftmetadata/${tokenId}.json?owner=${owner}`
   )
 }
 

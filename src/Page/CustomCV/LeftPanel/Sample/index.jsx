@@ -18,7 +18,6 @@ function Index() {
         .getMarket()
         .call()
         .then((success) => {
-
           return success.map((value, index) => {
             return { ...value }
           })

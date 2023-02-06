@@ -22,6 +22,7 @@ import Messages from '@page/Messages'
 import PageLayout from '@layout/PageLayout'
 import Mycv from '@page/Mycv'
 import Instruction from '@page/Instruction'
+import InterView from "@page/Interview"
 
 function App() {
   return (
@@ -39,8 +40,10 @@ function App() {
                 <Route path="page/:id">
                   <Route path="" element={<PageLayout></PageLayout>}>
                     <Route path="about" element={<AboutProfile />}></Route>
+                  
                     <Route path="" element={<PostsProfile />}></Route>
                   </Route>
+                  <Route path="interview" element={<InterView />}></Route>
                   <Route path="post/:postid" element={<Post></Post>}></Route>
                 </Route>
                 <Route path="profile/:id">

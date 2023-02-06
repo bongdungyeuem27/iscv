@@ -1,5 +1,5 @@
-@use '../../Style/abtracts/mixins' as mixin;
-@use '../../Style/globalType/function' as function;
+@use '@style/abtracts/mixins' as mixin;
+@use '@style/globalType/function' as function;
 %label {
   margin: 0px 0px 0px 10px;
   font-size: 15px;

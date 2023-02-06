@@ -7,7 +7,6 @@
   padding: $paddingGap 0px $paddingGap $paddingGap;
   gap: 10px;
   background: var(--color-theme-primary);
-  height:500px;
   @include mixin.md {
     flex-direction: row;
     padding: $paddingGap;

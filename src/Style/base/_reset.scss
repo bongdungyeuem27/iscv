@@ -85,7 +85,10 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield; /* Firefox */
 }
-
+main {
+  margin: 60px 0 0px 0px;
+  scroll-padding-top: 60px;
+}
 section {
   margin: 60px 0 0px 0px;
   scroll-padding-top: 60px;
