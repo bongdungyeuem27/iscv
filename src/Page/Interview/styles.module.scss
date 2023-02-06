@@ -16,7 +16,7 @@ $bg-green-bold: #00A389;
     height: calc(100vh - var(--header-height));
     padding: 0;
     color: var(--color-primary);
-
+    overflow: hidden !important;
     .left {
         flex: 1;
         padding: 10px;
@@ -77,7 +77,7 @@ $bg-green-bold: #00A389;
             border-radius: 15px;
             background: url("https://images.unsplash.com/photo-1476703993599-0035a21b17a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80");
             position: relative;
-
+            min-height: 150px;
             .user {
                 position: absolute;
                 top: 20px;
@@ -257,6 +257,7 @@ $bg-green-bold: #00A389;
 .right {
     width: 30vw;
     flex-shrink: 0;
+    overflow: hidden;
 }
 
 

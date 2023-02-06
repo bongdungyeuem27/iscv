@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styles from './styles.module.scss'
 import clsx from 'clsx'
 import { Modal } from '@iscv/modal'
+import Question from './Question'
 
 type Props = {}
 
@@ -81,7 +82,9 @@ const Interview = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className={styles.right}></div>
+      <div className={styles.right}>
+        <Question></Question>
+      </div>
     </main>
   )
 }
