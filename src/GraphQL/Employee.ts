@@ -1,3 +1,4 @@
+import { Skill } from './Skill'
 import { gql, useQuery } from '@apollo/client'
 
 export type Employee = {
@@ -68,3 +69,41 @@ export const getEmployee = gql`
     }
   }
 `
+
+export const getCV = gql`
+  query ExampleQuery($employeeId: ID!) {
+    cv(employeeId: $employeeId) {
+      category
+      id
+      user
+      name
+      phone
+      professional
+      email
+      github
+      linkedin
+      sourceImage
+      skills {
+        id
+        employeeId
+        title
+        level
+      }
+    }
+  }
+`
+export type GetCV = {
+  cv: {
+    category: number
+    id: string
+    user: string
+    name: string
+    phone: string
+    professional: string
+    email: string
+    github: string
+    linkedin: string
+    sourceImage: string
+    skills: Skill[]
+  }
+}

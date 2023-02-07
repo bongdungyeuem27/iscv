@@ -5,7 +5,7 @@ import Language from '@component/Language'
 import { useToast } from '@component/Toast'
 import { Toggle } from '@component/Toggle'
 import { CATEGORY } from '@constant/businessConst'
-import { getEmployeeByUser } from '@graphql/Employee'
+import { EmployeeByUserData, GetEmployee, getEmployeeByUser } from '@graphql/Employee'
 import { emailRegExp, phoneRegExp } from '@helper/regex'
 import { RootState } from '@redux/store'
 import clsx from 'clsx'
@@ -25,16 +25,9 @@ function Index() {
   const [employeeOrBusiness, setEmployeeOrBusiness] = useState(false)
   const toast = useToast()
   const account = useSelector((state: RootState) => state.auth.account)
-  const { loading, error, data, refetch, subscribeToMore, client } = useQuery(getEmployeeByUser, {
+  const { loading, error, data, refetch, subscribeToMore, client } = useQuery<EmployeeByUserData>(getEmployeeByUser, {
     variables: { user: account },
     notifyOnNetworkStatusChange: true,
-  })
-  const registerInfo = useLazyQuery(getEmployeeByUser, {
-    variables: { user: account },
-    notifyOnNetworkStatusChange: true,
-    onCompleted(x) {
-      if (x.employeeByUser != null) toast.info(t('had_register'))
-    },
   })
 
   const navigate = useNavigate()
@@ -73,7 +66,6 @@ function Index() {
       category: Yup.string(),
     }),
     onSubmit: async (values) => {
-      await registerInfo[0]()
       useRegister(values, signer!, toast, navigate, refetch)
     },
   })

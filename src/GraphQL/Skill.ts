@@ -10,12 +10,12 @@ export const getSkillsByEmployeeId = gql`
     }
   }
 `
-
+export type Skill = {
+  id: number
+  employeeId: number
+  title: string
+  level: number
+}
 export type SkillsByEmployeeId = {
-  skillsByEmployeeId: {
-    id: number
-    employeeId: number
-    title: string
-    level: number
-  }[]
+  skillsByEmployeeId: Skill[]
 }

@@ -15,6 +15,7 @@ specifiers:
   '@iscv/toast': ^1.1.19
   '@metamask/detect-provider': ^1.2.0
   '@reduxjs/toolkit': ^1.9.2
+  '@types/lodash': ^4.14.191
   '@types/react': ^18.0.27
   '@types/react-dom': ^18.0.10
   '@types/redux-logger': ^3.0.9
@@ -186,6 +187,7 @@ devDependencies:
   '@babel/plugin-transform-react-jsx': 7.20.13_@babel+core@7.20.12
   '@ethersproject/abi': 5.7.0
   '@ethersproject/providers': 5.7.2
+  '@types/lodash': 4.14.191
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
   '@types/redux-logger': 3.0.9
@@ -3659,7 +3661,6 @@ packages:
 
   /@types/lodash/4.14.191:
     resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
-    dev: false
 
   /@types/long/4.0.2:
     resolution: {integrity: sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA==}

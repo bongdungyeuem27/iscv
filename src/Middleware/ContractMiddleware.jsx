@@ -95,7 +95,7 @@ export default function ContractMiddleware(props) {
 
     setComplete(true)
   }
-
+  
   // useEffect(() => {
   //   ;(async () => {
   //     if (complete) return
