@@ -1,0 +1,10 @@
+@use '@styles/globalType/function' as function;
+@import './variables.scss';
+
+.container {
+  position: relative;
+  width: 70%;
+  color: var(--color-text-grey);
+  font-weight: 500;
+
+}

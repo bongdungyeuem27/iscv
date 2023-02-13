@@ -1,0 +1,21 @@
+@use '@styles/abtracts/variables' as variable;
+@use '@styles/globalType/function' as function;
+.container {
+  flex-basis: 0;
+  flex-grow: 0.3;
+  flex-shrink: 0;
+  padding: variable.$paddingGap;
+  .panel {
+    @include function.panel;
+    padding: variable.$paddingGap;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: variable.$paddingGap;
+    .button {
+      width: 100%;
+
+      @include function.button;
+    }
+  }
+}

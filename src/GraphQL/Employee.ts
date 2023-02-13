@@ -54,7 +54,7 @@ export interface GetEmployee {
 }
 
 export const getEmployee = gql`
-  query Query($employeeId: ID!) {
+  query Query($employeeId: Int!) {
     employee(id: $employeeId) {
       category
       id
@@ -70,8 +70,10 @@ export const getEmployee = gql`
   }
 `
 
+
+
 export const getCV = gql`
-  query ExampleQuery($employeeId: ID!) {
+  query ExampleQuery($employeeId: Int!) {
     cv(employeeId: $employeeId) {
       category
       id

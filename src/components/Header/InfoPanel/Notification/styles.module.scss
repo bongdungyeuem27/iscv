@@ -1,0 +1,33 @@
+@use "@styles/globalType/function" as function;
+.container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  background: var(--color-background-primary);
+  color: var(--color-text-grey);
+  padding: 5px 20px;
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .title {
+      font-weight: 550;
+      color: var(--color-text-primary);
+      cursor: pointer;
+    }
+    .clear {
+      cursor: pointer;
+      font-size: 15px;
+      &:hover {
+        color: var(--color-active-primary);
+      }
+    }
+  }
+}
+
+.delayHide {
+  display: none 5s;
+}
+.hide {
+  display: none;
+}

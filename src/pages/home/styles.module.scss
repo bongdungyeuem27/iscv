@@ -1,0 +1,97 @@
+@use '@styles/abtracts/mixins' as mixin;
+.container {
+  width: 100%;
+  position: relative;
+  background: var(--color-background-primary);
+  color: var(--color-text-primary);
+  .background {
+    position: relative;
+    width: 100%;
+    // aspect-ratio: 2/1;
+    background-size: cover;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    justify-content: space-evenly;
+
+    // background: linear-gradient(
+    //   43deg,
+    //   rgb(65, 88, 208) 0%,
+    //   rgb(222, 104, 214) 30%,
+    //   rgb(255, 231, 193) 66%,
+    //   rgb(255, 255, 255) 100%
+    // );
+    color: var(--color-text-primary);
+    .left {
+      flex: 1;
+      padding: 10vw 10vw;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      .title {
+        font-size: 80px;
+        font-weight: bold;
+        line-height: 90px;
+      }
+      .boxMid {
+        display: flex;
+        align-items: center;
+        color: #fb6473;
+        .dash {
+          width: 50px;
+          height: 3px;
+          background: rgb(88, 54, 75);
+        }
+        .text {
+          margin: 0px 20px;
+          font-size: 35px;
+          font-weight: bold;
+        }
+      }
+      .content {
+        color: var(--color-text-primary);
+        text-shadow: -1px 1px #bb8989;
+        font-size: 30px;
+      }
+    }
+    .right {
+      flex: 1;
+    }
+    @include mixin.md {
+      flex-direction: column;
+      .left {
+        gap: 10px;
+      }
+      .right {
+        display: none;
+      }
+    }
+  }
+  .category {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: 0px auto;
+    padding: 40px 0px;
+    gap: 30px;
+
+    .categoryTitle {
+      font-size: 40px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .categoryItemWrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2vw;
+      flex-wrap: wrap;
+      @include mixin.lg {
+        // flex-direction: column;
+      }
+    }
+  }
+}

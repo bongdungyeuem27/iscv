@@ -1,0 +1,145 @@
+@use '@styles/abtracts/mixins' as mixin;
+@use '@styles/globalType/function' as function;
+%label {
+  margin: 0px 0px 0px 10px;
+  font-size: 15px;
+  font-weight: 550;
+}
+%marginLeftItem {
+  margin: 7px 0px;
+}
+%input {
+  @include function.inputStyle;
+  background: var(--color-background-primary);
+  font-size: 15px;
+  font-weight: 450;
+  line-height: 20px;
+  outline: 2px solid var(--color-border);
+  padding: 10px 15px;
+  margin: 5px 0px 0px 0px;
+  overflow: scroll;
+  white-space: nowrap;
+  //   @include function.truncate;
+  &:focus {
+    outline: 2px solid var(--color-active-primary);
+  }
+}
+.container {
+  width: 100%;
+  flex-shrink: 0;
+  background-color: var(--color-background-primary);
+  color: var(--color-text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-size: cover;
+  .languageWrapper {
+    margin: 20px 0px 0px 40px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    .language {
+      @include function.button;
+      background: var(--color-button-tertiary);
+    }
+  }
+  .toggleWrapper {
+    display: flex;
+    gap: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    align-items: center;
+    margin: 10px 10px;
+  }
+  .loginTitle {
+    margin: 30px 20px;
+    font-size: 30px;
+    font-weight: 550;
+  }
+  .boxWrapper {
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+    @extend %marginLeftItem;
+    .label {
+      @extend %label;
+    }
+    .input {
+      @extend %input;
+    }
+    .select {
+    }
+    .button {
+      @extend %input;
+      border: unset;
+      cursor: pointer;
+      text-align: center;
+      &:focus {
+        border: unset;
+      }
+      background: var(--color-button-tertiary) !important;
+      color: var(--color-text-secondary);
+      text-transform: capitalize;
+      font-size: 18px;
+      font-weight: 550;
+    }
+  }
+  .main {
+    max-width: 800px;
+    .address {
+      width: 100%;
+      p {
+        background: var(--color-disable-primary);
+      }
+    }
+    .mainInput {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      .left {
+        flex: 1;
+      }
+      .right {
+        flex: 1;
+      }
+    }
+  }
+  .avatarImg {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 100%;
+    border: 3px solid var(--color-border);
+  }
+  .avatarBox {
+    flex-direction: row;
+    align-items: flex-end;
+    .iconAvatar {
+      margin: 0px 0px 0px 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      i {
+        cursor: pointer;
+        font-size: 50px;
+        @include function.textGradient;
+        background: var(--color-button-secondary);
+        -webkit-text-stroke: 2px var(--color-background-primary);
+      }
+    }
+  }
+  @include mixin.lg {
+    width: 60%;
+  }
+  @include mixin.md {
+    width: 100%;
+  }
+}
+.error {
+  @include function.errorInput;
+  height: 20px;
+}

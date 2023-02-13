@@ -1,7 +1,0 @@
-@use '../../../../Style/globalType/internal' as internal;
-.container {
-  .title {
-    @include internal.title;
-    text-transform: capitalize;
-  }
-}

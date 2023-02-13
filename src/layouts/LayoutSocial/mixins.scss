@@ -1,0 +1,19 @@
+@use '@styles/globalType/function' as function;
+@import './variables.scss';
+
+@mixin title {
+  a {
+    color: var(--color-text-grey);
+    font-weight: bold;
+  }
+}
+
+@mixin container {
+  @include function.panel;
+  width: 100%;
+  background: var(--color-background-primary);
+  border-radius: $borderRadiusItem;
+  padding: 7px 12px;
+  color: var(--color-text-grey);
+  @include title;
+}

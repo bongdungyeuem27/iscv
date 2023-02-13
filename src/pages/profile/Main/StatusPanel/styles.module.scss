@@ -1,0 +1,102 @@
+@use '../../../../Style/globalType/function' as function;
+@import '../../variables.scss';
+.container {
+  @include function.panel;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+
+  .top {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .avatar {
+      flex-shrink: 0;
+      img {
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+      }
+    }
+    .inputWrapper {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      .showTypeWrapper {
+        color: var(--color-text-primary);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 5px 10px;
+        i {
+          @include function.textGradient;
+          background: var(--color-button-hexatiary);
+          font-size: 20px;
+        }
+      }
+      .inputShow {
+        @include function.inputStyle;
+        flex: 1;
+        margin: 3px 0px 0px 20px;
+        border-radius: $borderRadius;
+        .inputArea {
+          width: 100%;
+          flex: 1;
+          color: var(--color-text-primary);
+          resize: none;
+        }
+        .showImage {
+          width: 100%;
+          object-fit: fill;
+          img {
+            border-radius: $borderRadius;
+          }
+        }
+      }
+
+      .sendWrapper {
+        flex-shrink: 0;
+        i {
+          @include function.textGradient;
+          font-weight: bold;
+          font-size: 30px;
+          cursor: pointer;
+          background: var(--color-button-secondary);
+        }
+      }
+    }
+  }
+  .bottom {
+    margin: 10px 0px 0px 80px;
+    display: flex;
+    align-items: center;
+    color: var(--color-text-grey2);
+    flex-wrap: wrap;
+    gap: 20px;
+    .toolItem {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      gap: 10px;
+      i {
+        font-size: 25px;
+      }
+      a {
+        font-size: 16px;
+        font-weight: 550;
+      }
+    }
+    .setType {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .itemSetType {
+        padding: 5px 10px;
+        cursor: pointer;
+        color: var(--color-text-grey);
+      }
+    }
+  }
+}

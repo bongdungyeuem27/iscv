@@ -1,0 +1,220 @@
+@use '@styles/globalType/function' as function;
+$anim: 0.75s;
+$sizeEase: ease-out;
+$fontSize: 19px;
+$borderRadius: 15px;
+$marginHeight: 2px;
+
+.info {
+  background: var(--color-button-secondary);
+  .icon {
+    .iconRound {
+      i {
+        background: var(--color-button-secondary);
+      }
+    }
+  }
+  .text {
+    color: var(--color-text-secondary);
+  }
+}
+.success {
+  background: var(--color-button-heptan);
+  .icon {
+    .iconRound {
+      i {
+        background: var(--color-button-heptan);
+      }
+    }
+  }
+  .text {
+    color: var(--color-text-secondary);
+  }
+}
+.warning {
+  background: var(--color-button-octane);
+  .icon {
+    .iconRound {
+      i {
+        background: var(--color-button-octane);
+      }
+    }
+  }
+  .text {
+    color: var(--color-text-secondary);
+  }
+}
+
+.error {
+  background: var(--color-button-tertiary);
+  .text {
+    color: var(--color-text-secondary);
+  }
+  .icon {
+    .iconRound {
+      i {
+        background: var(--color-button-tertiary);
+      }
+    }
+  }
+}
+
+.notifications {
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: fixed;
+  top: var(--header-height);
+  right: 0px;
+}
+
+.pauseOnHover {
+  &:hover {
+    .progressBar {
+      span {
+        animation-play-state: paused !important;
+      }
+    }
+  }
+}
+.container {
+  color: var(--color-text-grey);
+  min-width: 200px;
+  animation: open $anim * 0.75 ease-in-out forwards;
+  display: block;
+  height: 60px;
+  margin: 0px 0px $marginHeight 0px;
+  white-space: nowrap;
+  .notificationsItem {
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-items: flex-start;
+    overflow: hidden;
+    flex-shrink: 0;
+    border-top-left-radius: $borderRadius;
+    border-bottom-left-radius: $borderRadius;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    color: var(--color-text-primary);
+
+    .notificationContent {
+      padding: 7px 7px;
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+      color: var(--color-text-grey);
+      .icon {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+          rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        flex-shrink: 0;
+        width: 45px;
+        aspect-ratio: 1/1;
+        border-radius: 40%;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .iconRound {
+          border-radius: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          // background: $warning;
+          i {
+            font-size: 30px;
+            @include function.textGradient;
+            background: white;
+          }
+        }
+      }
+      .text {
+        color: var(--color-text-secondary);
+        font-size: $fontSize;
+        line-height: 1;
+        flex: 1;
+        font-weight: 500;
+        text-align: left;
+        display: inline-block;
+        white-space: nowrap;
+      }
+      .buttonClose {
+        margin: 0px 5px 0px 0px;
+        color: var(--color-text-primary);
+        font-size: 20px;
+        background: inherit;
+      }
+    }
+    .progressBar {
+      flex-shrink: 0;
+      box-sizing: content-box;
+      height: 5px;
+      position: absolute;
+      visibility: hidden;
+      // max-height: 6px;
+      // aspect-ratio: 25/1;
+      width: 100%;
+      border-bottom-right-radius: $borderRadius;
+      border-bottom-left-radius: $borderRadius;
+      span {
+        border-bottom-left-radius: $borderRadius;
+        display: block;
+        height: 100%;
+        width: 0px;
+
+        animation: move linear;
+        animation-play-state: running;
+        animation-iteration-count: 1;
+        opacity: 1;
+
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+.displayNone {
+  // transform: translate(100%, 0%);
+  animation: hideX $anim * 0.75 ease-in-out forwards,
+    hideY $anim * 0.5 ease-in-out $anim * 0.75 forwards;
+}
+@keyframes hideX {
+  from {
+    transform: inherit;
+  }
+  to {
+    transform: translate(100%, 0%);
+  }
+}
+@keyframes hideY {
+  from {
+    height: 60px;
+    margin: inherit;
+  }
+  to {
+    height: 0px;
+    margin: 0px 0px 0px 0px;
+  }
+}
+
+@keyframes open {
+  from {
+    transform: translate(100%, 0%);
+  }
+  to {
+    transform: translate(0%, 0%);
+  }
+}
+@keyframes move {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}

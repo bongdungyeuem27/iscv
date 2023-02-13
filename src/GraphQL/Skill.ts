@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const getSkillsByEmployeeId = gql`
-  query SkillsByEmployeeId($employeeId: ID!) {
+  query SkillsByEmployeeId($employeeId: Int!) {
     skillsByEmployeeId(employeeId: $employeeId) {
       id
       employeeId
@@ -17,5 +17,5 @@ export type Skill = {
   level: number
 }
 export type SkillsByEmployeeId = {
-  skillsByEmployeeId: Skill[]
+  skillsByEmployeeId: Skill[] | null
 }
