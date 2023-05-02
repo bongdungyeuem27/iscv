@@ -32,7 +32,6 @@ function Main() {
           return (
             <PagePost
               key={value.id + index}
-              emplopyeeId={userQuery.data?.employeeByUser.id!}
               postId={value.id}
             ></PagePost>
           )

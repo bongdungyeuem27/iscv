@@ -1,5 +1,5 @@
-import { gql } from '@apollo/client'
-import { PostStatus } from 'src/types/posts'
+import { gql } from "@apollo/client";
+import { IPost, PostStatus } from "src/types/posts";
 export const getPosts = gql`
   query Query {
     posts {
@@ -13,20 +13,11 @@ export const getPosts = gql`
       status
     }
   }
-`
-export type Post = {
-  id: number
-  businessId: number
-  hashtag: any
-  time: number
-  content: string
-  imageSource: string
-  job: string
-  status: PostStatus
-}
+`;
+
 export type GetPosts = {
-  posts: Post[]
-}
+  posts: IPost[];
+};
 
 export const getPostsByBusinessId = gql`
   query Query($businessId: Int!) {
@@ -41,40 +32,47 @@ export const getPostsByBusinessId = gql`
       status
     }
   }
-`
+`;
 
 export const getPostsIdByBusinessId = gql`
-  query GetPostsIdByBusinessId($businessId: Int!) {
+  query GetPostsIdByBusinessId($businessId: ID!) {
     postsByBusinessId(businessId: $businessId) {
       id
     }
   }
-`
+`;
 export type GetPostsIdByBusinessId = {
   postsByBusinessId: {
-    id: number
-  }[]
-}
+    id: number;
+  }[];
+};
 
 export type GetPostsByBusinessId = {
-  postsByBusinessId: Post[] | null
-}
+  postsByBusinessId: IPost[] | null;
+};
 
-export type GetPost = {
-  post: Post
-} | null
+export type IResPost = {
+  post: IPost;
+} | null;
+
+export type IReqPost = {
+  postId: number;
+};
 
 export const getPost = gql`
-  query Query($postId: Int!) {
-    post(postId: $postId) {
+  query Prediction($postId: ID!) {
+    post(id: $postId) {
       id
       businessId
-      hashtag
+      hashTag
       time
       content
       imageSource
       job
       status
+      businessName
+      businessUser
+      businessSourceImage
     }
   }
-`
+`;

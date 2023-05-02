@@ -1,54 +1,58 @@
-import { useQuery } from '@apollo/client'
-import { IPFS_GATEWAY } from '@constants/index'
-import { GetImageNameById, getImageNameById } from '@graphql/Business'
-import { GetPost, getPost } from '@graphql/Posts'
-import { useToast } from '@iscv/toast'
-import clsx from 'clsx'
-import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
-import { PostStatus } from 'src/types/posts'
-import styles from './styles.module.scss'
-import { useEmployee } from '@contracts/useEmployee'
-import { useSelector } from 'react-redux'
-import { RootState } from '@redux/store'
+import { useQuery } from "@apollo/client";
+import { IPFS_GATEWAY } from "@constants/index";
+import { useEmployee } from "@contracts/useEmployee";
+import { GetImageNameById, getImageNameById } from "@graphql/Business";
+import { IReqPost, IResPost, getPost } from "@graphql/Posts";
+import { useToast } from "@iscv/toast";
+import { RootState } from "@redux/store";
+import clsx from "clsx";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { PostStatus } from "src/types/posts";
+import styles from "./styles.module.scss";
 
 type Props = {
-  emplopyeeId: number
-  postId: number
-}
+  postId: number;
+};
 function ReviewPost(props: Props) {
-  const { emplopyeeId, postId } = props
-  const signer = useSelector((state: RootState) => state.auth.signer)
-  const { loading, data, refetch } = useQuery<GetPost>(getPost, { variables: { postId: postId } })
-  const imageNameQuery = useQuery<GetImageNameById>(getImageNameById, {
-    variables: { id: data?.post.businessId },
-  })
-  const { t } = useTranslation('component', { keyPrefix: 'postItem.index' })
-  const toast = useToast()
-  const employeeContract = useEmployee(signer!)
+  const { postId } = props;
+  const signer = useSelector((state: RootState) => state.auth.signer);
+  const { loading, data, refetch } = useQuery<IResPost, IReqPost>(getPost, {
+    variables: { postId: postId },
+  });
+  const id = useSelector((state: RootState) => state.auth.employee)?.id;
+  const { t } = useTranslation("component", { keyPrefix: "postItem.index" });
+  const toast = useToast();
+  const employeeContract = useEmployee(signer!);
   const handleApply = async () => {
-    try {
-      ;(await employeeContract)
-        .applyPost(emplopyeeId, data?.post?.businessId!, data?.post.id!)
-        .then((success) => {
-          toast.success()
-          refetch()
-        })
-    } catch (error) {
-      console.error(error)
-      toast.error()
-    }
-  }
+    await employeeContract
+      .applyPost(id!, data?.post?.businessId!, data?.post.id!)
+      .then((success) => {
+        toast.success();
+        refetch();
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error();
+      });
+  };
+
+  if (!data) return null;
+  console.log(data?.post);
   return (
     <div className={clsx(styles.item)}>
       <div className={styles.head}>
         <div className={styles.personalWrapper}>
-          <Link to={`/page/${data?.post.businessId}`} className={styles.avatarWrapper}>
-            <img src={`${IPFS_GATEWAY}${imageNameQuery.data?.business.sourceImage}`}></img>
+          <Link
+            to={`/page/${data?.post.businessId}`}
+            className={styles.avatarWrapper}
+          >
+            <img src={`${IPFS_GATEWAY}${data?.post.imageSource}`}></img>
           </Link>
           <div className={styles.avatarTextWrapper}>
             <Link to={`/page/${data?.post.businessId}`} className={styles.name}>
-              {imageNameQuery.data?.business.name}
+              {data?.post.businessName}
             </Link>
             <div className={styles.date}>{new Date().toLocaleString()}</div>
             {data?.post.status && (
@@ -80,31 +84,36 @@ function ReviewPost(props: Props) {
 
         <div className={styles.imageContent}>
           {data?.post.imageSource && (
-            <img src={`${IPFS_GATEWAY}${data.post.imageSource}`} alt="post"></img>
+            <img
+              src={`${IPFS_GATEWAY}${data.post.imageSource}`}
+              alt="post"
+            ></img>
           )}
-          {!data?.post.imageSource && <i className={clsx('fa-duotone fa-image')}></i>}
+          {!data?.post.imageSource && (
+            <i className={clsx("fa-duotone fa-image")}></i>
+          )}
         </div>
       </div>
       <div className={styles.foot}>
         <div className={styles.footItem}>
           <i className="fa-regular fa-heart"></i>
-          <div className={styles.footItemTitle}> {t('like')}</div>
+          <div className={styles.footItemTitle}> {t("like")}</div>
         </div>
         <div className={styles.footItem}>
           <i className="fa-regular fa-comment"></i>
-          <div className={styles.footItemTitle}> {t('comment')}</div>
+          <div className={styles.footItemTitle}> {t("comment")}</div>
         </div>
         <div className={styles.footItem}>
           <i className="fa-regular fa-bookmark"></i>
-          <div className={styles.footItemTitle}> {t('bookmark')}</div>
+          <div className={styles.footItemTitle}> {t("bookmark")}</div>
         </div>
         <div className={styles.footItem}>
           <i className="fa-light fa-share-nodes"></i>
-          <div className={styles.footItemTitle}> {t('share')}</div>
+          <div className={styles.footItemTitle}> {t("share")}</div>
         </div>
-        {data?.post.status && PostStatus[data?.post.status] === 'OPEN' && (
+        {data?.post.status && PostStatus[data?.post.status] === "OPEN" && (
           <button onClick={handleApply} className={styles.footItem}>
-            <div className={styles.buttonApply}> {t('apply')}</div>
+            <div className={styles.buttonApply}> {t("apply")}</div>
           </button>
         )}
       </div>
@@ -129,7 +138,7 @@ function ReviewPost(props: Props) {
           <CommentItem key={0}></CommentItem>
         </div> */}
     </div>
-  )
+  );
 }
 
-export default ReviewPost
+export default ReviewPost;
