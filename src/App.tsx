@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { LoadingContainer } from '@components/Loading'
-import { ToastContainer } from '@iscv/toast'
 import { getEmployeeByUser } from '@graphql/Employee'
+import { ToastContainer } from '@iscv/toast'
 
 import { connect } from '@redux/reducers/auth'
 import { RootState } from '@redux/store'

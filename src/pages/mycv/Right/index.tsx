@@ -17,6 +17,7 @@ function Right() {
           return Object.keys(routes).map((key) => {
             return (
               <Link
+                key={key}
                 to={`${Object(routes)[key].to}`}
                 className={clsx(styles.button, { [styles.active]: key == active })}
               >

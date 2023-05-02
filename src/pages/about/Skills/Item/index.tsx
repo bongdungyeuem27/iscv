@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client'
 import { ProgressBar } from '@components/ProgressBar'
 import { useToast } from '@components/Toast'
 import { useEmployee } from '@contracts/useEmployee'
-import { SkillsByEmployeeId, getSkillsByEmployeeId } from '@graphql/Skill'
+
 import { Modal } from '@iscv/modal'
 import { RootState } from '@redux/store'
 import { useFormik } from 'formik'
@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import * as Yup from 'yup'
 import styles from './styles.module.scss'
+import { IReqSkillsByEmployee, IResSkillsByEmployee, getSkillsByEmployee } from '@graphql/Skill'
 
 function Item({
   id,
@@ -32,8 +33,8 @@ function Item({
   const toast = useToast()
 
   const { t } = useTranslation('page', { keyPrefix: 'about.index' })
-  const querySkills = useQuery<SkillsByEmployeeId>(getSkillsByEmployeeId, {
-    variables: { employeeId: employeeId },
+  const querySkills = useQuery<IResSkillsByEmployee, IReqSkillsByEmployee>(getSkillsByEmployee, {
+    variables: { employeeId: id },
   })
 
   const formik = useFormik({

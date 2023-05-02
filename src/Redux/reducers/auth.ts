@@ -1,9 +1,10 @@
 import { ethers } from 'ethers'
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { AppDispatch } from '../store'
 import { IConnectData } from '../types/auth'
-import { RootState } from './../store'
+import { AppDispatch, RootState } from '@redux/store'
+// import { AppDispatch, RootState } from '../store'
+// import { IConnectData } from '../types/auth'
 
 export type LoginState = {
   provider: ethers.providers.Web3Provider

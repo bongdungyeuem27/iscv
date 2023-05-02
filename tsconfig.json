@@ -1,21 +1,20 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "ESNext", "ES2020"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "ESNext",
+    "forceConsistentCasingInFileNames": false,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
     "jsx": "react-jsx",
-    "esModuleInterop": true,
     "baseUrl": ".",
+    "incremental": true,
     "paths": {
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
@@ -28,10 +27,10 @@
       "@helpers/*": ["./src/helpers/*"],
       "@contracts/*": ["./src/contracts/*"],
       "@graphql/*": ["./src/graphql/*"],
-      "@redux/*": ["./src/redux/*"],
+      "@typechain/*": ["./src/typechain/*"],
+      "@redux/*": ["./src/redux/*"]
     }
   },
-  "include": ["**/*.d.js", "**/*.js", "**/*.cjs", "**/*.mjs", "**/*.jsx", "**/*.tsx", "**/*.ts"],
-  "files": ["./declaration.d.ts"],
-  "exclude": ["node_modules", "dist", "build"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

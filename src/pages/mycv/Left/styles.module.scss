@@ -2,7 +2,7 @@
 @use '@styles/globalType/function' as function;
 .container {
   flex-basis: 0;
-  flex-grow: 0.3;
+  flex-grow: 1;
   flex-shrink: 0;
   padding: variable.$paddingGap;
   .panel {

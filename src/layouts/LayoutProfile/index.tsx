@@ -13,18 +13,19 @@ function ProfileLayout() {
   const params = useParams()
   const id = Number(params.id)
   const { t } = useTranslation('layout', { keyPrefix: 'personal.index' })
-  const { loading, error, data, refetch, subscribeToMore, client } = useQuery<GetEmployee>(
-    getEmployee,
-    {
-      variables: { employeeId: id },
-    }
-  )
+  const { loading, error, data, refetch, subscribeToMore, client } = useQuery<
+    GetEmployee,
+    { employeeId: number }
+  >(getEmployee, {
+    variables: { employeeId: id },
+  })
   if (!loading && !data)
     return (
       <div>
         <Navigate to="/404" replace></Navigate>
       </div>
     )
+
   return (
     <>
       <section className={styles.container}>
@@ -33,9 +34,15 @@ function ProfileLayout() {
             <img src={cover} className={styles.image}></img>
           </div>
           <div className={styles.avatarWrapper}>
-            <img src={`${IPFS_GATEWAY}${data?.employee.sourceImage}` ?? avatar}></img>
+            <img
+              src={
+                data?.employee?.sourceImage
+                  ? `${IPFS_GATEWAY}${data?.employee?.sourceImage}`
+                  : avatar
+              }
+            ></img>
             <div className={styles.nameGroup}>
-              <div className={styles.name}>{data?.employee.name}</div>
+              <div className={styles.name}>{data?.employee?.name}</div>
               {/* {loginState.for == 'business' && (
                 <Link to={`/messages/profile/${id}`} className={styles.messages}>
                   {t('messages')}

@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client'
 import { useLoading } from '@components/Loading'
 import { useEmployee } from '@contracts/useEmployee'
 import { GetEmployeeIdByUser, getEmployeeIdByUser } from '@graphql/Employee'
-import { SkillsByEmployeeId, getSkillsByEmployeeId } from '@graphql/Skill'
+import { IReqSkillsByEmployee, IResSkillsByEmployee, getSkillsByEmployee } from '@graphql/Skill'
 import { Modal } from '@iscv/modal'
 import { useToast } from '@iscv/toast'
 import { RootState } from '@redux/store'
@@ -25,7 +25,7 @@ function Skills() {
     variables: { user: account },
     notifyOnNetworkStatusChange: true,
   })
-  const querySkills = useQuery<SkillsByEmployeeId>(getSkillsByEmployeeId, {
+  const querySkills = useQuery<IResSkillsByEmployee, IReqSkillsByEmployee>(getSkillsByEmployee, {
     variables: { employeeId: id },
   })
 
