@@ -7,6 +7,7 @@ class AxiosServices {
     const instance = axios.create({ baseURL: API_ENDPOINT_NODEJS })
     instance.interceptors.response.use(this.handleSuccess, this.handleError)
     instance.interceptors.request.use(async (config) => {
+      config.headers!['Content-Type'] = 'application/json'
       return config
     }, this.handleError)
     axios.defaults.withCredentials = true

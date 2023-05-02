@@ -1,9 +1,6 @@
-import { ethers } from "ethers";
-import { EmployeeController__factory } from "../typechain/index";
+import { ethers } from 'ethers'
+import { EmployeeController__factory } from '../typechain/index'
 
-export const useEmployee = async (signer: ethers.providers.JsonRpcSigner) => {
-  return EmployeeController__factory.connect(
-    "0xE6E340D132b5f46d1e472DebcD681B2aBc16e57E",
-    signer
-  );
-};
+export const useEmployee = (signer: ethers.providers.JsonRpcSigner) => {
+  return EmployeeController__factory.connect('0xa513E6E4b8f2a923D98304ec87F64353C4D5C853', signer)
+}

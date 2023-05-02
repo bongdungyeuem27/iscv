@@ -1,18 +1,6 @@
+import { IEmployee } from 'src/types'
 import { Skill } from './Skill'
 import { gql, useQuery } from '@apollo/client'
-
-export type Employee = {
-  category: number
-  id: number
-  user: string
-  name: string
-  phone: string
-  professional: string
-  email: string
-  github: string
-  linkedin: string
-  sourceImage: string
-}
 
 export const getEmployeeByUser = gql`
   query Query($user: String) {
@@ -46,15 +34,15 @@ export type GetEmployeeIdByUser = {
 }
 
 export interface EmployeeByUserData {
-  employeeByUser: Employee
+  employeeByUser: IEmployee
 }
 
 export interface GetEmployee {
-  employee: Employee
+  employee: IEmployee
 }
 
 export const getEmployee = gql`
-  query Query($employeeId: Int!) {
+  query Query($employeeId: ID!) {
     employee(id: $employeeId) {
       category
       id
@@ -69,43 +57,3 @@ export const getEmployee = gql`
     }
   }
 `
-
-
-
-export const getCV = gql`
-  query ExampleQuery($employeeId: Int!) {
-    cv(employeeId: $employeeId) {
-      category
-      id
-      user
-      name
-      phone
-      professional
-      email
-      github
-      linkedin
-      sourceImage
-      skills {
-        id
-        employeeId
-        title
-        level
-      }
-    }
-  }
-`
-export type GetCV = {
-  cv: {
-    category: number
-    id: string
-    user: string
-    name: string
-    phone: string
-    professional: string
-    email: string
-    github: string
-    linkedin: string
-    sourceImage: string
-    skills: Skill[]
-  }
-}

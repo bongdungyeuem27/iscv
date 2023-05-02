@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
-export const getSkillsByEmployeeId = gql`
-  query SkillsByEmployeeId($employeeId: Int!) {
-    skillsByEmployeeId(employeeId: $employeeId) {
+export const getSkillsByEmployee = gql`
+  query DefaultCV($employeeId: ID!) {
+    skillsByEmployee(employeeId: $employeeId) {
       id
       employeeId
       title
@@ -16,6 +16,9 @@ export type Skill = {
   title: string
   level: number
 }
-export type SkillsByEmployeeId = {
-  skillsByEmployeeId: Skill[] | null
+export type IResSkillsByEmployee = {
+  skillsByEmployee: Skill[] | null
+}
+export type IReqSkillsByEmployee = {
+  employeeId: number
 }

@@ -1,24 +1,24 @@
 import { useQuery } from '@apollo/client'
 
-import { useLocation, useParams } from 'react-router-dom'
-import Panel from './Panel/index'
-import ItemSkill from './Panel/ItemSkill'
-import styles from './styles.module.scss'
 import { IReqSkillsByEmployee, IResSkillsByEmployee, getSkillsByEmployee } from '@graphql/Skill'
+import { useLocation, useParams } from 'react-router-dom'
+import ItemSkill from './Panel/ItemSkill'
+import Panel from './Panel/index'
+import styles from './styles.module.scss'
 
 function Index() {
   const location = useLocation()
   const id = Number(useParams().id)
   const querySkills = useQuery<IResSkillsByEmployee, IReqSkillsByEmployee>(getSkillsByEmployee, {
-    variables: { employeeId: id },
+    variables: { employeeId: id }
   })
 
   return (
     <div className={styles.container}>
       {location.pathname.includes('profile') && (
         <Panel type={'skills'}>
-          {querySkills.data?.skillsByEmployeeId?.map((value, index) => {
-            return <ItemSkill key={index} title={value.title} level={value.level}></ItemSkill>
+          {querySkills.data?.skillsByEmployee?.map((value) => {
+            return <ItemSkill key={value.id} title={value.title} level={value.level}></ItemSkill>
           })}
         </Panel>
       )}

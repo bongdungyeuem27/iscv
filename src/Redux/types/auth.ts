@@ -1,14 +1,16 @@
-import { ethers } from "ethers";
+import { ethers } from 'ethers'
+import { IEmployee } from 'src/types'
 
 export type IConnectData = {
-  account: string | undefined;
-  signer: ethers.providers.JsonRpcSigner | undefined;
-};
+  account: string | undefined
+  signer: ethers.providers.JsonRpcSigner | undefined
+  employee: IEmployee | undefined
+}
 
-export type ILoginData = {
-  account: string | undefined;
-  signer: ethers.providers.JsonRpcSigner | undefined;
-};
+// export type ILoginData = {
+//   account: string | undefined
+//   signer: ethers.providers.JsonRpcSigner | undefined
+// }
 
 // export type ISignOutData = {
 

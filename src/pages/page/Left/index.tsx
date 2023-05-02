@@ -16,7 +16,7 @@ function Index() {
     <div className={styles.container}>
       {location.pathname.includes('profile') && (
         <Panel type={'skills'}>
-          {querySkills.data?.skillsByEmployeeId?.map((value, index) => {
+          {querySkills.data?.skillsByEmployee?.map((value, index) => {
             return <ItemSkill key={index} title={value.title} level={value.level}></ItemSkill>
           })}
         </Panel>

@@ -4,7 +4,6 @@ import styles from './styles.module.scss'
 import { useQuery } from '@apollo/client'
 import { useLoading } from '@components/Loading'
 import { useEmployee } from '@contracts/useEmployee'
-import { GetEmployeeIdByUser, getEmployeeIdByUser } from '@graphql/Employee'
 import { IReqSkillsByEmployee, IResSkillsByEmployee, getSkillsByEmployee } from '@graphql/Skill'
 import { Modal } from '@iscv/modal'
 import { useToast } from '@iscv/toast'
@@ -20,13 +19,11 @@ function Skills() {
   const id = Number(useParams().id)
   const account = useSelector((state: RootState) => state.auth.account)
   const signer = useSelector((state: RootState) => state.auth.signer)
+  const employee = useSelector((state: RootState) => state.auth.employee)
   const [openAdd, setOpenAdd] = useState(false)
-  const { data } = useQuery<GetEmployeeIdByUser>(getEmployeeIdByUser, {
-    variables: { user: account },
-    notifyOnNetworkStatusChange: true,
-  })
+
   const querySkills = useQuery<IResSkillsByEmployee, IReqSkillsByEmployee>(getSkillsByEmployee, {
-    variables: { employeeId: id },
+    variables: { employeeId: id }
   })
 
   const { t } = useTranslation('page', { keyPrefix: 'about.index' })
@@ -35,7 +32,7 @@ function Skills() {
   const formik = useFormik({
     initialValues: {
       skill: '',
-      level: 0,
+      level: 0
     },
     validationSchema: Yup.object({
       skill: Yup.string().required(t('require')),
@@ -43,14 +40,14 @@ function Skills() {
         .min(0, 'min0')
         .max(100, 'max100')
         .required(t('require'))
-        .integer(t('integer')),
+        .integer(t('integer'))
     }),
     onSubmit: async (values) => {
-      if (data?.employeeByUser.id == null) toast.error('please connect to metamask')
+      if (employee?.id == null) toast.error('please connect to metamask')
       loading.open()
       const employeeContract = useEmployee(signer!)
       ;(await employeeContract)
-        .addSkill(data?.employeeByUser.id!, values.skill, values.level)
+        .addSkill(employee?.id!, values.skill, values.level)
         .then((success) => {
           toast.success()
           querySkills.refetch()
@@ -59,9 +56,8 @@ function Skills() {
         })
         .catch((error) => toast.error())
       loading.close()
-    },
+    }
   })
-
   return (
     <>
       <Modal
@@ -100,19 +96,19 @@ function Skills() {
           <div className={styles.title}>
             <div className={styles.titleText}>{t('skills')}</div>
             <div className={styles.toolTitle}>
-              {data?.employeeByUser.id === id && (
+              {employee?.id === id && (
                 <div onClick={() => setOpenAdd(true)} className={styles.toolTitleWrapper}>
                   <i className="fa-solid fa-plus"></i>
                 </div>
               )}
             </div>
           </div>
-          {querySkills.data?.skillsByEmployeeId?.map((value, index) => {
+          {querySkills.data?.skillsByEmployee?.map((value) => {
             return (
               <Item
-                key={index}
+                key={value.id}
                 id={value.id}
-                owner={data?.employeeByUser.id === id}
+                owner={employee?.id === id}
                 employeeId={value.employeeId}
                 skill={value.title}
                 level={value.level}
