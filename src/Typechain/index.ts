@@ -18,8 +18,8 @@ export type { BusinessController } from "./controller/business/BusinessControlle
 export { BusinessController__factory } from "./factories/controller/business/BusinessController__factory";
 export type { IIGController } from "./controller/business/iig/IIGController";
 export { IIGController__factory } from "./factories/controller/business/iig/IIGController__factory";
-export type { CVController } from "./controller/employee/cv/CVController";
-export { CVController__factory } from "./factories/controller/employee/cv/CVController__factory";
+export type { EmployeeCVController } from "./controller/employee/cv/EmployeeCVController";
+export { EmployeeCVController__factory } from "./factories/controller/employee/cv/EmployeeCVController__factory";
 export type { EmployeeController } from "./controller/employee/EmployeeController";
 export { EmployeeController__factory } from "./factories/controller/employee/EmployeeController__factory";
 export type { ListBusinessApplyCursor } from "./cursor/business/apply/ListBusinessApplyCursor";
@@ -28,8 +28,6 @@ export type { ListIIGRequestCursor } from "./cursor/business/iig/ListIIGRequestC
 export { ListIIGRequestCursor__factory } from "./factories/cursor/business/iig/ListIIGRequestCursor__factory";
 export type { ListBusinessCursor } from "./cursor/business/ListBusinessCursor";
 export { ListBusinessCursor__factory } from "./factories/cursor/business/ListBusinessCursor__factory";
-export type { ListBusinessPostCursor } from "./cursor/business/post/ListBusinessPostCursor";
-export { ListBusinessPostCursor__factory } from "./factories/cursor/business/post/ListBusinessPostCursor__factory";
 export type { ListEmployeeCursor } from "./cursor/employee/ListEmployeeCursor";
 export { ListEmployeeCursor__factory } from "./factories/cursor/employee/ListEmployeeCursor__factory";
 export type { ListEmployeeSkillCursor } from "./cursor/employee/ListEmployeeSkillCursor";
@@ -46,8 +44,6 @@ export type { ListIIGSWResult } from "./database/business/igg/ListIIGSWResult";
 export { ListIIGSWResult__factory } from "./factories/database/business/igg/ListIIGSWResult__factory";
 export type { ListBusiness } from "./database/business/ListBusiness";
 export { ListBusiness__factory } from "./factories/database/business/ListBusiness__factory";
-export type { ListBusinessPost } from "./database/business/post/ListBusinessPost";
-export { ListBusinessPost__factory } from "./factories/database/business/post/ListBusinessPost__factory";
 export type { ListEmployeeCV } from "./database/employee/cv/ListEmployeeCV";
 export { ListEmployeeCV__factory } from "./factories/database/employee/cv/ListEmployeeCV__factory";
 export type { ListEmployee } from "./database/employee/ListEmployee";

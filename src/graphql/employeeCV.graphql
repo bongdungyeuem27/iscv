@@ -1,0 +1,20 @@
+query GetDefaultCV($employeeId: Int!) {
+  defaultCV(employeeId: $employeeId) {
+    category
+    id
+    user
+    name
+    phone
+    professional
+    email
+    github
+    linkedin
+    sourceImage
+    skills {
+      id
+      employeeId
+      title
+      level
+    }
+  }
+}

@@ -7,13 +7,13 @@ import { createRoot } from 'react-dom/client'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
-import { NODE_GRAPHQL_SERVER } from './constants'
 import { router } from './routes'
+import { API_ENDPOINT_NODEJS } from './constants'
 
 const root = createRoot(document.getElementById('root') as HTMLElement)
 
 const client = new ApolloClient({
-  uri: NODE_GRAPHQL_SERVER,
+  uri: `${API_ENDPOINT_NODEJS}graphql`,
   cache: new InMemoryCache({
     addTypename: true,
     typePolicies: {

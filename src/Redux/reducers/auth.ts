@@ -1,60 +1,64 @@
-import { ethers } from 'ethers'
+import { ethers } from "ethers";
 
-import { getEmployeeByUser } from '@apis/employee/profile'
-import { AppDispatch, RootState } from '@redux/store'
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { IEmployee } from 'src/types'
-import { IConnectData } from '../types/auth'
-import { useLoading } from '@components/Loading'
+import { getEmployeeByUser } from "@apis/employee/profile";
+import { AppDispatch, RootState } from "@redux/store";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { IEmployee } from "src/types";
+import { IConnectData } from "../types/auth";
+import { useLoading } from "@components/Loading";
 // import { AppDispatch, RootState } from '../store'
 // import { IConnectData } from '../types/auth'
-const loading = useLoading()
+const loading = useLoading();
 
 export type LoginState = {
-  provider: ethers.providers.Web3Provider
-  signer: ethers.providers.JsonRpcSigner | undefined
-  account: string | undefined
-  employee: IEmployee | undefined
-}
+  provider: ethers.providers.Web3Provider | undefined;
+  signer: ethers.providers.JsonRpcSigner | undefined;
+  account: string | undefined;
+  employee: IEmployee | undefined;
+};
 
 const initialState: LoginState = {
-  provider: new ethers.providers.Web3Provider(window.ethereum!),
+  provider: window.ethereum
+    ? new ethers.providers.Web3Provider(window.ethereum)
+    : undefined,
   account: undefined,
   signer: undefined,
   employee: undefined,
-}
+};
 
 export const connect = createAsyncThunk<
   IConnectData,
   {
-    provider: ethers.providers.Web3Provider
+    provider: ethers.providers.Web3Provider;
   },
   { dispatch: AppDispatch; state: RootState }
->('auth/connect', async ({ provider }) => {
-  loading.open()
+>("auth/connect", async ({ provider }) => {
+  loading.open();
   const accounts = await provider
-    .send('eth_requestAccounts', [])
-    .catch((error) => console.log(error))
-  const account = accounts[0]
-  if (!account) return { account: undefined, signer: undefined, employee: undefined }
-  const signer = provider.getSigner(account)
+    .send("eth_requestAccounts", [])
+    .catch((error) => console.log(error));
+  const account = accounts[0];
+  if (!account)
+    return { account: undefined, signer: undefined, employee: undefined };
+  const signer = provider.getSigner(account);
 
   const employee = await getEmployeeByUser({ user: account })
     .then((success) => success.data.data.employeeByUser)
-    .catch((error) => console.log(error))
-  if (!employee) return { account: account, signer: signer, employee: undefined }
+    .catch((error) => console.log(error));
+  if (!employee)
+    return { account: account, signer: signer, employee: undefined };
 
-  return { account: account, signer: signer, employee: employee }
-})
+  return { account: account, signer: signer, employee: employee };
+});
 
 export const authReducer = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     signout: (state, action) => {
-      state.account = undefined
-      state.signer = undefined
-      state.provider = new ethers.providers.Web3Provider(window.ethereum!)
+      state.account = undefined;
+      state.signer = undefined;
+      state.provider = new ethers.providers.Web3Provider(window.ethereum!);
     },
   },
   extraReducers(builder) {
@@ -62,19 +66,19 @@ export const authReducer = createSlice({
     builder
       .addCase(connect.fulfilled, (state, action) => {
         if (action.payload) {
-          state.account = action.payload.account
-          state.signer = action.payload.signer
-          state.employee = action.payload.employee
-          loading.close()
+          state.account = action.payload.account;
+          state.signer = action.payload.signer;
+          state.employee = action.payload.employee;
+          loading.close();
         }
       })
       .addCase(connect.rejected, (state, action) => {
-        loading.close()
-      })
+        loading.close();
+      });
   },
-})
+});
 
 // creators are generated for each case reducer function
-export const { signout } = authReducer.actions
+export const { signout } = authReducer.actions;
 
-export default authReducer.reducer
+export default authReducer.reducer;

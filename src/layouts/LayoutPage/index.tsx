@@ -1,35 +1,40 @@
-import { useQuery } from '@apollo/client'
-import avatar from '@assets/avatar.png'
-import cover from '@assets/cover.png'
-import { IPFS_GATEWAY } from '@constants/index'
-import { GetEmployee, getEmployee } from '@graphql/Employee'
-import clsx from 'clsx'
-import { useTranslation } from 'react-i18next'
-import { Link, NavLink, Navigate, Outlet, useLocation, useParams } from 'react-router-dom'
-import styles from './styles.module.scss'
-import { GetBusiness, getBusiness } from '@graphql/Business'
+import { useQuery } from "@apollo/client";
+import avatar from "@assets/avatar.png";
+import cover from "@assets/cover.png";
+import { IPFS_GATEWAY } from "@constants/index";
+import clsx from "clsx";
+import { useTranslation } from "react-i18next";
+import {
+  Link,
+  NavLink,
+  Navigate,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
+import styles from "./styles.module.scss";
 
 function LayoutPage() {
-  const location = useLocation()
-  const params = useParams()
-  const id = Number(params.id)
-  const { t } = useTranslation('layout', { keyPrefix: 'personal.index' })
-  const { loading, error, data, refetch, subscribeToMore, client } = useQuery<GetBusiness>(
-    getBusiness,
-    {
-      variables: { id: id },
-    }
-  )
-  const owner = id == data?.business.id
-  if (!loading && !data)
-    return (
-      <div>
-        <Navigate to="/404" replace></Navigate>
-      </div>
-    )
+  const location = useLocation();
+  const params = useParams();
+  const id = Number(params.id);
+  const { t } = useTranslation("layout", { keyPrefix: "personal.index" });
+  // const { loading, error, data, refetch, subscribeToMore, client } = useQuery<GetBusiness>(
+  //   getBusiness,
+  //   {
+  //     variables: { id: id },
+  //   }
+  // )
+  // const owner = id == data?.business.id
+  // if (!loading && !data)
+  //   return (
+  //     <div>
+  //       <Navigate to="/404" replace></Navigate>
+  //     </div>
+  //   )
   return (
     <>
-      <section className={styles.container}>
+      {/* <section className={styles.container}>
         <div className={styles.panel}>
           <div className={styles.cover}>
             <img src={cover} className={styles.image}></img>
@@ -75,9 +80,9 @@ function LayoutPage() {
           </NavLink>
         </div>
         <Outlet></Outlet>
-      </section>
+      </section> */}
     </>
-  )
+  );
 }
 
-export default LayoutPage
+export default LayoutPage;

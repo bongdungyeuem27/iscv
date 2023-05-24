@@ -14,7 +14,6 @@ import postDashboardEn from './en/page/dashboard/posts.json'
 import personalLayoutEn from './en/layout/personal/index.json'
 import aboutPageEn from './en/page/about/index.json'
 import toastEn from './en/component/toast/index.json'
-import layoutSocialEn from './en/layout/social'
 import iigPostsPageEn from './en/page/posts/left/iig.json'
 import registerPageEn from './en/page/register/index.json'
 import loginPageEn from './en/page/login/index.json'
@@ -40,7 +39,6 @@ import postDashboardVi from './vi/page/dashboard/posts.json'
 import personalLayoutVi from './vi/layout/personal/index.json'
 import aboutPageVi from './vi/page/about/index.json'
 import toastVi from './vi/component/toast/index.json'
-import layoutSocialVi from './vi/layout/social'
 import iigPostsPageVi from './vi/page/posts/left/iig.json'
 import registerPageVi from './vi/page/register/index.json'
 import loginPageVi from './vi/page/login/index.json'
@@ -119,7 +117,6 @@ const resources = {
     },
     layout: {
       social: {
-        index: layoutSocialVi,
       },
       personal: {
         index: personalLayoutVi,
@@ -190,7 +187,6 @@ const resources = {
     },
     layout: {
       social: {
-        index: layoutSocialEn,
       },
       personal: {
         index: personalLayoutEn,

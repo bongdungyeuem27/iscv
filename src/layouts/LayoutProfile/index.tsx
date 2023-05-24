@@ -1,30 +1,33 @@
-import { useQuery } from '@apollo/client'
-import avatar from '@assets/avatar.png'
-import cover from '@assets/cover.png'
-import { IPFS_GATEWAY } from '@constants/index'
-import { GetEmployee, getEmployee } from '@graphql/Employee'
-import clsx from 'clsx'
-import { useTranslation } from 'react-i18next'
-import { Link, NavLink, Navigate, Outlet, useLocation, useParams } from 'react-router-dom'
-import styles from './styles.module.scss'
+import { useQuery } from "@apollo/client";
+import avatar from "@assets/avatar.png";
+import cover from "@assets/cover.png";
+import { IPFS_GATEWAY } from "@constants/index";
+import clsx from "clsx";
+import { useTranslation } from "react-i18next";
+import {
+  Link,
+  NavLink,
+  Navigate,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
+import styles from "./styles.module.scss";
+import { useGetEmployeeQuery } from "@graphql/generated/schema";
 
 function ProfileLayout() {
-  const location = useLocation()
-  const params = useParams()
-  const id = Number(params.id)
-  const { t } = useTranslation('layout', { keyPrefix: 'personal.index' })
-  const { loading, error, data, refetch, subscribeToMore, client } = useQuery<
-    GetEmployee,
-    { employeeId: number }
-  >(getEmployee, {
-    variables: { employeeId: id },
-  })
+  const location = useLocation();
+  const params = useParams();
+  const id = Number(params.id);
+  const { t } = useTranslation("layout", { keyPrefix: "personal.index" });
+  const { loading, error, data, refetch, subscribeToMore, client } =
+    useGetEmployeeQuery({ variables: { employeeId: id } });
   if (!loading && !data)
     return (
       <div>
         <Navigate to="/404" replace></Navigate>
       </div>
-    )
+    );
 
   return (
     <>
@@ -54,9 +57,11 @@ function ProfileLayout() {
         <div className={styles.tableWrapper}>
           <NavLink
             to={{ pathname: `/profile/${id}` }}
-            className={clsx(styles.tab, { [styles.active]: location.pathname == `/profile/${id}` })}
+            className={clsx(styles.tab, {
+              [styles.active]: location.pathname == `/profile/${id}`,
+            })}
           >
-            {t('posts')}
+            {t("posts")}
           </NavLink>
           <NavLink
             to={{ pathname: `/profile/${id}/mycv` }}
@@ -66,7 +71,7 @@ function ProfileLayout() {
               })
             }
           >
-            {t('mycv')}
+            {t("mycv")}
           </NavLink>
           <NavLink
             to={{ pathname: `/profile/${id}/about` }}
@@ -76,13 +81,13 @@ function ProfileLayout() {
               })
             }
           >
-            {t('about')}
+            {t("about")}
           </NavLink>
         </div>
         <Outlet></Outlet>
       </section>
     </>
-  )
+  );
 }
 
-export default ProfileLayout
+export default ProfileLayout;

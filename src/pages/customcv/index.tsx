@@ -21,7 +21,7 @@ function Index() {
   )
 }
 
-function Wrapper() {
+function CustomCV() {
   return (
     <CustomCVContextProvider>
       <DndProvider backend={HTML5Backend}>
@@ -31,4 +31,4 @@ function Wrapper() {
   )
 }
 
-export default Wrapper
+export default CustomCV

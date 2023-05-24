@@ -47,6 +47,7 @@ export interface ListEmployeeCVInterface extends utils.Interface {
     "approve(address)": FunctionFragment;
     "at(uint256)": FunctionFragment;
     "destroy()": FunctionFragment;
+    "getAll()": FunctionFragment;
     "list(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "retrive(address)": FunctionFragment;
@@ -59,6 +60,7 @@ export interface ListEmployeeCVInterface extends utils.Interface {
       | "approve"
       | "at"
       | "destroy"
+      | "getAll"
       | "list"
       | "owner"
       | "retrive"
@@ -78,6 +80,7 @@ export interface ListEmployeeCVInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "destroy", values?: undefined): string;
+  encodeFunctionData(functionFragment: "getAll", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "list",
     values: [PromiseOrValue<BigNumberish>]
@@ -96,6 +99,7 @@ export interface ListEmployeeCVInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "at", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "destroy", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getAll", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "list", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "retrive", data: BytesLike): Result;
@@ -190,6 +194,8 @@ export interface ListEmployeeCV extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    getAll(overrides?: CallOverrides): Promise<[EmployeeCVStructOutput[]]>;
+
     list(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -234,6 +240,8 @@ export interface ListEmployeeCV extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  getAll(overrides?: CallOverrides): Promise<EmployeeCVStructOutput[]>;
+
   list(
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -272,6 +280,8 @@ export interface ListEmployeeCV extends BaseContract {
     ): Promise<EmployeeCVStructOutput>;
 
     destroy(overrides?: CallOverrides): Promise<void>;
+
+    getAll(overrides?: CallOverrides): Promise<EmployeeCVStructOutput[]>;
 
     list(
       arg0: PromiseOrValue<BigNumberish>,
@@ -335,6 +345,8 @@ export interface ListEmployeeCV extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    getAll(overrides?: CallOverrides): Promise<BigNumber>;
+
     list(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -372,6 +384,8 @@ export interface ListEmployeeCV extends BaseContract {
     destroy(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    getAll(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     list(
       arg0: PromiseOrValue<BigNumberish>,

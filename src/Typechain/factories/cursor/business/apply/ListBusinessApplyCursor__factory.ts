@@ -42,9 +42,9 @@ const _abi = [
         type: "uint256",
       },
       {
-        internalType: "uint256",
+        internalType: "string",
         name: "postId",
-        type: "uint256",
+        type: "string",
       },
     ],
     name: "_checkExistApply",
@@ -66,9 +66,9 @@ const _abi = [
         type: "uint256",
       },
       {
-        internalType: "uint256",
+        internalType: "string",
         name: "postId",
-        type: "uint256",
+        type: "string",
       },
     ],
     name: "_checkIdBelongsToPostId",

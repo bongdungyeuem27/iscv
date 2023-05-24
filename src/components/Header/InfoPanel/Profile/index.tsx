@@ -1,50 +1,49 @@
-'use client'
-import clsx from 'clsx'
+"use client";
+import clsx from "clsx";
 
-import { useContext } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // import { useEmployeeContract } from "@contracts/index";
-import { signout } from '@redux/reducers/auth'
-import { RootState } from '@redux/store'
-import { InfoPanelContext } from '../InfoPanelContext'
-import styles from './styles.module.scss'
+import { signout } from "@redux/reducers/auth";
+import { RootState } from "@redux/store";
+import { InfoPanelContext } from "../InfoPanelContext";
+import styles from "./styles.module.scss";
 
-import { useQuery } from '@apollo/client'
-import { getEmployeeByUser } from '@graphql/Employee'
-import { Link } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { useQuery } from "@apollo/client";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-type Props = {}
+type Props = {};
 
 function Profile(props: Props) {
-  const signer = useSelector((state: RootState) => state.auth.signer)
-  const account = useSelector((state: RootState) => state.auth.account)
-  const { t, i18n } = useTranslation('component', { keyPrefix: 'morePanel.index' })
-  const { setShowInfoPanel } = useContext(InfoPanelContext)
-  const dispatch = useDispatch()
-  const { loading, error, data, refetch, subscribeToMore } = useQuery(getEmployeeByUser, {
-    variables: { user: account },
-  })
+  const signer = useSelector((state: RootState) => state.auth.signer);
+  const employee = useSelector((state: RootState) => state.auth.employee);
+  const { t, i18n } = useTranslation("component", {
+    keyPrefix: "morePanel.index",
+  });
+  const { setShowInfoPanel } = useContext(InfoPanelContext);
+  const dispatch = useDispatch();
+
   const handleSignout = () => {
     setShowInfoPanel!((e) => {
-      return { ...e, show: false }
-    })
-    dispatch(signout({}))
-  }
+      return { ...e, show: false };
+    });
+    dispatch(signout({}));
+  };
   return (
     <ul className={clsx(styles.container)}>
       <Link
         onClick={() => {
           setShowInfoPanel!((e) => {
-            return { ...e, show: false }
-          })
+            return { ...e, show: false };
+          });
         }}
-        to={`/profile/${data?.employeeByUser?.id}`}
+        to={`/profile/${employee?.id}`}
         className={styles.item}
       >
         <i className="fa-solid fa-circle-heart"></i>
-        <p>{t('my_page')}</p>
+        <p>{t("my_page")}</p>
       </Link>
       {/* {loginState.for == "business" && (
         <Link
@@ -62,26 +61,26 @@ function Profile(props: Props) {
       )} */}
       <a className={styles.item}>
         <i className="fa-solid fa-bookmark"></i>
-        <p>{t('saved')}</p>
+        <p>{t("saved")}</p>
       </a>
       <Link
         to="aaa"
         onClick={() => {
           setShowInfoPanel!((e) => {
-            return { ...e, show: false }
-          })
+            return { ...e, show: false };
+          });
         }}
         className={styles.item}
       >
         <i className="fa-solid fa-gear"></i>
-        <p>{t('setting')}</p>
+        <p>{t("setting")}</p>
       </Link>
       <a onClick={handleSignout} className={styles.item}>
         <i className="fa-solid fa-arrow-right-from-bracket"></i>
-        <p>{t('logout')}</p>
+        <p>{t("logout")}</p>
       </a>
     </ul>
-  )
+  );
 }
 
-export default Profile
+export default Profile;

@@ -1,0 +1,16 @@
+query GetPost($postId: String!, $employeeId: Int) {
+  post(id: $postId, employeeId: $employeeId) {
+    _id
+    businessId
+    images
+    videos
+    content
+    hashtag
+    status
+    job
+    applied
+    businessImage
+    createdAt
+    updatedAt
+  }
+}

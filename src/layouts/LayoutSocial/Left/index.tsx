@@ -5,7 +5,7 @@ import styles from './styles.module.scss'
 
 function Index() {
   const location = useLocation()
-  const { t } = useTranslation('layout', { keyPrefix: 'social.index' })
+  const { t } = useTranslation('layout', { keyPrefix: 'page.social.feed.index' })
   return (
     <div className={styles.container}>
       <NavLink
@@ -13,7 +13,7 @@ function Index() {
         className={clsx(styles.item, { [styles.active]: location.pathname == '/social' })}
       >
         <i className="fa-light fa-box-open-full"></i>
-        <a>{t('feed')}</a>
+        <span>{t('suggestion')}</span>
       </NavLink>
       {/* <Link
         to="/friend"

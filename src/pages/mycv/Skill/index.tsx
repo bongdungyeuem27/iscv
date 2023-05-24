@@ -1,8 +1,8 @@
-import { ProgressBar } from '@components/ProgressBar'
-import { Skill } from '@graphql/Skill'
-import styles from './styles.module.scss'
+import { ProgressBar } from "@components/ProgressBar";
+import styles from "./styles.module.scss";
+import { ISkill } from "@graphql/generated/schema";
 
-function Index({ list }: { list: Skill[] }) {
+function Index({ list }: { list: ISkill[] }) {
   return (
     <div className={styles.container}>
       <div className={styles.group}>
@@ -13,13 +13,13 @@ function Index({ list }: { list: Skill[] }) {
                 <div className={styles.title}>{value.title}</div>
                 <div className={styles.level}>{value.level}%</div>
               </div>
-              <ProgressBar percent={Math.round(value.level)}></ProgressBar>
+              <ProgressBar percent={Math.round(value.level!)}></ProgressBar>
             </div>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }
 
-export default Index
+export default Index;

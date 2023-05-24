@@ -1,0 +1,8 @@
+query GetSkillsByEmployee($employeeId: Int!) {
+  skillsByEmployee(employeeId: $employeeId) {
+    id
+    employeeId
+    title
+    level
+  }
+}

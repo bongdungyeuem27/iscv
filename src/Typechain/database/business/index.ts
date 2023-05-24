@@ -5,6 +5,4 @@ import type * as apply from "./apply";
 export type { apply };
 import type * as igg from "./igg";
 export type { igg };
-import type * as post from "./post";
-export type { post };
 export type { ListBusiness } from "./ListBusiness";

@@ -1,24 +1,30 @@
-import { useQuery } from '@apollo/client'
+import { useQuery } from "@apollo/client";
 
-import { IReqSkillsByEmployee, IResSkillsByEmployee, getSkillsByEmployee } from '@graphql/Skill'
-import { useLocation, useParams } from 'react-router-dom'
-import ItemSkill from './Panel/ItemSkill'
-import Panel from './Panel/index'
-import styles from './styles.module.scss'
+import { useLocation, useParams } from "react-router-dom";
+import ItemSkill from "./Panel/ItemSkill";
+import Panel from "./Panel/index";
+import styles from "./styles.module.scss";
+import { useGetSkillsByEmployeeQuery } from "@graphql/generated/schema";
 
 function Index() {
-  const location = useLocation()
-  const id = Number(useParams().id)
-  const querySkills = useQuery<IResSkillsByEmployee, IReqSkillsByEmployee>(getSkillsByEmployee, {
-    variables: { employeeId: id }
-  })
+  const location = useLocation();
+  const id = Number(useParams().id);
+  const querySkills = useGetSkillsByEmployeeQuery({
+    variables: { employeeId: id },
+  });
 
   return (
     <div className={styles.container}>
-      {location.pathname.includes('profile') && (
-        <Panel type={'skills'}>
+      {location.pathname.includes("profile") && (
+        <Panel type={"skills"}>
           {querySkills.data?.skillsByEmployee?.map((value) => {
-            return <ItemSkill key={value.id} title={value.title} level={value.level}></ItemSkill>
+            return (
+              <ItemSkill
+                key={value?.id}
+                title={value!.title!}
+                level={value!.level!}
+              ></ItemSkill>
+            );
           })}
         </Panel>
       )}
@@ -48,7 +54,7 @@ function Index() {
       {/* {location.pathname.includes('page') &&
         profile?.category == CATEGORY.igg.type && <IIGRequestPanel></IIGRequestPanel>} */}
     </div>
-  )
+  );
 }
 
-export default Index
+export default Index;

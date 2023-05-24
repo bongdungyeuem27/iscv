@@ -1,0 +1,35 @@
+query GetEmployeeByUser($user: String) {
+  employeeByUser(user: $user) {
+    category
+    id
+    user
+    name
+    phone
+    professional
+    email
+    github
+    linkedin
+    sourceImage
+  }
+}
+
+query GetEmployeeIdByUser($user: String) {
+  employeeByUser(user: $user) {
+    id
+  }
+}
+
+query GetEmployee($employeeId: Int!) {
+  employee(id: $employeeId) {
+    category
+    id
+    user
+    name
+    phone
+    professional
+    email
+    github
+    linkedin
+    sourceImage
+  }
+}

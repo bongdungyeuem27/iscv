@@ -5,6 +5,4 @@ import type * as apply from "./apply";
 export type { apply };
 import type * as iig from "./iig";
 export type { iig };
-import type * as post from "./post";
-export type { post };
 export type { ListBusinessCursor } from "./ListBusinessCursor";

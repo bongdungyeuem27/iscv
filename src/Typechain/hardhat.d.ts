@@ -29,9 +29,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IIGController__factory>;
     getContractFactory(
-      name: "CVController",
+      name: "EmployeeCVController",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.CVController__factory>;
+    ): Promise<Contracts.EmployeeCVController__factory>;
     getContractFactory(
       name: "EmployeeController",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -48,10 +48,6 @@ declare module "hardhat/types/runtime" {
       name: "ListBusinessCursor",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ListBusinessCursor__factory>;
-    getContractFactory(
-      name: "ListBusinessPostCursor",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ListBusinessPostCursor__factory>;
     getContractFactory(
       name: "ListEmployeeCursor",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -84,10 +80,6 @@ declare module "hardhat/types/runtime" {
       name: "ListBusiness",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ListBusiness__factory>;
-    getContractFactory(
-      name: "ListBusinessPost",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ListBusinessPost__factory>;
     getContractFactory(
       name: "ListEmployeeCV",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -122,10 +114,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IIGController>;
     getContractAt(
-      name: "CVController",
+      name: "EmployeeCVController",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.CVController>;
+    ): Promise<Contracts.EmployeeCVController>;
     getContractAt(
       name: "EmployeeController",
       address: string,
@@ -146,11 +138,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ListBusinessCursor>;
-    getContractAt(
-      name: "ListBusinessPostCursor",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ListBusinessPostCursor>;
     getContractAt(
       name: "ListEmployeeCursor",
       address: string,
@@ -191,11 +178,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ListBusiness>;
-    getContractAt(
-      name: "ListBusinessPost",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ListBusinessPost>;
     getContractAt(
       name: "ListEmployeeCV",
       address: string,

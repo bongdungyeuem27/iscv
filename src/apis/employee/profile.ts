@@ -14,27 +14,6 @@ export const deleteAvatar = (id: number) => {
   return axiosServices.delete(`${API_ENDPOINT_NODEJS}/employee/profile/avatar/${id}`, {})
 }
 
-// export const getEmplopyee = ({ id }: { id: number }) => {
-//   return axiosServices.post(`graphql`, {
-//     query: `query ExampleQuery($employeeId: ID!) {
-//     employee(id: $employeeId) {
-//       category
-//       id
-//       user
-//       name
-//       phone
-//       professional
-//       email
-//       github
-//       linkedin
-//       sourceImage
-//     }
-//   }`,
-//     variables: {
-//       employeeId: id,
-//     },
-//   })
-// }
 
 export const getEmployeeByUser = ({ user }: { user: string }) => {
   return axiosServices.post<{ data: { employeeByUser: IEmployee } }>(`graphql`, {

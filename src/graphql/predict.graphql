@@ -1,0 +1,12 @@
+query GetPredict($employeeId: Int!) {
+  prediction(id: $employeeId) {
+    _id
+    # businessId
+    # hashTag
+    # time
+    # content
+    # imageSource
+    # job
+    # status
+  }
+}

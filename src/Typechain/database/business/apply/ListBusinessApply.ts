@@ -31,7 +31,7 @@ export type BusinessApplyStruct = {
   id: PromiseOrValue<BigNumberish>;
   employeeId: PromiseOrValue<BigNumberish>;
   businessId: PromiseOrValue<BigNumberish>;
-  postId: PromiseOrValue<BigNumberish>;
+  postId: PromiseOrValue<string>;
   time: PromiseOrValue<BigNumberish>;
   status: PromiseOrValue<BigNumberish>;
 };
@@ -40,21 +40,21 @@ export type BusinessApplyStructOutput = [
   BigNumber,
   BigNumber,
   BigNumber,
-  BigNumber,
+  string,
   BigNumber,
   BigNumber
 ] & {
   id: BigNumber;
   employeeId: BigNumber;
   businessId: BigNumber;
-  postId: BigNumber;
+  postId: string;
   time: BigNumber;
   status: BigNumber;
 };
 
 export interface ListBusinessApplyInterface extends utils.Interface {
   functions: {
-    "add((uint256,uint256,uint256,uint256,uint256,uint256))": FunctionFragment;
+    "add((uint256,uint256,uint256,string,uint256,uint256))": FunctionFragment;
     "approve(address)": FunctionFragment;
     "at(uint256)": FunctionFragment;
     "destroy()": FunctionFragment;
@@ -218,11 +218,11 @@ export interface ListBusinessApply extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+      [BigNumber, BigNumber, BigNumber, string, BigNumber, BigNumber] & {
         id: BigNumber;
         employeeId: BigNumber;
         businessId: BigNumber;
-        postId: BigNumber;
+        postId: string;
         time: BigNumber;
         status: BigNumber;
       }
@@ -272,11 +272,11 @@ export interface ListBusinessApply extends BaseContract {
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+    [BigNumber, BigNumber, BigNumber, string, BigNumber, BigNumber] & {
       id: BigNumber;
       employeeId: BigNumber;
       businessId: BigNumber;
-      postId: BigNumber;
+      postId: string;
       time: BigNumber;
       status: BigNumber;
     }
@@ -321,11 +321,11 @@ export interface ListBusinessApply extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+      [BigNumber, BigNumber, BigNumber, string, BigNumber, BigNumber] & {
         id: BigNumber;
         employeeId: BigNumber;
         businessId: BigNumber;
-        postId: BigNumber;
+        postId: string;
         time: BigNumber;
         status: BigNumber;
       }

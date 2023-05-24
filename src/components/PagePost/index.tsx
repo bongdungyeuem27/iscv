@@ -1,8 +1,6 @@
 import { useQuery } from "@apollo/client";
-import { IPFS_GATEWAY } from "@constants/index";
+import { API_ENDPOINT_NODEJS, IPFS_GATEWAY } from "@constants/index";
 import { useEmployee } from "@contracts/useEmployee";
-import { GetImageNameById, getImageNameById } from "@graphql/Business";
-import { IReqPost, IResPost, getPost } from "@graphql/Posts";
 import { useToast } from "@iscv/toast";
 import { RootState } from "@redux/store";
 import clsx from "clsx";
@@ -11,23 +9,25 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { PostStatus } from "src/types/posts";
 import styles from "./styles.module.scss";
+import { useGetPostQuery } from "@graphql/generated/schema";
+import Video from "@components/Video";
 
 type Props = {
-  postId: number;
+  postId: string;
 };
-function ReviewPost(props: Props) {
+function PagePost(props: Props) {
   const { postId } = props;
   const signer = useSelector((state: RootState) => state.auth.signer);
-  const { loading, data, refetch } = useQuery<IResPost, IReqPost>(getPost, {
-    variables: { postId: postId },
-  });
   const id = useSelector((state: RootState) => state.auth.employee)?.id;
+  const { loading, data, refetch } = useGetPostQuery({
+    variables: { postId: String(postId), employeeId: id },
+  });
   const { t } = useTranslation("component", { keyPrefix: "postItem.index" });
   const toast = useToast();
   const employeeContract = useEmployee(signer!);
   const handleApply = async () => {
     await employeeContract
-      .applyPost(id!, data?.post?.businessId!, data?.post.id!)
+      .applyPost(id!, data?.post?.businessId!, data?.post?._id!)
       .then((success) => {
         toast.success();
         refetch();
@@ -37,32 +37,34 @@ function ReviewPost(props: Props) {
         toast.error();
       });
   };
-
+  console.log(data);
   if (!data) return null;
-  console.log(data?.post);
   return (
     <div className={clsx(styles.item)}>
       <div className={styles.head}>
         <div className={styles.personalWrapper}>
           <Link
-            to={`/page/${data?.post.businessId}`}
+            to={`/page/${data?.post?.businessId}`}
             className={styles.avatarWrapper}
           >
-            <img src={`${IPFS_GATEWAY}${data?.post.imageSource}`}></img>
+            {/* <img src={`${IPFS_GATEWAY}${data?.post?}`}></img> */}
           </Link>
           <div className={styles.avatarTextWrapper}>
-            <Link to={`/page/${data?.post.businessId}`} className={styles.name}>
-              {data?.post.businessName}
+            <Link
+              to={`/page/${data?.post?.businessId}`}
+              className={styles.name}
+            >
+              {data?.post?.businessImage}
             </Link>
             <div className={styles.date}>{new Date().toLocaleString()}</div>
-            {data?.post.status && (
+            {data?.post?.status && (
               <div
                 className={clsx(
                   styles.container,
-                  styles[PostStatus[data?.post.status].toLowerCase()]
+                  styles[PostStatus[data?.post?.status].toLowerCase()]
                 )}
               >
-                <a>{t(PostStatus[data?.post.status!].toLowerCase())}</a>
+                <a>{t(PostStatus[data?.post?.status!].toLowerCase())}</a>
               </div>
             )}
           </div>
@@ -73,25 +75,22 @@ function ReviewPost(props: Props) {
       </div>
       <div className={styles.hashtag}>
         <i className="fa-regular fa-hashtag"></i>
-        <a>{data?.post.hashtag}</a>
+        <a>{data?.post?.hashtag}</a>
       </div>
       <div className={styles.job}>
         <i className="fa-solid fa-tags"></i>
-        <a>{data?.post.job}</a>
+        <a>{data?.post?.job}</a>
       </div>
       <div className={styles.contentWrapper}>
-        <p>{data?.post.content}</p>
+        <p>{data?.post?.content}</p>
 
         <div className={styles.imageContent}>
-          {data?.post.imageSource && (
-            <img
-              src={`${IPFS_GATEWAY}${data.post.imageSource}`}
-              alt="post"
-            ></img>
-          )}
-          {!data?.post.imageSource && (
-            <i className={clsx("fa-duotone fa-image")}></i>
-          )}
+          {/* {data.post?.images &&  <img src={window.URL.createObjectURL(field.value)} alt="post"></img>} */}
+          <Video
+            video={`${API_ENDPOINT_NODEJS}public/business/post/${
+              data.post?._id
+            }/${data.post?.videos?.at(0)}.mp4`}
+          ></Video>
         </div>
       </div>
       <div className={styles.foot}>
@@ -111,9 +110,23 @@ function ReviewPost(props: Props) {
           <i className="fa-light fa-share-nodes"></i>
           <div className={styles.footItemTitle}> {t("share")}</div>
         </div>
-        {data?.post.status && PostStatus[data?.post.status] === "OPEN" && (
+        {!data.post?.applied && PostStatus[data?.post?.status!] === "OPEN" && (
           <button onClick={handleApply} className={styles.footItem}>
             <div className={styles.buttonApply}> {t("apply")}</div>
+          </button>
+        )}
+        {data.post?.applied && PostStatus[data?.post?.status!] === "OPEN" && (
+          <button disabled={true} className={styles.footItem}>
+            <div className={clsx(styles.buttonApply, styles.applied)}>
+              {t("applied")}
+            </div>
+          </button>
+        )}
+        {PostStatus[data?.post?.status!] === "CLOSE" && (
+          <button disabled={true} className={styles.footItem}>
+            <div className={clsx(styles.buttonApply, styles.applied)}>
+              {t("closed")}
+            </div>
           </button>
         )}
       </div>
@@ -141,4 +154,4 @@ function ReviewPost(props: Props) {
   );
 }
 
-export default ReviewPost;
+export default PagePost;

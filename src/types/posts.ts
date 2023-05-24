@@ -7,14 +7,17 @@ export enum PostStatus {
 
 export type IPost = {
   id: number;
+  businessName: string;
+  businessUser: string;
+  businessSourceImage: string;
   businessId: number;
-  hashtag: any;
-  time: number;
+  hashTag: string;
+  time: Date;
   content: string;
   imageSource: string;
   job: string;
-  status: PostStatus;
-  businessName: String;
-  businessUser: String;
-  businessSourceImage: String;
+  status: number;
+  applyId: number | undefined;
+  applyTime: number | undefined;
+  applyStatus: number | undefined;
 };

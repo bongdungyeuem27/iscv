@@ -1,6 +1,5 @@
-import { designTabComponents } from '../ItemTypes'
 import { capitalizeFirstLetter } from '@helper/string'
-import { defaultComponent } from '../config'
+import { designTabComponents } from '../ItemTypes'
 export default function (
   type,
   top,

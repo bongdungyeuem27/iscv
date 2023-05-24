@@ -1,49 +1,52 @@
-'use client'
-import { useQuery } from '@apollo/client'
-import avatar from '@assets/avatar.png'
-import { EmployeeByUserData, getEmployeeByUser } from '@graphql/Employee'
-import { useContext } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+"use client";
+import { useQuery } from "@apollo/client";
+import avatar from "@assets/avatar.png";
+import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { IPFS_GATEWAY } from '@constants/index'
-import { connect } from '@redux/reducers/auth'
-import { RootState } from '@redux/store'
-import { useTranslation } from 'react-i18next'
-import { InfoPanelContext } from './InfoPanelContext'
-import styles from './styles.module.scss'
+import { IPFS_GATEWAY } from "@constants/index";
+import { connect } from "@redux/reducers/auth";
+import { RootState } from "@redux/store";
+import { useTranslation } from "react-i18next";
+import { InfoPanelContext } from "./InfoPanelContext";
+import styles from "./styles.module.scss";
+import { useToast } from "@iscv/toast";
 
-type Props = {}
+type Props = {};
 
 const ButtonProfile = (props: Props) => {
-  const { t, i18n } = useTranslation('component', { keyPrefix: 'header.index' })
-  const { showInfoPanel, setShowInfoPanel } = useContext(InfoPanelContext)
-  const dispatch = useDispatch()
-  const provider = useSelector((state: RootState) => state.auth.provider)
-  const account = useSelector((state: RootState) => state.auth.account)
+  const { t, i18n } = useTranslation("component", {
+    keyPrefix: "header.index",
+  });
+  const { showInfoPanel, setShowInfoPanel } = useContext(InfoPanelContext);
+  const dispatch = useDispatch();
+  const provider = useSelector((state: RootState) => state.auth.provider);
+  const employee = useSelector((state: RootState) => state.auth.employee);
+  const account = useSelector((state: RootState) => state.auth.account);
+  const toast = useToast();
   const handleConnect = () => {
-    dispatch<any>(connect({ provider }))
-  }
-  const { loading, error, data, refetch, subscribeToMore } = useQuery<EmployeeByUserData>(
-    getEmployeeByUser,
-    {
-      variables: { user: account },
+    if (!provider) {
+      toast.error(t("not_have_metamask"));
+      return;
     }
-  )
+    dispatch<any>(connect({ provider }));
+  };
+
   return (
     <div>
       {!account && (
         <button className={styles.buttonAccount} onClick={handleConnect}>
-          {t('connect_metamask')}
+          {t("connect_metamask")}
         </button>
       )}
-      {account && !data?.employeeByUser && (
-        <Link to={'/register'} className={styles.buttonAccount}>
-          {t('register')}
+      {account && !employee && (
+        <Link to={"/register"} className={styles.buttonAccount}>
+          {t("register")}
         </Link>
       )}
 
-      {account && data?.employeeByUser && (
+      {employee && (
         <button
           id="header_button"
           onClick={() => {
@@ -51,8 +54,8 @@ const ButtonProfile = (props: Props) => {
               return {
                 show: e.show == false ? true : e.panel != 1 ? true : false,
                 panel: 1,
-              }
-            })
+              };
+            });
           }}
           key={4}
           className={styles.account}
@@ -60,8 +63,8 @@ const ButtonProfile = (props: Props) => {
           <img
             className={styles.avatar}
             src={
-              data?.employeeByUser?.sourceImage
-                ? `${IPFS_GATEWAY}${data?.employeeByUser?.sourceImage}`
+              employee.sourceImage
+                ? `${IPFS_GATEWAY}${employee.sourceImage}`
                 : avatar
             }
             loading="eager"
@@ -70,7 +73,7 @@ const ButtonProfile = (props: Props) => {
         </button>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ButtonProfile
+export default ButtonProfile;

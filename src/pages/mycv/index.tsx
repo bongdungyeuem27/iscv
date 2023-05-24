@@ -1,5 +1,3 @@
-import { useQuery } from '@apollo/client'
-import { GetEmployeeIdByUser, getEmployeeIdByUser } from '@graphql/Employee'
 import { RootState } from '@redux/store'
 import { useSelector } from 'react-redux'
 import { useParams, useSearchParams } from 'react-router-dom'
@@ -12,12 +10,10 @@ function Index() {
   const params = useParams()
   const id = params.id
   const [searchParams] = useSearchParams()
-  const account = useSelector((state: RootState) => state.auth.account)
+  const employee = useSelector((state: RootState) => state.auth.employee)
   const tab = searchParams.get('tab')
-  const idQuery = useQuery<GetEmployeeIdByUser>(getEmployeeIdByUser, {
-    variables: { user: account },
-  })
-  const owner = idQuery.data?.employeeByUser.id == id
+
+  const owner = employee?.id == id
   return (
     <div className={styles.container}>
       <Left owner={owner}></Left>

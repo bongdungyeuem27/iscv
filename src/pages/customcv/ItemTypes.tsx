@@ -10,8 +10,20 @@ import ImageItem from './Main/Component/ImageItem'
 import IconItem from './Main/Component/IconItem'
 
 import { defaultComponent } from './config'
+import React from 'react'
 
-export const designTabComponents = {
+type IView = {
+
+} & any
+
+export const designTabComponents: {
+  [key: string]:{
+    icon: string
+    view: (id: string, data: any, profile: any, selected: string, list: any[], setList: any) => JSX.Element 
+    data: any
+    components: JSX.Element[]
+  }
+} = {
   text: {
     icon: 'fa-regular fa-text',
     view: (id, data, profile, selected, list, setList) => (
@@ -23,7 +35,7 @@ export const designTabComponents = {
         list={list}
         setList={setList}
       ></TextItem>
-    ),
+    ) ,
     data: {
       ...defaultComponent.common,
       ...defaultComponent.text,

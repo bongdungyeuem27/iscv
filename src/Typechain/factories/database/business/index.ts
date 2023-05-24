@@ -3,5 +3,4 @@
 /* eslint-disable */
 export * as apply from "./apply";
 export * as igg from "./igg";
-export * as post from "./post";
 export { ListBusiness__factory } from "./ListBusiness__factory";
