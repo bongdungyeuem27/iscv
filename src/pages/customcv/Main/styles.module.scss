@@ -1,20 +1,29 @@
 .index {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 100%;
+  padding: 40px;
 }
 .board {
   border: 1px solid black;
-  position: relative;
   overflow: hidden;
-  background-color: var(--color-background-primary);
+
   overflow-x: hidden;
   .drawChild {
     width: 100%;
+    position: relative;
     height: 100%;
     overflow: hidden;
     background: white;
   }
 }
 .draggableBox {
+  width: 100%;
+  height: 100%;
+  position: relative;
   &:hover {
     outline: 2px outset #97c9e4;
   }

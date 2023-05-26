@@ -2,4 +2,3 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { ListBusinessApply } from "./ListBusinessApply";
-export type { ListBusinessAppointment } from "./ListBusinessAppointment";

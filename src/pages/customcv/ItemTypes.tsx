@@ -1,16 +1,15 @@
-import ImagePreview from './RightPanel/Design/ImagePreview'
 import Dimension from './RightPanel/Design/Dimension'
+import Icon from './RightPanel/Design/Icon'
+import ImagePreview from './RightPanel/Design/ImagePreview'
 import Style from './RightPanel/Design/Style'
 import Text from './RightPanel/Design/Text'
-import Icon from './RightPanel/Design/Icon'
 
 import BoxItem from './Main/Component/BoxItem'
-import TextItem from './Main/Component/TextItem'
-import ImageItem from './Main/Component/ImageItem'
 import IconItem from './Main/Component/IconItem'
+import ImageItem from './Main/Component/ImageItem'
+import TextItem from './Main/Component/TextItem'
 
 import { defaultComponent } from './config'
-import React from 'react'
 
 type IView = {
 

@@ -28,7 +28,6 @@ import type {
 } from "../../common";
 
 export type ProfileStruct = {
-  category: PromiseOrValue<BigNumberish>;
   id: PromiseOrValue<BigNumberish>;
   user: PromiseOrValue<string>;
   name: PromiseOrValue<string>;
@@ -42,7 +41,6 @@ export type ProfileStruct = {
 
 export type ProfileStructOutput = [
   BigNumber,
-  BigNumber,
   string,
   string,
   string,
@@ -52,7 +50,6 @@ export type ProfileStructOutput = [
   string,
   string
 ] & {
-  category: BigNumber;
   id: BigNumber;
   user: string;
   name: string;
@@ -66,7 +63,7 @@ export type ProfileStructOutput = [
 
 export interface ListEmployeeInterface extends utils.Interface {
   functions: {
-    "add((uint256,uint256,address,string,string,string,string,string,string,string))": FunctionFragment;
+    "add((uint256,address,string,string,string,string,string,string,string))": FunctionFragment;
     "approve(address)": FunctionFragment;
     "at(uint256)": FunctionFragment;
     "atAddress(address)": FunctionFragment;
@@ -76,7 +73,6 @@ export interface ListEmployeeInterface extends utils.Interface {
     "list(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "retrive(address)": FunctionFragment;
-    "setCategory(uint256,uint256)": FunctionFragment;
     "setEmail(uint256,string)": FunctionFragment;
     "setGithub(uint256,string)": FunctionFragment;
     "setId(uint256,uint256)": FunctionFragment;
@@ -101,7 +97,6 @@ export interface ListEmployeeInterface extends utils.Interface {
       | "list"
       | "owner"
       | "retrive"
-      | "setCategory"
       | "setEmail"
       | "setGithub"
       | "setId"
@@ -141,10 +136,6 @@ export interface ListEmployeeInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "retrive",
     values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setCategory",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setEmail",
@@ -200,10 +191,6 @@ export interface ListEmployeeInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "list", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "retrive", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setCategory",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "setEmail", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setGithub", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setId", data: BytesLike): Result;
@@ -328,7 +315,6 @@ export interface ListEmployee extends BaseContract {
     ): Promise<
       [
         BigNumber,
-        BigNumber,
         string,
         string,
         string,
@@ -338,7 +324,6 @@ export interface ListEmployee extends BaseContract {
         string,
         string
       ] & {
-        category: BigNumber;
         id: BigNumber;
         user: string;
         name: string;
@@ -355,12 +340,6 @@ export interface ListEmployee extends BaseContract {
 
     retrive(
       value: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setCategory(
-      index: PromiseOrValue<BigNumberish>,
-      value: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -461,7 +440,6 @@ export interface ListEmployee extends BaseContract {
   ): Promise<
     [
       BigNumber,
-      BigNumber,
       string,
       string,
       string,
@@ -471,7 +449,6 @@ export interface ListEmployee extends BaseContract {
       string,
       string
     ] & {
-      category: BigNumber;
       id: BigNumber;
       user: string;
       name: string;
@@ -488,12 +465,6 @@ export interface ListEmployee extends BaseContract {
 
   retrive(
     value: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setCategory(
-    index: PromiseOrValue<BigNumberish>,
-    value: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -589,7 +560,6 @@ export interface ListEmployee extends BaseContract {
     ): Promise<
       [
         BigNumber,
-        BigNumber,
         string,
         string,
         string,
@@ -599,7 +569,6 @@ export interface ListEmployee extends BaseContract {
         string,
         string
       ] & {
-        category: BigNumber;
         id: BigNumber;
         user: string;
         name: string;
@@ -616,12 +585,6 @@ export interface ListEmployee extends BaseContract {
 
     retrive(
       value: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setCategory(
-      index: PromiseOrValue<BigNumberish>,
-      value: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -746,12 +709,6 @@ export interface ListEmployee extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setCategory(
-      index: PromiseOrValue<BigNumberish>,
-      value: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setEmail(
       index: PromiseOrValue<BigNumberish>,
       value: PromiseOrValue<string>,
@@ -853,12 +810,6 @@ export interface ListEmployee extends BaseContract {
 
     retrive(
       value: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setCategory(
-      index: PromiseOrValue<BigNumberish>,
-      value: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

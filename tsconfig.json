@@ -28,9 +28,15 @@
       "@contracts/*": ["./src/contracts/*"],
       "@graphql/*": ["./src/graphql/*"],
       "@typechain/*": ["./src/typechain/*"],
-      "@redux/*": ["./src/redux/*"]
+      "@redux/*": ["./src/redux/*"],
+      "@globalTypes/*": ["./src/globalTypes/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/pages/customcv/HeaderToolBox/ImportBlockchain/index.jsx"
+, "src/pages/customcv/config.js", "src/pages/customcv/config.js"  ],
   "exclude": ["node_modules"]
 }

@@ -29,7 +29,6 @@ import type {
 
 export type IIGSWResultStruct = {
   id: PromiseOrValue<BigNumberish>;
-  businessId: PromiseOrValue<BigNumberish>;
   employeeId: PromiseOrValue<BigNumberish>;
   testDate: PromiseOrValue<BigNumberish>;
   shiftTest: PromiseOrValue<BigNumberish>;
@@ -43,7 +42,6 @@ export type IIGSWResultStructOutput = [
   BigNumber,
   BigNumber,
   BigNumber,
-  BigNumber,
   number,
   BigNumber,
   BigNumber,
@@ -51,7 +49,6 @@ export type IIGSWResultStructOutput = [
   BigNumber
 ] & {
   id: BigNumber;
-  businessId: BigNumber;
   employeeId: BigNumber;
   testDate: BigNumber;
   shiftTest: number;
@@ -63,7 +60,7 @@ export type IIGSWResultStructOutput = [
 
 export interface ListIIGSWResultInterface extends utils.Interface {
   functions: {
-    "add((uint256,uint256,uint256,uint256,uint8,uint256,uint256,uint256,uint256))": FunctionFragment;
+    "add((uint256,uint256,uint256,uint8,uint256,uint256,uint256,uint256))": FunctionFragment;
     "approve(address)": FunctionFragment;
     "at(uint256)": FunctionFragment;
     "destroy()": FunctionFragment;
@@ -71,10 +68,9 @@ export interface ListIIGSWResultInterface extends utils.Interface {
     "list(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "retrive(address)": FunctionFragment;
-    "setBusinessId(uint256,uint256)": FunctionFragment;
     "setEmployeeId(uint256,uint256)": FunctionFragment;
     "setExprireDate(uint256,uint256)": FunctionFragment;
-    "setRequest(uint256,uint256,uint256,uint256,uint8,uint256,uint256,uint256)": FunctionFragment;
+    "setRequest(uint256,uint256,uint256,uint8,uint256,uint256,uint256)": FunctionFragment;
     "setShiftTest(uint256,uint8)": FunctionFragment;
     "setSpeakingScore(uint256,uint256)": FunctionFragment;
     "setTestDate(uint256,uint256)": FunctionFragment;
@@ -92,7 +88,6 @@ export interface ListIIGSWResultInterface extends utils.Interface {
       | "list"
       | "owner"
       | "retrive"
-      | "setBusinessId"
       | "setEmployeeId"
       | "setExprireDate"
       | "setRequest"
@@ -127,10 +122,6 @@ export interface ListIIGSWResultInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setBusinessId",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setEmployeeId",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
@@ -141,7 +132,6 @@ export interface ListIIGSWResultInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setRequest",
     values: [
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -180,10 +170,6 @@ export interface ListIIGSWResultInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "list", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "retrive", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setBusinessId",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "setEmployeeId",
     data: BytesLike
@@ -310,7 +296,6 @@ export interface ListIIGSWResult extends BaseContract {
         BigNumber,
         BigNumber,
         BigNumber,
-        BigNumber,
         number,
         BigNumber,
         BigNumber,
@@ -318,7 +303,6 @@ export interface ListIIGSWResult extends BaseContract {
         BigNumber
       ] & {
         id: BigNumber;
-        businessId: BigNumber;
         employeeId: BigNumber;
         testDate: BigNumber;
         shiftTest: number;
@@ -336,12 +320,6 @@ export interface ListIIGSWResult extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setBusinessId(
-      index: PromiseOrValue<BigNumberish>,
-      value: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     setEmployeeId(
       index: PromiseOrValue<BigNumberish>,
       value: PromiseOrValue<BigNumberish>,
@@ -356,7 +334,6 @@ export interface ListIIGSWResult extends BaseContract {
 
     setRequest(
       index: PromiseOrValue<BigNumberish>,
-      businessId: PromiseOrValue<BigNumberish>,
       employeeId: PromiseOrValue<BigNumberish>,
       testDate: PromiseOrValue<BigNumberish>,
       shiftTest: PromiseOrValue<BigNumberish>,
@@ -425,7 +402,6 @@ export interface ListIIGSWResult extends BaseContract {
       BigNumber,
       BigNumber,
       BigNumber,
-      BigNumber,
       number,
       BigNumber,
       BigNumber,
@@ -433,7 +409,6 @@ export interface ListIIGSWResult extends BaseContract {
       BigNumber
     ] & {
       id: BigNumber;
-      businessId: BigNumber;
       employeeId: BigNumber;
       testDate: BigNumber;
       shiftTest: number;
@@ -451,12 +426,6 @@ export interface ListIIGSWResult extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setBusinessId(
-    index: PromiseOrValue<BigNumberish>,
-    value: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   setEmployeeId(
     index: PromiseOrValue<BigNumberish>,
     value: PromiseOrValue<BigNumberish>,
@@ -471,7 +440,6 @@ export interface ListIIGSWResult extends BaseContract {
 
   setRequest(
     index: PromiseOrValue<BigNumberish>,
-    businessId: PromiseOrValue<BigNumberish>,
     employeeId: PromiseOrValue<BigNumberish>,
     testDate: PromiseOrValue<BigNumberish>,
     shiftTest: PromiseOrValue<BigNumberish>,
@@ -535,7 +503,6 @@ export interface ListIIGSWResult extends BaseContract {
         BigNumber,
         BigNumber,
         BigNumber,
-        BigNumber,
         number,
         BigNumber,
         BigNumber,
@@ -543,7 +510,6 @@ export interface ListIIGSWResult extends BaseContract {
         BigNumber
       ] & {
         id: BigNumber;
-        businessId: BigNumber;
         employeeId: BigNumber;
         testDate: BigNumber;
         shiftTest: number;
@@ -561,12 +527,6 @@ export interface ListIIGSWResult extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setBusinessId(
-      index: PromiseOrValue<BigNumberish>,
-      value: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setEmployeeId(
       index: PromiseOrValue<BigNumberish>,
       value: PromiseOrValue<BigNumberish>,
@@ -581,7 +541,6 @@ export interface ListIIGSWResult extends BaseContract {
 
     setRequest(
       index: PromiseOrValue<BigNumberish>,
-      businessId: PromiseOrValue<BigNumberish>,
       employeeId: PromiseOrValue<BigNumberish>,
       testDate: PromiseOrValue<BigNumberish>,
       shiftTest: PromiseOrValue<BigNumberish>,
@@ -672,12 +631,6 @@ export interface ListIIGSWResult extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setBusinessId(
-      index: PromiseOrValue<BigNumberish>,
-      value: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     setEmployeeId(
       index: PromiseOrValue<BigNumberish>,
       value: PromiseOrValue<BigNumberish>,
@@ -692,7 +645,6 @@ export interface ListIIGSWResult extends BaseContract {
 
     setRequest(
       index: PromiseOrValue<BigNumberish>,
-      businessId: PromiseOrValue<BigNumberish>,
       employeeId: PromiseOrValue<BigNumberish>,
       testDate: PromiseOrValue<BigNumberish>,
       shiftTest: PromiseOrValue<BigNumberish>,
@@ -766,12 +718,6 @@ export interface ListIIGSWResult extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    setBusinessId(
-      index: PromiseOrValue<BigNumberish>,
-      value: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     setEmployeeId(
       index: PromiseOrValue<BigNumberish>,
       value: PromiseOrValue<BigNumberish>,
@@ -786,7 +732,6 @@ export interface ListIIGSWResult extends BaseContract {
 
     setRequest(
       index: PromiseOrValue<BigNumberish>,
-      businessId: PromiseOrValue<BigNumberish>,
       employeeId: PromiseOrValue<BigNumberish>,
       testDate: PromiseOrValue<BigNumberish>,
       shiftTest: PromiseOrValue<BigNumberish>,

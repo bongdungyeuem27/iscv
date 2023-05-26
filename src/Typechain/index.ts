@@ -24,8 +24,6 @@ export type { EmployeeController } from "./controller/employee/EmployeeControlle
 export { EmployeeController__factory } from "./factories/controller/employee/EmployeeController__factory";
 export type { ListBusinessApplyCursor } from "./cursor/business/apply/ListBusinessApplyCursor";
 export { ListBusinessApplyCursor__factory } from "./factories/cursor/business/apply/ListBusinessApplyCursor__factory";
-export type { ListIIGRequestCursor } from "./cursor/business/iig/ListIIGRequestCursor";
-export { ListIIGRequestCursor__factory } from "./factories/cursor/business/iig/ListIIGRequestCursor__factory";
 export type { ListBusinessCursor } from "./cursor/business/ListBusinessCursor";
 export { ListBusinessCursor__factory } from "./factories/cursor/business/ListBusinessCursor__factory";
 export type { ListEmployeeCursor } from "./cursor/employee/ListEmployeeCursor";
@@ -34,12 +32,10 @@ export type { ListEmployeeSkillCursor } from "./cursor/employee/ListEmployeeSkil
 export { ListEmployeeSkillCursor__factory } from "./factories/cursor/employee/ListEmployeeSkillCursor__factory";
 export type { ListBusinessApply } from "./database/business/apply/ListBusinessApply";
 export { ListBusinessApply__factory } from "./factories/database/business/apply/ListBusinessApply__factory";
-export type { ListBusinessAppointment } from "./database/business/apply/ListBusinessAppointment";
-export { ListBusinessAppointment__factory } from "./factories/database/business/apply/ListBusinessAppointment__factory";
+export type { IIGData } from "./database/business/igg/IIGData";
+export { IIGData__factory } from "./factories/database/business/igg/IIGData__factory";
 export type { ListIIGLRResult } from "./database/business/igg/ListIIGLRResult";
 export { ListIIGLRResult__factory } from "./factories/database/business/igg/ListIIGLRResult__factory";
-export type { ListIIGRequest } from "./database/business/igg/ListIIGRequest";
-export { ListIIGRequest__factory } from "./factories/database/business/igg/ListIIGRequest__factory";
 export type { ListIIGSWResult } from "./database/business/igg/ListIIGSWResult";
 export { ListIIGSWResult__factory } from "./factories/database/business/igg/ListIIGSWResult__factory";
 export type { ListBusiness } from "./database/business/ListBusiness";

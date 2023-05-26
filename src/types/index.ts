@@ -1,5 +1,4 @@
 export type IEmployee = {
-  category: number
   id: number
   user: string
   name: string

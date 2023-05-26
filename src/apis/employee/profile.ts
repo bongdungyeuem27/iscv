@@ -19,7 +19,6 @@ export const getEmployeeByUser = ({ user }: { user: string }) => {
   return axiosServices.post<{ data: { employeeByUser: IEmployee } }>(`graphql`, {
     query: `query ExampleQuery($user: String) {
       employeeByUser(user: $user) {
-        category
         id
         user
         name

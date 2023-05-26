@@ -2,4 +2,3 @@
 /* tslint:disable */
 /* eslint-disable */
 export { ListBusinessApply__factory } from "./ListBusinessApply__factory";
-export { ListBusinessAppointment__factory } from "./ListBusinessAppointment__factory";

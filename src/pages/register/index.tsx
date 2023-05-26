@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import styles from "./styles.module.scss";
-import { Professional } from "./types";
+import { FormikData, Professional } from "./types";
 import { useRegister } from "./useRegister";
 import { useGetEmployeeByUserQuery } from "@graphql/generated/schema";
 
@@ -27,7 +27,7 @@ function Index() {
 
   const navigate = useNavigate();
   const { t } = useTranslation("page", { keyPrefix: "register.index" });
-  const formik = useFormik({
+  const formik = useFormik<FormikData>({
     initialValues: {
       avatar: undefined,
       fullname: "",
@@ -36,7 +36,6 @@ function Index() {
       email: "",
       github: "",
       linkedin: "",
-      category: "1",
     },
     validationSchema: Yup.object({
       avatar: Yup.mixed()
@@ -64,7 +63,6 @@ function Index() {
         .matches(emailRegExp, t("invalid")),
       github: Yup.string(),
       linkedin: Yup.string(),
-      category: Yup.string(),
     }),
     onSubmit: async (values) => {
       useRegister(values, signer!, toast, navigate, refetch);

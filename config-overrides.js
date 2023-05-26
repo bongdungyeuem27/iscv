@@ -25,6 +25,7 @@ module.exports = function override(config, env) {
     "@contracts": path.resolve(__dirname, "src/contracts"),
     "@graphql": path.resolve(__dirname, "src/graphql"),
     "@redux": path.resolve(__dirname, "src/redux"),
+    "@globalTypes": path.resolve(__dirname, "src/globalTypes"),
     "@": path.resolve(__dirname, "src"),
   })(config, env);
   // config.resolve.fallback = fallback

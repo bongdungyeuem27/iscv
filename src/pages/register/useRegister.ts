@@ -26,7 +26,6 @@ export const useRegister = async (
     const employeeContract = useEmployee(signer)
     ;(await employeeContract)
       .addEmployee(
-        values.category,
         values.fullname,
         values.phone,
         values.professional,

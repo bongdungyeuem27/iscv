@@ -12,6 +12,7 @@ const CustomCVContextProvider = ({ children }: Props) => {
   });
   const [layerGroupDimension, setLayerGroupDimension] = useState();
   const [list, setList] = useState({});
+  console.log(list);
   const [selected, setSelected] = useState();
   const [copy, setCopy] = useState();
   const [autoCreatement, setAutoCreatement] = useState(1);

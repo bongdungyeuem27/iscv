@@ -7,6 +7,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import Main from './Main'
 import RightPanel from './RightPanel'
 import CustomCVContextProvider from './CustomCVContext'
+import 'split-pane-react/esm/themes/default.css'
 
 function Index() {
   return (

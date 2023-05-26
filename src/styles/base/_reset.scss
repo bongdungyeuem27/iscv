@@ -1,5 +1,6 @@
-@use '../abtracts/mixins' as mixin;
-@use '../globalType/function' as function;
+@use "../abtracts/mixins" as mixin;
+@use "../globalType/function" as function;
+
 *,
 *::before,
 *::after {
@@ -10,22 +11,26 @@
 }
 
 html {
-  ::-webkit-scrollbar {
-    // -webkit-appearance:;
-    // width: 10px;
-    // background: red;
-    display: block;
-    width: 7px;
-    height: 5px;
-    -ms-overflow-style: none;
-  }
+  background-color: var(--color-theme-primary);
+  overflow: auto;
+  // ::-webkit-scrollbar {
+  //   // -webkit-appearance:;
+  //   // width: 10px;
+  //   // background: red;
+  //   display: block;
+  //   width: 7px;
+  //   height: 5px;
 
-  ::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
-    // -ms-overflow-style: none;
-  }
+  //   -ms-overflow-style: none;
+  // }
+
+  // ::-webkit-scrollbar-thumb {
+  //   border-radius: 4px;
+  //   background-color: rgba(0, 0, 0, 0.5);
+  //   box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+  //   padding: 2px;
+  //   // -ms-overflow-style: none;
+  // }
   @include mixin.md {
     ::-webkit-scrollbar {
       display: none;
@@ -33,7 +38,6 @@ html {
   }
 }
 body {
-  background-color: var(--color-theme-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -44,8 +48,6 @@ body {
   font-family: var(--font-family-primary);
   line-height: var(--theme-lineheight-primary);
   text-decoration: none;
-  overflow-y: overlay;
-  overflow-x: auto;
 }
 img,
 picture,
@@ -82,7 +84,7 @@ input::-webkit-inner-spin-button {
   margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-input[type='number'] {
+input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
 }
 main {

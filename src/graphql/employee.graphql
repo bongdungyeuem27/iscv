@@ -1,6 +1,5 @@
 query GetEmployeeByUser($user: String) {
   employeeByUser(user: $user) {
-    category
     id
     user
     name
@@ -21,7 +20,6 @@ query GetEmployeeIdByUser($user: String) {
 
 query GetEmployee($employeeId: Int!) {
   employee(id: $employeeId) {
-    category
     id
     user
     name

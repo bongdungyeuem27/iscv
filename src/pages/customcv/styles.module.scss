@@ -1,9 +1,15 @@
-@import './variable.scss';
+@import "./variable.scss";
 .container {
   // position: fixed;
   // height: 100vh;
   // width: 100vw;
+  width: 100%;
+  margin: 0;
+  background-color: var(--color-theme-primary);
+  min-height: calc(100vh);
+  display: flex;
 }
 .main {
-  // padding: $headerHeight 0px 0px 0px;
+  margin: $headerHeight 0px 0px 0px;
+  flex: 1;
 }

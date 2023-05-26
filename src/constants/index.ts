@@ -1,5 +1,5 @@
 // export const API_ENDPOINT_NODEJS = 'https://node.iscv.ftisu.vn/'
-// export const DEFAULT_CURRENCY = 'MATIC'
+// export const DEFAULT_CURRENCY = 'ISCV'
 // export const IPFS_GATEWAY = 'https://ipfs.iscv.ftisu.vn/ipfs/'
 
 

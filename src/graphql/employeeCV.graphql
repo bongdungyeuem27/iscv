@@ -1,6 +1,5 @@
 query GetDefaultCV($employeeId: Int!) {
   defaultCV(employeeId: $employeeId) {
-    category
     id
     user
     name

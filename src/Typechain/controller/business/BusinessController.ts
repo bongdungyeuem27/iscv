@@ -53,7 +53,6 @@ export type BusinessApplyStructOutput = [
 };
 
 export type ProfileStruct = {
-  category: PromiseOrValue<BigNumberish>;
   id: PromiseOrValue<BigNumberish>;
   user: PromiseOrValue<string>;
   name: PromiseOrValue<string>;
@@ -67,7 +66,6 @@ export type ProfileStruct = {
 
 export type ProfileStructOutput = [
   BigNumber,
-  BigNumber,
   string,
   string,
   string,
@@ -77,7 +75,6 @@ export type ProfileStructOutput = [
   string,
   string
 ] & {
-  category: BigNumber;
   id: BigNumber;
   user: string;
   name: string;
@@ -95,7 +92,7 @@ export interface BusinessControllerInterface extends utils.Interface {
     "_checkExistApply(uint256,string)": FunctionFragment;
     "_checkExistBusinessAccount()": FunctionFragment;
     "_checkIdBelongsToPostId(uint256,string)": FunctionFragment;
-    "addBusiness(uint256,string,string,string,string,string,string,string)": FunctionFragment;
+    "addBusiness(string,string,string,string,string,string,string)": FunctionFragment;
     "destroy()": FunctionFragment;
     "getAllApplies()": FunctionFragment;
     "getAllProfile()": FunctionFragment;
@@ -138,7 +135,6 @@ export interface BusinessControllerInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "addBusiness",
     values: [
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -270,7 +266,6 @@ export interface BusinessController extends BaseContract {
     ): Promise<[boolean]>;
 
     addBusiness(
-      category: PromiseOrValue<BigNumberish>,
       name: PromiseOrValue<string>,
       phone: PromiseOrValue<string>,
       professional: PromiseOrValue<string>,
@@ -325,7 +320,6 @@ export interface BusinessController extends BaseContract {
   ): Promise<boolean>;
 
   addBusiness(
-    category: PromiseOrValue<BigNumberish>,
     name: PromiseOrValue<string>,
     phone: PromiseOrValue<string>,
     professional: PromiseOrValue<string>,
@@ -380,7 +374,6 @@ export interface BusinessController extends BaseContract {
     ): Promise<boolean>;
 
     addBusiness(
-      category: PromiseOrValue<BigNumberish>,
       name: PromiseOrValue<string>,
       phone: PromiseOrValue<string>,
       professional: PromiseOrValue<string>,
@@ -445,7 +438,6 @@ export interface BusinessController extends BaseContract {
     ): Promise<BigNumber>;
 
     addBusiness(
-      category: PromiseOrValue<BigNumberish>,
       name: PromiseOrValue<string>,
       phone: PromiseOrValue<string>,
       professional: PromiseOrValue<string>,
@@ -501,7 +493,6 @@ export interface BusinessController extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     addBusiness(
-      category: PromiseOrValue<BigNumberish>,
       name: PromiseOrValue<string>,
       phone: PromiseOrValue<string>,
       professional: PromiseOrValue<string>,

@@ -20,7 +20,6 @@ function Index() {
             if (
               !Number.isInteger(parseInt(key)) &&
               key != "__typename" &&
-              key != "category" &&
               key != "id" &&
               key != "idCardNumber" &&
               key != "sourceImage"

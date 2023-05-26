@@ -1,6 +1,6 @@
-@use '@styles/globalType/function' as function;
-@import '../variable.scss';
-@import './variable.scss';
+@use "@styles/globalType/function" as function;
+@import "../variable.scss";
+@import "./variable.scss";
 
 .container {
   position: relative;
@@ -10,14 +10,13 @@
   color: var(--color-customcv-text-primary);
   display: flex;
   // flex-direction: column;
-  border-right: $borderStyle;
+
   @include function.disableselect;
 
   .tabs {
     display: flex;
     flex-direction: column;
     background-color: var(--color-customcv-header-primary);
-
   }
   // .tab {
   //   width: 100%;
@@ -25,4 +24,11 @@
   //   border-top: $borderStyle;
   //   border-bottom: $borderStyle;
   // }
+}
+.boderRight {
+  border-right: $borderStyle;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 2px;
 }
