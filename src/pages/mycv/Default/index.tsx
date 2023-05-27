@@ -1,14 +1,15 @@
-import { useQuery } from "@apollo/client";
+import { ISkill, useGetDefaultCvQuery } from "@graphql/generated/schema";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
+import { ICertificate } from "src/types/certificate";
 import Avatar from "../Avatar";
+import Certificate from "../Certificate";
 import Contract from "../Contract";
 import Education from "../Education";
 import Group from "../Group";
 import Skill from "../Skill";
 import Social from "../Social";
 import styles from "./styles.module.scss";
-import { ISkill, useGetDefaultCvQuery } from "@graphql/generated/schema";
 
 function Default() {
   const id = Number(useParams().id);
@@ -16,7 +17,7 @@ function Default() {
     useGetDefaultCvQuery({ variables: { employeeId: id } });
 
   const { t } = useTranslation("page", { keyPrefix: "mycv.index" });
-
+  // data?.defaultCV?.iig
   if (!data) return null;
   return (
     <div className={styles.cv}>
@@ -44,7 +45,7 @@ function Default() {
           )}
 
           <Group type="positive" title={t("certificates")}>
-            {/* <Certificate id={id}></Certificate> */}
+            <Certificate id={id} data={data.defaultCV?.certificate as ICertificate}></Certificate>
           </Group>
         </div>
       </div>

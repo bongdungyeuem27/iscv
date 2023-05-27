@@ -15,5 +15,29 @@ query GetDefaultCV($employeeId: Int!) {
       title
       level
     }
+    certificate {
+      iig {
+        lr {
+          id
+          employeeId
+          testDate
+          shiftTest
+          expireDate
+          listeningScore
+          readingScore
+          time
+        }
+        sw {
+          id
+          employeeId
+          testDate
+          shiftTest
+          expireDate
+          speakingScore
+          writingScore
+          time
+        }
+      }
+    }
   }
 }

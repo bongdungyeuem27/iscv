@@ -3,4 +3,4 @@ export const SCOREMAX = {
   READING: 495,
   SPEAKING: 195,
   WRITING: 195,
-}
+};
