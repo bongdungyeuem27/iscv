@@ -6,6 +6,7 @@ import React, {
   lazy,
   Suspense,
   useCallback,
+  useEffect,
 } from "react";
 import styles from "./styles.module.scss";
 import Button from "./Button";
@@ -14,12 +15,16 @@ import clsx from "clsx";
 import ObjectName from "./ObjectName";
 import { CustomCVContext } from "../CustomCVContext";
 import update from "immutability-helper";
-import { useToast } from "@components/Toast";
+import { useToast } from "@iscv/toast";
 const DownloadModal = lazy(() => import("./DownloadModal"));
 const PublishModal = lazy(() => import("./PublishModal"));
 import { useLoading } from "@components/Loading";
 import useToObject from "../hooks/useToObject";
 import useToJson from "../hooks/useToJson";
+import { postJSON, postObject } from "@apis/common/ipfs";
+import { useEmployeeCV } from "@contracts/useEmployeeCV";
+import { useSelector } from "react-redux";
+import { RootState } from "@redux/store";
 
 const ImportBlockchain = lazy(() => import("./ImportBlockchain"));
 
@@ -39,6 +44,8 @@ function Index() {
   const [openModalDownload, setOpenModalDownload] = useState(false);
   const [openModalPublish, setOpenModalPublish] = useState(false);
   const [openImportBlockchain, setOpenImportBlockchain] = useState(false);
+  const signer = useSelector((state: RootState) => state.auth.signer);
+  const employee = useSelector((state: RootState) => state.auth.employee);
   const fileImportRef = useRef<any>();
   const loading = useLoading();
   const handleCopy = () => {
@@ -72,6 +79,7 @@ function Index() {
       });
     }
   };
+
   const handleDelete = () => {
     if (selected) {
       const { [selected]: _, ...newData } = list;
@@ -100,16 +108,54 @@ function Index() {
   const openUpload = () => {
     fileImportRef.current!.click();
   };
-  const handleDeploy = async () => {};
+  const handleDeploy = async () => {
+    if (employee?.id === undefined) {
+      toast.error("not have id");
+      return;
+    }
+    loading.open();
+    try {
+      const cid = await postObject({
+        data: useToJson(autoCreatement, list),
+      }).then(async (success) => {
+        console.log(success);
+        if (!success.data) {
+          toast.error();
+          return;
+        }
+        return success.data;
+      });
+
+      if (!cid) {
+        toast.error();
+        return;
+      }
+      if (!signer) {
+        toast.warning("not have signer");
+        return;
+      }
+      const employeeCVContract = useEmployeeCV(signer);
+
+      await employeeCVContract.addCV(employee?.id, cid);
+      toast.success();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      loading.close();
+    }
+  };
   const handleChange = (e: any) => {
-    // if (e.target.value) {
-    //   fileReader.readAsText(e.target.files[0], 'UTF-8')
-    //   fileReader.onload = (e) => {
-    //     let data = useToObject(e.target.result)
-    //     setAutoCreatement(data.autoCreatement)
-    //     setList(data.list)
-    //   }
-    // }
+    if (e.target.value) {
+      const fileReader = new FileReader();
+      fileReader.readAsText(e.target.files[0], "UTF-8");
+      fileReader.onload = (x: any) => {
+        let data = useToObject(x.target.result);
+        if (data) {
+          setAutoCreatement(data.autoCreatement);
+          setList(data.list);
+        }
+      };
+    }
   };
 
   return (

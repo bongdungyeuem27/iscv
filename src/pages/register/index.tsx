@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import avatarDefault from "@assets/avatar.png";
-import { useToast } from "@components/Toast";
+import { useToast } from "@iscv/toast";
 import { Toggle } from "@components/Toggle";
 import { emailRegExp, phoneRegExp } from "@helpers/regex";
 import { RootState } from "@redux/store";

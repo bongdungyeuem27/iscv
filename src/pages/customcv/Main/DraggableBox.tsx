@@ -11,6 +11,8 @@ import { Rnd } from "react-rnd";
 import update from "immutability-helper";
 import SelectIconModal from "./Component/SelectIconModal";
 import { designTabComponents } from "../ItemTypes";
+import { useSelector } from "react-redux";
+import { RootState } from "@redux/store";
 
 type Props = {
   id: string;
@@ -20,6 +22,7 @@ export const DraggableBox = memo(function DraggableBox(props: Props) {
   const { id } = props;
   const { list, setList, selected, setSelected, setSelectedFor } =
     useContext(CustomCVContext);
+  const profile = useSelector((state: RootState) => state.auth.employee);
   const preWDrag = useRef(null);
   const preHDrag = useRef(null);
   const [openIcon, setOpenIcon] = useState(false);
@@ -57,7 +60,6 @@ export const DraggableBox = memo(function DraggableBox(props: Props) {
           preWDrag.current = list[id].width;
           preHDrag.current = list[id].height;
         }}
-        
         onResize={(e, dir, ref, delta, position) => {
           setList(
             update(list, {
@@ -98,7 +100,7 @@ export const DraggableBox = memo(function DraggableBox(props: Props) {
         {designTabComponents[list[id].type].view(
           id,
           list[id],
-          undefined,
+          profile,
           selected,
           list,
           setList

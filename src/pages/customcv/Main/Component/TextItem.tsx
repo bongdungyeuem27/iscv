@@ -4,7 +4,8 @@ import styles from "../styles.module.scss";
 import { CustomCVContext } from "../../CustomCVContext";
 import update from "immutability-helper";
 
-function TextItem({ id, data, selected, list, setList }: any) {
+function TextItem({ id, data, selected }: any) {
+  const { list, setList } = useContext(CustomCVContext);
   useLayoutEffect(() => {
     if (!selected) return;
     if (selected != id)

@@ -36,7 +36,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/customcv/HeaderToolBox/ImportBlockchain/index.jsx"
+    "src/pages/customcv/HeaderToolBox/ImportBlockchain/index.tsx"
 , "src/pages/customcv/config.js", "src/pages/customcv/config.js"  ],
   "exclude": ["node_modules"]
 }

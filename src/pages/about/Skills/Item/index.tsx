@@ -1,7 +1,7 @@
 import { useLoading } from "@components/Loading";
 import { useQuery } from "@apollo/client";
 import { ProgressBar } from "@components/ProgressBar";
-import { useToast } from "@components/Toast";
+import { useToast } from "@iscv/toast";
 import { useEmployee } from "@contracts/useEmployee";
 
 import { Modal } from "@iscv/modal";

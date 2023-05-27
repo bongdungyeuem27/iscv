@@ -21,7 +21,22 @@ function Index(props: Props) {
       nftName: Yup.string().required("required"),
       nftPrice: Yup.number(),
     }),
-    onSubmit: async (values) => {},
+    onSubmit: async (values) => {
+      //   await handlePublishTemplate({
+      //     address: loginState.address,
+      //     nftName: values.nftName,
+      //     nftPrice: values.nftPrice,
+      //     autoCreatement,
+      //     list,
+      //   })
+      //     .then((success) => {
+      //       setOpen(false)
+      //     })
+      //     .catch((error) => {
+      //       console.log(error)
+      //     })
+      // },
+    },
   });
 
   return (

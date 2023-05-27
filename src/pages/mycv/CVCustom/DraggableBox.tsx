@@ -1,5 +1,4 @@
 import { memo, useRef, useContext, useState } from 'react'
-// import { designTabComponents } from '@pages/CustomCV/ItemTypes'
 
 export const DraggableBox = memo(function DraggableBox({
   id,

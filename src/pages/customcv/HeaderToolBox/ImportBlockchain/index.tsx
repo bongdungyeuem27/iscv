@@ -7,19 +7,21 @@ import { CustomCVContext } from "../../CustomCVContext";
 import useToJson from "../../hooks/useToJson";
 import useToObject from "../../hooks/useToObject";
 
-function Index(props) {
+type Props = {} & any;
+
+function Index(props: Props) {
   const [open, setOpen] = props.state;
   const { autoCreatement, list, setList, setAutoCreatement } =
     useContext(CustomCVContext);
-  const [listCV, setListCV] = useState();
+  const [listCV, setListCV] = useState<any[]>([]);
   useEffect(() => {
     if (!open) return;
   }, [open]);
-  const handleSetList = (index) => {
-    // let result = useToObject(listCV[index].data)
-    // setAutoCreatement(result.autoCreatement)
-    // setList(result.list)
-    // setOpen(false)
+  const handleSetList = (index: any) => {
+    let result = useToObject(listCV[index].data);
+    setAutoCreatement(result!.autoCreatement);
+    setList(result!.list);
+    setOpen(false);
   };
   return (
     <Modal state={[open, setOpen]} title={"download"}>
