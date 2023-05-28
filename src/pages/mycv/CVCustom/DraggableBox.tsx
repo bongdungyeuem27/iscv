@@ -1,3 +1,4 @@
+import { designTabComponents } from '@pages/customcv/ItemTypes'
 import { memo, useRef, useContext, useState } from 'react'
 
 export const DraggableBox = memo(function DraggableBox({
@@ -5,10 +6,11 @@ export const DraggableBox = memo(function DraggableBox({
   data,
   profile,
 }: {
-  id: number
+  id: string
   data: any
   profile: any
 }) {
+
   return (
     <div
       style={{
@@ -19,7 +21,7 @@ export const DraggableBox = memo(function DraggableBox({
         height: data.height + 'px',
       }}
     >
-      {/* {designTabComponents[data.type].view(id, data, profile)} */}
+      {designTabComponents[data.type].view(id, data, profile)}
     </div>
   )
 })

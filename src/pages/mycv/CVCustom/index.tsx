@@ -1,76 +1,42 @@
-import { useState } from 'react'
-import { useParams } from 'react-router-dom'
-import styles from './styles.module.scss'
+import { useGetCustomCvQuery } from "@graphql/generated/schema";
+import { useParams } from "react-router-dom";
+import styles from "./styles.module.scss";
+import { useEffect, useState } from "react";
+import useIPFStoCV from "./useIPFStoCV";
+import { DraggableBox } from "./DraggableBox";
+import { getIPFSData } from "@apis/common/ipfs";
 
 export default function Container() {
-  const params = useParams()
-  const id = params.id
-  const [list, setList] = useState({})
-  const [profile, setProfile] = useState()
-  const [isLoading, setIsLoading] = useState(false)
-  // useEffect(() => {
-  //   ;(async () => {
-  //     setIsLoading(true)
-  //     await getContractCV()
-  //       .then(async (contractCV) => {
-  //         await contractCV.methods
-  //           .getListCVByEmployeeId(id)
-  //           .call()
-  //           .then((success) => {
-  //             if (!success || success.length === 0) {
-  //               return
-  //             }
-  //             let result = useToObject(success[success.length - 1].data)
+  const params = useParams();
+  const [list, setList] = useState<any>();
+  const id = Number(useParams().id);
+  const { data } = useGetCustomCvQuery({ variables: { employeeId: id } });
+  useEffect(() => {
+    (async () => {
+      if (!data?.customCV?.source) return;
+      const jsonData = await getIPFSData(data?.customCV?.source)
+        .then((success) => success.data)
+        .catch((error) => console.log(error));
 
-  //             let temp = result.list
-  //             let newData = Object.keys(temp).map((key) => {
-  //               let item = temp[key]
-  //               item.top = Math.round(item.top * CUSTOMCVDIMENSION.SCALE)
-  //               item.left = Math.round(item.left * CUSTOMCVDIMENSION.SCALE)
-  //               item.width = Math.round(item.width * CUSTOMCVDIMENSION.SCALE)
-  //               item.height = Math.round(item.height * CUSTOMCVDIMENSION.SCALE)
-  //               item.fontSize = {
-  //                 value: Math.round(item.fontSize.value * CUSTOMCVDIMENSION.SCALE),
-  //                 label: Math.round(item.fontSize.value * CUSTOMCVDIMENSION.SCALE).toString(),
-  //               }
-  //               item.lineHeight = Math.round(item.lineHeight * CUSTOMCVDIMENSION.SCALE)
-  //               item.borderWidth = Math.round(item.borderWidth * CUSTOMCVDIMENSION.SCALE)
-  //               item.borderRadius = Math.round(item.borderRadius * CUSTOMCVDIMENSION.SCALE)
-  //               return item
-  //             })
+      if (!jsonData) return;
 
-  //             setList(newData)
-  //           })
-  //           .catch((error) => console.error(error))
-  //       })
-  //       .catch((error) => {
-  //         console.error(error)
-  //       })
-  //     setIsLoading(false)
-  //   })()
-  // }, [])
+      setList(useIPFStoCV(jsonData));
+    })();
+  }, [data?.customCV?.source]);
 
-  // useEffect(() => {
-  //   getContractEmployee()
-  //     .then((contractEmployee) => {
-  //       contractEmployee.methods
-  //         .getProfile(id)
-  //         .call()
-  //         .then((success) => {
-  //           setProfile({ ...success })
-  //         })
-  //         .catch((error) => console.error(error))
-  //     })
-  //     .catch((error) => console.error(error))
-  // }, [])
   return (
     <div className={styles.container}>
-      {/* {isLoading && <ContentLoader></ContentLoader>}
-      {profile &&
-        list &&
+      {list &&
         Object.keys(list).map((id) => {
-          return <DraggableBox key={id} id={id} data={list[id]} profile={profile}></DraggableBox>
-        })} */}
+          return (
+            <DraggableBox
+              key={id}
+              id={id}
+              data={list[id]}
+              profile={data?.customCV}
+            ></DraggableBox>
+          );
+        })}
     </div>
-  )
+  );
 }

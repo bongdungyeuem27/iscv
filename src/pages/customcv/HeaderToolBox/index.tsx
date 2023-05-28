@@ -118,7 +118,6 @@ function Index() {
       const cid = await postObject({
         data: useToJson(autoCreatement, list),
       }).then(async (success) => {
-        console.log(success);
         if (!success.data) {
           toast.error();
           return;
@@ -136,8 +135,10 @@ function Index() {
       }
       const employeeCVContract = useEmployeeCV(signer);
 
-      await employeeCVContract.addCV(employee?.id, cid);
-      toast.success();
+      await employeeCVContract.addCV(employee?.id, cid).then(async (tx) => {
+        await tx.wait();
+        toast.success();
+      });
     } catch (error) {
       console.log(error);
     } finally {

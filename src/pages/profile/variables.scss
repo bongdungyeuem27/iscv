@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use "@styles/globalType/function" as function;
 $borderRadius: 10px;
 $paddingGap: 13px;
 $borderRadiusItem: 7px;
@@ -10,3 +10,7 @@ $width: 120px;
   font-weight: bold;
 }
 
+.container {
+  display: flex;
+  gap: 15px;
+}

@@ -41,3 +41,49 @@ query GetDefaultCV($employeeId: Int!) {
     }
   }
 }
+
+query GetCustomCV($employeeId: Int!) {
+  customCV(employeeId: $employeeId) {
+    category
+    id
+    user
+    name
+    phone
+    professional
+    email
+    github
+    linkedin
+    sourceImage
+    skills {
+      id
+      employeeId
+      title
+      level
+    }
+    certificate {
+      iig {
+        lr {
+          id
+          employeeId
+          testDate
+          shiftTest
+          expireDate
+          listeningScore
+          readingScore
+          time
+        }
+        sw {
+          id
+          employeeId
+          testDate
+          shiftTest
+          expireDate
+          speakingScore
+          writingScore
+          time
+        }
+      }
+    }
+    source
+  }
+}

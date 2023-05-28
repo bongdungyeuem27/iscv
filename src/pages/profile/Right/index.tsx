@@ -8,7 +8,7 @@ function Index() {
 
   return (
     <div className={styles.container}>
-      <Todos></Todos>
+      {/* <Todos></Todos> */}
     </div>
   )
 }

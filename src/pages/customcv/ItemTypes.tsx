@@ -18,7 +18,7 @@ type IView = {
 export const designTabComponents: {
   [key: string]:{
     icon: string
-    view: (id: string, data: any, profile: any, selected: string, list: any[], setList: any) => JSX.Element 
+    view: (id: string, data: any, profile: any, selected?: string, list?: any[], setList?: any) => JSX.Element 
     data: any
     components: JSX.Element[]
   }

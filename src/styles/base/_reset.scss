@@ -11,7 +11,7 @@
 }
 
 html {
-  background-color: var(--color-theme-primary);
+  background: var(--color-theme-primary);
   overflow: auto;
   // ::-webkit-scrollbar {
   //   // -webkit-appearance:;
@@ -43,8 +43,9 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
+  min-height: 100vh;
+  max-width: 100%; /* added */
+  background-color: var(--color-theme-primary);
   font-family: var(--font-family-primary);
   line-height: var(--theme-lineheight-primary);
   text-decoration: none;

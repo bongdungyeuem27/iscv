@@ -50,6 +50,23 @@ export type ICertificate = {
   iig?: Maybe<IIig>;
 };
 
+export type ICustomcv = {
+  __typename?: 'Customcv';
+  category?: Maybe<Scalars['Int']>;
+  certificate?: Maybe<ICertificate>;
+  email?: Maybe<Scalars['String']>;
+  github?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  linkedin?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  professional?: Maybe<Scalars['String']>;
+  skills?: Maybe<Array<Maybe<ISkill>>>;
+  source?: Maybe<Scalars['String']>;
+  sourceImage?: Maybe<Scalars['String']>;
+  user?: Maybe<Scalars['String']>;
+};
+
 export type IDefaultCv = {
   __typename?: 'DefaultCV';
   category?: Maybe<Scalars['Int']>;
@@ -125,6 +142,7 @@ export type IQuery = {
   books?: Maybe<Array<Maybe<IBook>>>;
   business?: Maybe<IBusiness>;
   businessByUser?: Maybe<IBusiness>;
+  customCV?: Maybe<ICustomcv>;
   cv?: Maybe<ICv>;
   cvs?: Maybe<Array<Maybe<ICv>>>;
   defaultCV?: Maybe<IDefaultCv>;
@@ -150,6 +168,11 @@ export type IQueryBusinessArgs = {
 
 export type IQueryBusinessByUserArgs = {
   user?: InputMaybe<Scalars['String']>;
+};
+
+
+export type IQueryCustomCvArgs = {
+  employeeId: Scalars['Int'];
 };
 
 
@@ -249,6 +272,13 @@ export type IGetDefaultCvQueryVariables = Exact<{
 
 
 export type IGetDefaultCvQuery = { __typename?: 'Query', defaultCV?: { __typename?: 'DefaultCV', id?: number | null, user?: string | null, name?: string | null, phone?: string | null, professional?: string | null, email?: string | null, github?: string | null, linkedin?: string | null, sourceImage?: string | null, skills?: Array<{ __typename?: 'Skill', id?: number | null, employeeId?: number | null, title?: string | null, level?: number | null } | null> | null, certificate?: { __typename?: 'Certificate', iig?: { __typename?: 'IIG', lr?: { __typename?: 'LR', id?: number | null, employeeId?: number | null, testDate?: any | null, shiftTest?: number | null, expireDate?: any | null, listeningScore?: number | null, readingScore?: number | null, time?: any | null } | null, sw?: { __typename?: 'SW', id?: number | null, employeeId?: number | null, testDate?: any | null, shiftTest?: number | null, expireDate?: any | null, speakingScore?: number | null, writingScore?: number | null, time?: any | null } | null } | null } | null } | null };
+
+export type IGetCustomCvQueryVariables = Exact<{
+  employeeId: Scalars['Int'];
+}>;
+
+
+export type IGetCustomCvQuery = { __typename?: 'Query', customCV?: { __typename?: 'Customcv', category?: number | null, id?: number | null, user?: string | null, name?: string | null, phone?: string | null, professional?: string | null, email?: string | null, github?: string | null, linkedin?: string | null, sourceImage?: string | null, source?: string | null, skills?: Array<{ __typename?: 'Skill', id?: number | null, employeeId?: number | null, title?: string | null, level?: number | null } | null> | null, certificate?: { __typename?: 'Certificate', iig?: { __typename?: 'IIG', lr?: { __typename?: 'LR', id?: number | null, employeeId?: number | null, testDate?: any | null, shiftTest?: number | null, expireDate?: any | null, listeningScore?: number | null, readingScore?: number | null, time?: any | null } | null, sw?: { __typename?: 'SW', id?: number | null, employeeId?: number | null, testDate?: any | null, shiftTest?: number | null, expireDate?: any | null, speakingScore?: number | null, writingScore?: number | null, time?: any | null } | null } | null } | null } | null };
 
 export type IGetIigRequestStatusQueryVariables = Exact<{
   employeeId: Scalars['Int'];
@@ -562,6 +592,81 @@ export function useGetDefaultCvLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type GetDefaultCvQueryHookResult = ReturnType<typeof useGetDefaultCvQuery>;
 export type GetDefaultCvLazyQueryHookResult = ReturnType<typeof useGetDefaultCvLazyQuery>;
 export type GetDefaultCvQueryResult = Apollo.QueryResult<IGetDefaultCvQuery, IGetDefaultCvQueryVariables>;
+export const GetCustomCvDocument = gql`
+    query GetCustomCV($employeeId: Int!) {
+  customCV(employeeId: $employeeId) {
+    category
+    id
+    user
+    name
+    phone
+    professional
+    email
+    github
+    linkedin
+    sourceImage
+    skills {
+      id
+      employeeId
+      title
+      level
+    }
+    certificate {
+      iig {
+        lr {
+          id
+          employeeId
+          testDate
+          shiftTest
+          expireDate
+          listeningScore
+          readingScore
+          time
+        }
+        sw {
+          id
+          employeeId
+          testDate
+          shiftTest
+          expireDate
+          speakingScore
+          writingScore
+          time
+        }
+      }
+    }
+    source
+  }
+}
+    `;
+
+/**
+ * __useGetCustomCvQuery__
+ *
+ * To run a query within a React component, call `useGetCustomCvQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCustomCvQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCustomCvQuery({
+ *   variables: {
+ *      employeeId: // value for 'employeeId'
+ *   },
+ * });
+ */
+export function useGetCustomCvQuery(baseOptions: Apollo.QueryHookOptions<IGetCustomCvQuery, IGetCustomCvQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IGetCustomCvQuery, IGetCustomCvQueryVariables>(GetCustomCvDocument, options);
+      }
+export function useGetCustomCvLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IGetCustomCvQuery, IGetCustomCvQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IGetCustomCvQuery, IGetCustomCvQueryVariables>(GetCustomCvDocument, options);
+        }
+export type GetCustomCvQueryHookResult = ReturnType<typeof useGetCustomCvQuery>;
+export type GetCustomCvLazyQueryHookResult = ReturnType<typeof useGetCustomCvLazyQuery>;
+export type GetCustomCvQueryResult = Apollo.QueryResult<IGetCustomCvQuery, IGetCustomCvQueryVariables>;
 export const GetIigRequestStatusDocument = gql`
     query GetIIGRequestStatus($employeeId: Int!) {
   requestStatus(employeeId: $employeeId) {
