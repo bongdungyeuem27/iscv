@@ -37,6 +37,7 @@ export type ProfileStruct = {
   github: PromiseOrValue<string>;
   linkedin: PromiseOrValue<string>;
   sourceImage: PromiseOrValue<string>;
+  category: PromiseOrValue<BigNumberish>;
 };
 
 export type ProfileStructOutput = [
@@ -48,7 +49,8 @@ export type ProfileStructOutput = [
   string,
   string,
   string,
-  string
+  string,
+  number
 ] & {
   id: BigNumber;
   user: string;
@@ -59,16 +61,17 @@ export type ProfileStructOutput = [
   github: string;
   linkedin: string;
   sourceImage: string;
+  category: number;
 };
 
 export interface ListBusinessInterface extends utils.Interface {
   functions: {
-    "add((uint256,address,string,string,string,string,string,string,string))": FunctionFragment;
+    "add((uint256,address,string,string,string,string,string,string,string,uint8))": FunctionFragment;
     "approve(address)": FunctionFragment;
     "at(uint256)": FunctionFragment;
     "atAddress(address)": FunctionFragment;
     "destroy()": FunctionFragment;
-    "edit((uint256,address,string,string,string,string,string,string,string))": FunctionFragment;
+    "edit((uint256,address,string,string,string,string,string,string,string,uint8))": FunctionFragment;
     "findIdByAddress(address)": FunctionFragment;
     "getAll()": FunctionFragment;
     "list(uint256)": FunctionFragment;
@@ -331,7 +334,8 @@ export interface ListBusiness extends BaseContract {
         string,
         string,
         string,
-        string
+        string,
+        number
       ] & {
         id: BigNumber;
         user: string;
@@ -342,6 +346,7 @@ export interface ListBusiness extends BaseContract {
         github: string;
         linkedin: string;
         sourceImage: string;
+        category: number;
       }
     >;
 
@@ -461,7 +466,8 @@ export interface ListBusiness extends BaseContract {
       string,
       string,
       string,
-      string
+      string,
+      number
     ] & {
       id: BigNumber;
       user: string;
@@ -472,6 +478,7 @@ export interface ListBusiness extends BaseContract {
       github: string;
       linkedin: string;
       sourceImage: string;
+      category: number;
     }
   >;
 
@@ -583,7 +590,8 @@ export interface ListBusiness extends BaseContract {
         string,
         string,
         string,
-        string
+        string,
+        number
       ] & {
         id: BigNumber;
         user: string;
@@ -594,6 +602,7 @@ export interface ListBusiness extends BaseContract {
         github: string;
         linkedin: string;
         sourceImage: string;
+        category: number;
       }
     >;
 

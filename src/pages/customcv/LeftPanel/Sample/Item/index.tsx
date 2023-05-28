@@ -3,8 +3,6 @@ import styles from "./styles.module.scss";
 import clsx from "clsx";
 // import Modal from '@component/Modal'
 import { Modal } from "@iscv/modal";
-
-import { DEFAULT_CURRENCY } from "@constants/index";
 import useToObject from "../../../hooks/useToObject";
 import { CustomCVContext } from "../../../CustomCVContext";
 
@@ -102,7 +100,7 @@ function Item(props: Props) {
             <div className={styles.nftName}>{nft?.["name"]}</div>
             <div className={styles.nftPrice}>
               <a>
-                {price} {DEFAULT_CURRENCY}
+                {price} 
               </a>
               <i className={clsx("fa-solid fa-crown", styles.crown)}></i>
             </div>

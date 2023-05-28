@@ -26,6 +26,7 @@ module.exports = function override(config, env) {
     "@graphql": path.resolve(__dirname, "src/graphql"),
     "@redux": path.resolve(__dirname, "src/redux"),
     "@typechain": path.resolve(__dirname, "src/typechain"),
+    "@middlewares": path.resolve(__dirname, "src/middlewares"),
     "@globalTypes": path.resolve(__dirname, "src/globalTypes"),
     "@": path.resolve(__dirname, "src"),
   })(config, env);

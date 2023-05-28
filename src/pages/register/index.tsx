@@ -23,7 +23,7 @@ function Index() {
   const toast = useToast();
   const account = useSelector((state: RootState) => state.auth.account);
   const { loading, error, data, refetch, subscribeToMore, client } =
-    useGetEmployeeByUserQuery({ variables: { user: account } });
+    useGetEmployeeByUserQuery({ variables: { user: account! } });
 
   const navigate = useNavigate();
   const { t } = useTranslation("page", { keyPrefix: "register.index" });

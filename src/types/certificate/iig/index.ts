@@ -24,3 +24,8 @@ export type IIIG = {
   lr?: IIIGLR;
   sw?: IIIGSW;
 };
+
+export enum EIIGRequest {
+  LR = "lr",
+  SW = "sw",
+}

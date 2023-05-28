@@ -13,7 +13,7 @@ function Index() {
         className={clsx(styles.item, { [styles.active]: location.pathname == '/social' })}
       >
         <i className="fa-light fa-box-open-full"></i>
-        <span>{t('suggestion')}</span>
+        <span className=' truncate'>{t('suggestion')}</span>
       </NavLink>
       {/* <Link
         to="/friend"

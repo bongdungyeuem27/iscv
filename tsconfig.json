@@ -28,6 +28,7 @@
       "@contracts/*": ["./src/contracts/*"],
       "@graphql/*": ["./src/graphql/*"],
       "@typechain/*": ["./src/typechain/*"],
+      "@middlewares/*": ["./src/middlewares/*"],
       "@redux/*": ["./src/redux/*"],
       "@globalTypes/*": ["./src/globalTypes/*"]
     }

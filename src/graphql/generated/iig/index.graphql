@@ -1,0 +1,6 @@
+query GetIIGRequestStatus($employeeId: Int!) {
+  requestStatus(employeeId: $employeeId) {
+    lr
+    sw
+  }
+}

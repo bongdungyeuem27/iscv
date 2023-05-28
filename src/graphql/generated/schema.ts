@@ -23,6 +23,20 @@ export type IBook = {
   title?: Maybe<Scalars['String']>;
 };
 
+export type IBusiness = {
+  __typename?: 'Business';
+  category?: Maybe<Scalars['Int']>;
+  email?: Maybe<Scalars['String']>;
+  github?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  linkedin?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  professional?: Maybe<Scalars['String']>;
+  sourceImage?: Maybe<Scalars['String']>;
+  user?: Maybe<Scalars['String']>;
+};
+
 export type ICv = {
   __typename?: 'CV';
   employeeId?: Maybe<Scalars['Int']>;
@@ -71,6 +85,12 @@ export type IIig = {
   sw?: Maybe<ISw>;
 };
 
+export type IIigStatus = {
+  __typename?: 'IIGStatus';
+  lr?: Maybe<Scalars['Boolean']>;
+  sw?: Maybe<Scalars['Boolean']>;
+};
+
 export type ILr = {
   __typename?: 'LR';
   employeeId?: Maybe<Scalars['Int']>;
@@ -103,6 +123,8 @@ export type IQuery = {
   __typename?: 'Query';
   book?: Maybe<IBook>;
   books?: Maybe<Array<Maybe<IBook>>>;
+  business?: Maybe<IBusiness>;
+  businessByUser?: Maybe<IBusiness>;
   cv?: Maybe<ICv>;
   cvs?: Maybe<Array<Maybe<ICv>>>;
   defaultCV?: Maybe<IDefaultCv>;
@@ -111,12 +133,23 @@ export type IQuery = {
   employees?: Maybe<Array<Maybe<IEmployee>>>;
   post?: Maybe<IPost>;
   prediction?: Maybe<Array<Maybe<IPost>>>;
+  requestStatus?: Maybe<IIigStatus>;
   skillsByEmployee?: Maybe<Array<Maybe<ISkill>>>;
 };
 
 
 export type IQueryBookArgs = {
   id: Scalars['Int'];
+};
+
+
+export type IQueryBusinessArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type IQueryBusinessByUserArgs = {
+  user?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -146,6 +179,11 @@ export type IQueryPredictionArgs = {
 };
 
 
+export type IQueryRequestStatusArgs = {
+  employeeId: Scalars['Int'];
+};
+
+
 export type IQuerySkillsByEmployeeArgs = {
   employeeId: Scalars['Int'];
 };
@@ -169,6 +207,20 @@ export type ISkill = {
   level?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
 };
+
+export type IGetBusinessByUserQueryVariables = Exact<{
+  user: Scalars['String'];
+}>;
+
+
+export type IGetBusinessByUserQuery = { __typename?: 'Query', businessByUser?: { __typename?: 'Business', id?: number | null, user?: string | null, name?: string | null, phone?: string | null, professional?: string | null, email?: string | null, github?: string | null, linkedin?: string | null, sourceImage?: string | null, category?: number | null } | null };
+
+export type IGetBusinessQueryVariables = Exact<{
+  businessId: Scalars['Int'];
+}>;
+
+
+export type IGetBusinessQuery = { __typename?: 'Query', business?: { __typename?: 'Business', id?: number | null, user?: string | null, name?: string | null, phone?: string | null, professional?: string | null, email?: string | null, github?: string | null, linkedin?: string | null, sourceImage?: string | null, category?: number | null } | null };
 
 export type IGetEmployeeByUserQueryVariables = Exact<{
   user?: InputMaybe<Scalars['String']>;
@@ -198,6 +250,13 @@ export type IGetDefaultCvQueryVariables = Exact<{
 
 export type IGetDefaultCvQuery = { __typename?: 'Query', defaultCV?: { __typename?: 'DefaultCV', id?: number | null, user?: string | null, name?: string | null, phone?: string | null, professional?: string | null, email?: string | null, github?: string | null, linkedin?: string | null, sourceImage?: string | null, skills?: Array<{ __typename?: 'Skill', id?: number | null, employeeId?: number | null, title?: string | null, level?: number | null } | null> | null, certificate?: { __typename?: 'Certificate', iig?: { __typename?: 'IIG', lr?: { __typename?: 'LR', id?: number | null, employeeId?: number | null, testDate?: any | null, shiftTest?: number | null, expireDate?: any | null, listeningScore?: number | null, readingScore?: number | null, time?: any | null } | null, sw?: { __typename?: 'SW', id?: number | null, employeeId?: number | null, testDate?: any | null, shiftTest?: number | null, expireDate?: any | null, speakingScore?: number | null, writingScore?: number | null, time?: any | null } | null } | null } | null } | null };
 
+export type IGetIigRequestStatusQueryVariables = Exact<{
+  employeeId: Scalars['Int'];
+}>;
+
+
+export type IGetIigRequestStatusQuery = { __typename?: 'Query', requestStatus?: { __typename?: 'IIGStatus', lr?: boolean | null, sw?: boolean | null } | null };
+
 export type IGetPostQueryVariables = Exact<{
   postId: Scalars['String'];
   employeeId?: InputMaybe<Scalars['Int']>;
@@ -221,6 +280,94 @@ export type IGetSkillsByEmployeeQueryVariables = Exact<{
 export type IGetSkillsByEmployeeQuery = { __typename?: 'Query', skillsByEmployee?: Array<{ __typename?: 'Skill', id?: number | null, employeeId?: number | null, title?: string | null, level?: number | null } | null> | null };
 
 
+export const GetBusinessByUserDocument = gql`
+    query GetBusinessByUser($user: String!) {
+  businessByUser(user: $user) {
+    id
+    user
+    name
+    phone
+    professional
+    email
+    github
+    linkedin
+    sourceImage
+    category
+  }
+}
+    `;
+
+/**
+ * __useGetBusinessByUserQuery__
+ *
+ * To run a query within a React component, call `useGetBusinessByUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBusinessByUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBusinessByUserQuery({
+ *   variables: {
+ *      user: // value for 'user'
+ *   },
+ * });
+ */
+export function useGetBusinessByUserQuery(baseOptions: Apollo.QueryHookOptions<IGetBusinessByUserQuery, IGetBusinessByUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IGetBusinessByUserQuery, IGetBusinessByUserQueryVariables>(GetBusinessByUserDocument, options);
+      }
+export function useGetBusinessByUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IGetBusinessByUserQuery, IGetBusinessByUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IGetBusinessByUserQuery, IGetBusinessByUserQueryVariables>(GetBusinessByUserDocument, options);
+        }
+export type GetBusinessByUserQueryHookResult = ReturnType<typeof useGetBusinessByUserQuery>;
+export type GetBusinessByUserLazyQueryHookResult = ReturnType<typeof useGetBusinessByUserLazyQuery>;
+export type GetBusinessByUserQueryResult = Apollo.QueryResult<IGetBusinessByUserQuery, IGetBusinessByUserQueryVariables>;
+export const GetBusinessDocument = gql`
+    query GetBusiness($businessId: Int!) {
+  business(id: $businessId) {
+    id
+    user
+    name
+    phone
+    professional
+    email
+    github
+    linkedin
+    sourceImage
+    category
+  }
+}
+    `;
+
+/**
+ * __useGetBusinessQuery__
+ *
+ * To run a query within a React component, call `useGetBusinessQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBusinessQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBusinessQuery({
+ *   variables: {
+ *      businessId: // value for 'businessId'
+ *   },
+ * });
+ */
+export function useGetBusinessQuery(baseOptions: Apollo.QueryHookOptions<IGetBusinessQuery, IGetBusinessQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IGetBusinessQuery, IGetBusinessQueryVariables>(GetBusinessDocument, options);
+      }
+export function useGetBusinessLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IGetBusinessQuery, IGetBusinessQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IGetBusinessQuery, IGetBusinessQueryVariables>(GetBusinessDocument, options);
+        }
+export type GetBusinessQueryHookResult = ReturnType<typeof useGetBusinessQuery>;
+export type GetBusinessLazyQueryHookResult = ReturnType<typeof useGetBusinessLazyQuery>;
+export type GetBusinessQueryResult = Apollo.QueryResult<IGetBusinessQuery, IGetBusinessQueryVariables>;
 export const GetEmployeeByUserDocument = gql`
     query GetEmployeeByUser($user: String) {
   employeeByUser(user: $user) {
@@ -415,6 +562,42 @@ export function useGetDefaultCvLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type GetDefaultCvQueryHookResult = ReturnType<typeof useGetDefaultCvQuery>;
 export type GetDefaultCvLazyQueryHookResult = ReturnType<typeof useGetDefaultCvLazyQuery>;
 export type GetDefaultCvQueryResult = Apollo.QueryResult<IGetDefaultCvQuery, IGetDefaultCvQueryVariables>;
+export const GetIigRequestStatusDocument = gql`
+    query GetIIGRequestStatus($employeeId: Int!) {
+  requestStatus(employeeId: $employeeId) {
+    lr
+    sw
+  }
+}
+    `;
+
+/**
+ * __useGetIigRequestStatusQuery__
+ *
+ * To run a query within a React component, call `useGetIigRequestStatusQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetIigRequestStatusQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetIigRequestStatusQuery({
+ *   variables: {
+ *      employeeId: // value for 'employeeId'
+ *   },
+ * });
+ */
+export function useGetIigRequestStatusQuery(baseOptions: Apollo.QueryHookOptions<IGetIigRequestStatusQuery, IGetIigRequestStatusQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IGetIigRequestStatusQuery, IGetIigRequestStatusQueryVariables>(GetIigRequestStatusDocument, options);
+      }
+export function useGetIigRequestStatusLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IGetIigRequestStatusQuery, IGetIigRequestStatusQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IGetIigRequestStatusQuery, IGetIigRequestStatusQueryVariables>(GetIigRequestStatusDocument, options);
+        }
+export type GetIigRequestStatusQueryHookResult = ReturnType<typeof useGetIigRequestStatusQuery>;
+export type GetIigRequestStatusLazyQueryHookResult = ReturnType<typeof useGetIigRequestStatusLazyQuery>;
+export type GetIigRequestStatusQueryResult = Apollo.QueryResult<IGetIigRequestStatusQuery, IGetIigRequestStatusQueryVariables>;
 export const GetPostDocument = gql`
     query GetPost($postId: String!, $employeeId: Int) {
   post(id: $postId, employeeId: $employeeId) {

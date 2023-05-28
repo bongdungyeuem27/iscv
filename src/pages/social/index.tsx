@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import ReviewPost from "@components/PagePost";
+import PagePost from "@components/PagePost";
 
 import { RootState } from "@redux/store";
 import { useSelector } from "react-redux";
@@ -14,7 +14,7 @@ const Social = (props: Props) => {
   return (
     <div className={styles.container}>
       {query.data?.prediction?.map((value) => {
-        return <ReviewPost postId={value?._id!} key={value?._id}></ReviewPost>;
+        return <PagePost postId={value?._id!} key={value?._id}></PagePost>;
       })}
     </div>
   );

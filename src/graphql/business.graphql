@@ -1,0 +1,29 @@
+query GetBusinessByUser($user: String!) {
+  businessByUser(user: $user) {
+    id
+    user
+    name
+    phone
+    professional
+    email
+    github
+    linkedin
+    sourceImage
+    category
+  }
+}
+
+query GetBusiness($businessId: Int!) {
+  business(id: $businessId) {
+    id
+    user
+    name
+    phone
+    professional
+    email
+    github
+    linkedin
+    sourceImage
+    category
+  }
+}

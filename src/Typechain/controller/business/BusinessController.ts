@@ -62,6 +62,7 @@ export type ProfileStruct = {
   github: PromiseOrValue<string>;
   linkedin: PromiseOrValue<string>;
   sourceImage: PromiseOrValue<string>;
+  category: PromiseOrValue<BigNumberish>;
 };
 
 export type ProfileStructOutput = [
@@ -73,7 +74,8 @@ export type ProfileStructOutput = [
   string,
   string,
   string,
-  string
+  string,
+  number
 ] & {
   id: BigNumber;
   user: string;
@@ -84,6 +86,7 @@ export type ProfileStructOutput = [
   github: string;
   linkedin: string;
   sourceImage: string;
+  category: number;
 };
 
 export interface BusinessControllerInterface extends utils.Interface {

@@ -2,6 +2,7 @@ import LayoutHeader from "@layouts/LayoutHeader";
 import LayoutPage from "@layouts/LayoutPage";
 import LayoutProfile from "@layouts/LayoutProfile";
 import LayoutSocial from "@layouts/LayoutSocial";
+import Permission from "@middlewares/Permission";
 import About from "@pages/about";
 import CustomCV from "@pages/customcv";
 import Home from "@pages/home";
@@ -11,6 +12,7 @@ import Page from "@pages/page";
 import Profile from "@pages/profile";
 import Register from "@pages/register";
 import Social from "@pages/social";
+
 import { createBrowserRouter } from "react-router-dom";
 import App from "src/App";
 
@@ -32,55 +34,61 @@ export const routes = [
             icon: "fa-regular fa-house-heart",
           },
           {
-            path: "/profile",
-            name: "profile-layout",
-            element: <LayoutProfile></LayoutProfile>,
+            name: "permission",
+            element: <Permission></Permission>,
             children: [
               {
-                path: "/profile/:id",
-                name: "profile",
-                element: <Profile></Profile>,
+                path: "/profile",
+                name: "profile-layout",
+                element: <LayoutProfile></LayoutProfile>,
+                children: [
+                  {
+                    path: "/profile/:id",
+                    name: "profile",
+                    element: <Profile></Profile>,
+                  },
+                  {
+                    path: "/profile/:id/mycv",
+                    name: "mycv",
+                    element: <Mycv></Mycv>,
+                  },
+                  {
+                    path: "/profile/:id/about",
+                    name: "about",
+                    element: <About></About>,
+                  },
+                ],
               },
               {
-                path: "/profile/:id/mycv",
-                name: "mycv",
-                element: <Mycv></Mycv>,
+                path: "/page",
+                name: "page-layout",
+                element: <LayoutPage></LayoutPage>,
+                children: [
+                  {
+                    path: "/page/:id",
+                    name: "page",
+                    element: <Page></Page>,
+                  },
+                ],
               },
-              {
-                path: "/profile/:id/about",
-                name: "about",
-                element: <About></About>,
-              },
-            ],
-          },
-          {
-            path: "/page",
-            name: "page-layout",
-            element: <LayoutPage></LayoutPage>,
-            children: [
-              {
-                path: "/page/:id",
-                name: "page",
-                element: <Page></Page>,
-              },
-            ],
-          },
-          {
-            path: "/social",
-            name: "social-layout",
-            element: <LayoutSocial></LayoutSocial>,
-            children: [
               {
                 path: "/social",
-                name: "social",
-                element: <Social></Social>,
+                name: "social-layout",
+                element: <LayoutSocial></LayoutSocial>,
+                children: [
+                  {
+                    path: "/social",
+                    name: "social",
+                    element: <Social></Social>,
+                  },
+                ],
+              },
+              {
+                path: "/interview/:id",
+                name: "interview",
+                element: <Interview></Interview>,
               },
             ],
-          },
-          {
-            path: "/interview/:id",
-            name: "interview",
-            element: <Interview></Interview>,
           },
         ],
       },
@@ -90,9 +98,15 @@ export const routes = [
         element: <Register></Register>,
       },
       {
-        path: "/customcv",
-        name: "customcv",
-        element: <CustomCV></CustomCV>,
+        name: "permission-secondary",
+        element: <Permission></Permission>,
+        children: [
+          {
+            path: "/customcv",
+            name: "customcv",
+            element: <CustomCV></CustomCV>,
+          },
+        ],
       },
     ],
   },
