@@ -12,6 +12,8 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { EIIGRequest } from "src/types/certificate/iig";
 import styles from "./styles.module.scss";
+import { Controller, useForm } from "react-hook-form";
+import { IForm } from "./types";
 
 function Index() {
   const { t } = useTranslation("page", { keyPrefix: "posts.left.iig" });
@@ -23,17 +25,21 @@ function Index() {
   const { data, refetch } = useGetIigRequestStatusQuery({
     variables: { employeeId: employee!.id },
   });
-  const [certificateType, setCertificateType] = useState<
-    EIIGRequest | undefined
-  >();
-  const [examId, setExamId] = useState<number | undefined>(undefined);
 
-  const handleRequest = async () => {
+  const { control, handleSubmit, setValue } = useForm<IForm>({
+    defaultValues: {
+      employeeId: employee?.id,
+      certificateType: undefined,
+      examId: undefined,
+    },
+  });
+
+  const onSubmit = async (data: IForm) => {
     loading.open();
     await postRequest({
       employeeId: employee?.id!,
-      examId: examId!,
-      certificateType: certificateType!,
+      examId: data.examId!,
+      certificateType: data.certificateType!,
     })
       .then((success) => {
         refetch();
@@ -43,15 +49,33 @@ function Index() {
     loading.close();
   };
 
+  const onValidate = (errors: any) => console.log(errors);
+
   return (
     <>
       <Modal
         state={[openAdd, setOpenAdd]}
         title={t("request_certificate")}
-        action={handleRequest}
+        action={handleSubmit(onSubmit, onValidate)}
       >
-
-        <Input value={String(examId)} onChange={(e)=>setExamId(Number(e.target.value))}></Input>
+        <Controller
+          name="examId"
+          control={control}
+          render={({ field, fieldState }) => {
+            return (
+              <div>
+                <Input
+                  className=" w-full h-12"
+                  value={field.value?.toString()}
+                  onChange={field.onChange}
+                ></Input>
+                {fieldState.error?.message && (
+                  <p className=" text-red-500">{fieldState.error?.message}</p>
+                )}
+              </div>
+            );
+          }}
+        ></Controller>
       </Modal>
       <div className={styles.container}>
         <div className={styles.title}>
@@ -64,7 +88,7 @@ function Index() {
             })}
             onClick={() => {
               if (data?.requestStatus?.lr) return;
-              setCertificateType(EIIGRequest.LR);
+              setValue("certificateType", EIIGRequest.LR);
               setOpenAdd(true);
             }}
           >
@@ -77,7 +101,7 @@ function Index() {
             })}
             onClick={() => {
               if (data?.requestStatus?.sw) return;
-              setCertificateType(EIIGRequest.SW);
+              setValue("certificateType", EIIGRequest.SW);
               setOpenAdd(true);
             }}
           >

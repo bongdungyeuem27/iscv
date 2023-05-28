@@ -1,3 +1,5 @@
+import { IMyDocument } from "src/types";
+
 export type IIIGLR = {
   id: number | undefined;
   employeeId: number | undefined;
@@ -28,4 +30,21 @@ export type IIIG = {
 export enum EIIGRequest {
   LR = "lr",
   SW = "sw",
+}
+
+export type IIIGRequest = {
+  _id: string
+  employeeId: number
+  examId: number
+  certificateType: EIIGRequest
+  status: ERequestStatus
+  createdAt: Date
+  updatedAt: Date
+  __v: number
+} & IMyDocument
+
+export enum ERequestStatus {
+  NULL,
+  WAITING,
+  APPROVED
 }
