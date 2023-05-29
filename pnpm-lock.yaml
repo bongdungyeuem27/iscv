@@ -103,6 +103,9 @@ dependencies:
   lzutf8:
     specifier: ^0.6.3
     version: 0.6.3
+  moment:
+    specifier: ^2.29.4
+    version: 2.29.4
   near-api-js:
     specifier: ^1.1.0
     version: 1.1.0
@@ -11991,6 +11994,10 @@ packages:
 
   /mock-fs@4.14.0:
     resolution: {integrity: sha512-qYvlv/exQ4+svI3UOvPUpLDF0OMX5euvUH0Ny4N5QyRyhNdgAgUrVH3iUINSzEPLvx0kbo/Bp28GJKIqvE7URw==}
+    dev: false
+
+  /moment@2.29.4:
+    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
     dev: false
 
   /ms@2.0.0:

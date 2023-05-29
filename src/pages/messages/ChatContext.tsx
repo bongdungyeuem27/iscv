@@ -11,7 +11,6 @@ type Props = {
   children?: React.ReactNode;
 };
 
-const socket = io(API_ENDPOINT_NODEJS);
 const ChatContextProvider = ({ children }: Props) => {
   const id = useParams().id ? parseInt(useParams()?.id!) : undefined;
 

@@ -2,6 +2,7 @@ import { LoadingContainer } from "@components/Loading";
 import { useGetEmployeeByUserQuery } from "@graphql/generated/schema";
 import { ToastContainer } from "@iscv/toast";
 import { connect } from "@redux/reducers/auth";
+import { setClient } from "@redux/reducers/socket";
 import { RootState } from "@redux/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,6 +36,17 @@ function App() {
       await dispatch<any>(connect({ provider }));
     })();
   }, [provider]);
+
+  useEffect(() => {
+    (async () => {
+      if (
+        data?.employeeByUser?.id === undefined ||
+        data?.employeeByUser?.id === null
+      )
+        return;
+      await dispatch<any>(setClient({ employeeId: data?.employeeByUser?.id }));
+    })();
+  }, [data?.employeeByUser?.id]);
   return (
     <div className="App">
       <LoadingContainer></LoadingContainer>

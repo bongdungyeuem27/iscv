@@ -19,8 +19,6 @@ const videoConstraints = {
   facingMode: "user",
 };
 
-const socket = io(API_ENDPOINT_NODEJS);
-
 const Interview = (props: Props) => {
   const [expandVolume, setExpandVolume] = useState(false);
   const [micro, setMicro] = useState(false);
@@ -29,6 +27,7 @@ const Interview = (props: Props) => {
   const [running, setRunning] = useState(0);
   const toast = useToast();
   const employee = useSelector((state: RootState) => state.auth.employee);
+  const client = useSelector((state: RootState) => state.socket.client);
   useEffect(() => {
     async function setupCamera() {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -44,7 +43,7 @@ const Interview = (props: Props) => {
         videoBitsPerSecond: 2500000,
       });
       mediaRecorder.ondataavailable = (event) => {
-        socket.emit("chunk-interview", event.data);
+        // client?.emit("chunk-interview", event.data);
       };
       mediaRecorder.onstop = () => {};
 
@@ -61,13 +60,13 @@ const Interview = (props: Props) => {
     }
     if (running === 0) {
       mediaRecorderRef.current.start(500);
-      socket.emit("start-interview");
+      // client?.emit("start-interview");
       setRunning(1);
       return;
     }
     if (running === 1) {
       mediaRecorderRef.current.stop();
-      socket.emit("stop-interview");
+      // client?.emit("stop-interview");
       (videoRef.current?.srcObject as any)
         ?.getTracks()
         .forEach((track: { stop: () => void }) => {

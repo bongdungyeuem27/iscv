@@ -1,9 +1,8 @@
-import React from "react";
-import styles from "./styles.module.scss";
-import People from "./People";
 import Chat from "./Chat";
+import ChatContextProvider from "./ChatContext";
+import People from "./People";
 import Tools from "./Tools";
-import ChatContextProvider, { ChatContext } from "./ChatContext";
+import styles from "./styles.module.scss";
 
 function Index() {
   return (

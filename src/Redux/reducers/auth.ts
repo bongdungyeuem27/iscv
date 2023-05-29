@@ -47,8 +47,9 @@ export const connect = createAsyncThunk<
     .catch((error) => console.log(error));
   if (!employee)
     return { account: account, signer: signer, employee: undefined };
-
-  return { account: account, signer: signer, employee: employee };
+  else {
+    return { account: account, signer: signer, employee: employee };
+  }
 });
 
 export const authReducer = createSlice({
