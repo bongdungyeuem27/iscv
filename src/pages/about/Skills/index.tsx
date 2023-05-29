@@ -48,11 +48,16 @@ function Skills() {
       const employeeContract = useEmployee(signer!);
       (await employeeContract)
         .addSkill(employee?.id!, values.skill, values.level)
-        .then((success) => {
-          toast.success();
-          querySkills.refetch();
-          formik.resetForm();
-          setOpenAdd(false);
+        .then(async (tx) => {
+          await tx
+            .wait()
+            .then(() => {
+              toast.success();
+              querySkills.refetch();
+              formik.resetForm();
+              setOpenAdd(false);
+            })
+            .catch((error) => console.log(error));
         })
         .catch((error) => toast.error());
       loading.close();

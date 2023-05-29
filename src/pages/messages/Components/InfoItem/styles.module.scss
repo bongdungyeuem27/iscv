@@ -1,0 +1,15 @@
+@use '@styles/globalType/function' as function;
+@import '../../variables.scss';
+.container {
+  display: flex;
+  align-items: center;
+  .icon {
+    @include function.buttonRound;
+  }
+  .fold {
+    display: none;
+  }
+  &:first-child {
+    margin: -50% 0px 0px 0px;
+  }
+}

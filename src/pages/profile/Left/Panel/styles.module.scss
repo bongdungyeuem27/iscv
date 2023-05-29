@@ -2,6 +2,7 @@
 @import '../../variables.scss';
 .container {
   @include function.panel;
+  flex-direction: column;
   padding: 10px 15px;
   .title {
     @include function.panelTitle;

@@ -12,7 +12,7 @@ type Props = {
 };
 
 function Index({ id, data }: Props) {
-  console.log(data);
+
   return (
     <div className={styles.container}>
       {<div className={styles.title}>IGG VietNam</div>}

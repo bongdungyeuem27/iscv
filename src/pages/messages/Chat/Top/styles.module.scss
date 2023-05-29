@@ -1,0 +1,35 @@
+@use '@styles/globalType/function' as function;
+@import '../../variables.scss';
+.top {
+  position: absolute;
+  z-index: 2;
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .info {
+    height: $topHeight;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    align-content: stretch;
+    justify-content: space-between;
+    gap: 5px;
+    background: var(--color-background-primary);
+    padding: $paddingGap $paddingGap;
+    border-bottom: 1px solid var(--color-border);
+    .tools {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      gap: 5px;
+      .plus {
+        @include function.buttonRound;
+      }
+      .search {
+        @include function.buttonRound;
+      }
+    }
+  }
+}

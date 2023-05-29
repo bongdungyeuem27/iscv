@@ -1,25 +1,27 @@
-import styles from './styles.module.scss'
+import clsx from "clsx";
+import styles from "./styles.module.scss";
 
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next";
 
 type Props = {
-  type: string
-  children: React.ReactNode
-}
+  type: string;
+  children: React.ReactNode;
+  className?: string;
+};
 
 function Index(props: Props) {
-  const { type, children } = props
+  const { type, children, className } = props;
 
-  const { t } = useTranslation('page', { keyPrefix: 'posts.left.skills' })
+  const { t } = useTranslation("page", { keyPrefix: "posts.left.skills" });
 
   return (
-    <div className={styles.container}>
+    <div className={clsx(styles.container, className)}>
       <div className={styles.title}>
         <a>{t(type)}</a>
       </div>
       {children}
     </div>
-  )
+  );
 }
 
-export default Index
+export default Index;

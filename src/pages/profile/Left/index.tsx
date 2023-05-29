@@ -15,8 +15,8 @@ function Index() {
 
   return (
     <div className={styles.container}>
-      {location.pathname.includes("profile") && (
-        <Panel type={"skills"}>
+      <Panel type={"skills"}>
+        <div className=" flex flex-col gap-3">
           {querySkills.data?.skillsByEmployee?.map((value) => {
             return (
               <ItemSkill
@@ -26,8 +26,9 @@ function Index() {
               ></ItemSkill>
             );
           })}
-        </Panel>
-      )}
+        </div>
+      </Panel>
+
       {/* {location.pathname.includes('profile') && (
         <Panel type={'joblevels'}>
           {listJobLevel &&

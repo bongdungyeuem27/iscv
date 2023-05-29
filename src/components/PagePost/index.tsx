@@ -11,6 +11,7 @@ import { PostStatus } from "src/types/posts";
 import styles from "./styles.module.scss";
 import { useGetPostQuery } from "@graphql/generated/schema";
 import Video from "@components/Video";
+import { useLoading } from "@components/Loading";
 
 type Props = {
   postId: string;
@@ -19,25 +20,35 @@ function PagePost(props: Props) {
   const { postId } = props;
   const signer = useSelector((state: RootState) => state.auth.signer);
   const id = useSelector((state: RootState) => state.auth.employee)?.id;
-  const { loading, data, refetch } = useGetPostQuery({
+  const loading = useLoading();
+  const { data, refetch } = useGetPostQuery({
     variables: { postId: String(postId), employeeId: id },
   });
   const { t } = useTranslation("component", { keyPrefix: "postItem.index" });
   const toast = useToast();
   const employeeContract = useEmployee(signer!);
   const handleApply = async () => {
+    loading.open();
     await employeeContract
       .applyPost(id!, data?.post?.businessId!, data?.post?._id!)
-      .then((success) => {
-        toast.success();
-        refetch();
+      .then(async (tx) => {
+        await tx
+          .wait()
+          .then(() => {
+            toast.success();
+            refetch();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.error(error);
         toast.error();
       });
+    loading.close();
   };
-  console.log(data);
+
   if (!data) return null;
   return (
     <div className={clsx(styles.item)}>
@@ -47,7 +58,7 @@ function PagePost(props: Props) {
             to={`/page/${data?.post?.businessId}`}
             className={styles.avatarWrapper}
           >
-            {/* <img src={`${IPFS_GATEWAY}${data?.post?}`}></img> */}
+            <img src={`${IPFS_GATEWAY}${data?.post?.businessImage}`}></img>
           </Link>
           <div className={styles.avatarTextWrapper}>
             <Link
@@ -85,12 +96,16 @@ function PagePost(props: Props) {
         <p>{data?.post?.content}</p>
 
         <div className={styles.imageContent}>
-          {/* {data.post?.images &&  <img src={window.URL.createObjectURL(field.value)} alt="post"></img>} */}
-          <Video
-            video={`${API_ENDPOINT_NODEJS}public/business/post/${
-              data.post?._id
-            }/${data.post?.videos?.at(0)}.mp4`}
-          ></Video>
+          {data.post?.images?.at(0) && (
+            <img src={data.post.images.at(0) as string}></img>
+          )}
+          {data.post?.videos?.at(0) && (
+            <Video
+              video={`${API_ENDPOINT_NODEJS}public/business/post/${
+                data.post?._id
+              }/${data.post?.videos?.at(0)}.mp4`}
+            ></Video>
+          )}
         </div>
       </div>
       <div className={styles.foot}>

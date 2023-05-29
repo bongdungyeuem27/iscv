@@ -12,6 +12,7 @@ import Page from "@pages/page";
 import Profile from "@pages/profile";
 import Register from "@pages/register";
 import Social from "@pages/social";
+import Messages from "@pages/messages";
 
 import { createBrowserRouter } from "react-router-dom";
 import App from "src/App";
@@ -87,6 +88,11 @@ export const routes = [
                 path: "/interview/:id",
                 name: "interview",
                 element: <Interview></Interview>,
+              },
+              {
+                path: "/messages",
+                name: "messages",
+                element: <Messages></Messages>,
               },
             ],
           },

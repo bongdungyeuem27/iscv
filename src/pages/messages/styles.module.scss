@@ -1,0 +1,8 @@
+.container {
+  width: 100%;
+  height: calc(100vh);
+  position: relative;
+  display: flex;
+  color: var(--color-text-grey);
+  background: var(--color-background-primary);
+}

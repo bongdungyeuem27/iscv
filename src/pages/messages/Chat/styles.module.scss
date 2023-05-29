@@ -1,0 +1,71 @@
+@use '@styles/globalType/function' as function;
+@import '../variables.scss';
+.container {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  background: inherit;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  .content {
+    position: relative;
+    height: calc(100% - $topHeight);
+    width: 100%;
+    margin: calc($topHeight) 0px 0px 0px;
+
+    background-color: rgb(253, 248, 253);
+    background-size: cover;
+    background-position: center;
+    overflow-y: overlay;
+    scroll-snap-type: y proximity;
+    padding: $paddingGap $paddingGap;
+    display: flex;
+    flex-direction: column-reverse;
+    .scroll {
+      scroll-snap-type: y proximity;
+      width: 100%;
+      margin: calc($pinHeight) 0px 20px 0px;
+    }
+  }
+  .chatInput {
+    width: 100%;
+    bottom: 0;
+    background: var(--color-background-primary);
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    align-items: stretch;
+    .chatType {
+      width: 100%;
+      padding: 7px;
+      display: flex;
+      align-items: center;
+      textarea {
+        @include function.inputStyle;
+        border-radius: 15px;
+        width: 100%;
+        resize: none;
+
+        background: var(--color-input-primary);
+        padding: 5px 15px;
+      }
+    }
+
+    .chatSend {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        cursor: pointer;
+        @include function.textGradient;
+        background: var(--color-button-secondary);
+        width: 30px;
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+    }
+  }
+}
