@@ -1,8 +1,10 @@
 .container {
   width: 100%;
-  height: calc(100vh);
   position: relative;
   display: flex;
+  height: calc(100vh);
+  // margin: 60px 0px 0px 0px;
+  // padding: 0;
   color: var(--color-text-grey);
   background: var(--color-background-primary);
 }

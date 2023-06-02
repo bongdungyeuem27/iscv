@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Socket, io } from "socket.io-client";
 
-import { AppDispatch, RootState } from "@redux/store";
+import { AppDispatch, RootState, store } from "@redux/store";
 import { ClientToServerEvents, ISocketStore, ServerToClientEvents, SocketInput, SocketOutput } from "@redux/types/socket";
 import { API_ENDPOINT_NODEJS } from "@constants/index";
-import { addItem } from "./messages";
+import { addItem, crawl, newRecent } from "./messages";
 
 const initialState: ISocketStore = {
   client: undefined,
@@ -21,10 +21,14 @@ export const setClient = createAsyncThunk<
       query: { employeeId: data.employeeId },
     }
   );
-  client.on("send", (args) => {
-    console.log(args);
-    thunkApi.dispatch(addItem(args as any))
-  });
+   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
+  thunkApi.dispatch(crawl({ employeeId: store.getState().auth.employee?.id! }))
+  client.on('send', (args) => {
+    if (store.getState().messages.current === args.employeeId) {
+      thunkApi.dispatch(addItem(args as any))
+      thunkApi.dispatch(newRecent({ businessId: args.businessId!, updatedAt: new Date() }))
+    }
+  })
   return { client };
 });
 

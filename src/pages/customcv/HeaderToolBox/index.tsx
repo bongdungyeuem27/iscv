@@ -1,30 +1,26 @@
-import React, {
-  useContext,
-  useState,
-  useLayoutEffect,
-  useRef,
-  lazy,
+import { postObject } from "@apis/common/ipfs";
+import { useLoading } from "@components/Loading";
+import { useEmployeeCV } from "@contracts/useEmployeeCV";
+import { useToast } from "@iscv/toast";
+import { RootState } from "@redux/store";
+import update from "immutability-helper";
+import {
   Suspense,
-  useCallback,
-  useEffect,
+  lazy,
+  useContext,
+  useRef,
+  useState
 } from "react";
-import styles from "./styles.module.scss";
+import { useSelector } from "react-redux";
+import { CustomCVContext } from "../CustomCVContext";
+import useToJson from "../hooks/useToJson";
+import useToObject from "../hooks/useToObject";
 import Button from "./Button";
 import Logo from "./Logo/indext";
-import clsx from "clsx";
 import ObjectName from "./ObjectName";
-import { CustomCVContext } from "../CustomCVContext";
-import update from "immutability-helper";
-import { useToast } from "@iscv/toast";
+import styles from "./styles.module.scss";
 const DownloadModal = lazy(() => import("./DownloadModal"));
 const PublishModal = lazy(() => import("./PublishModal"));
-import { useLoading } from "@components/Loading";
-import useToObject from "../hooks/useToObject";
-import useToJson from "../hooks/useToJson";
-import { postJSON, postObject } from "@apis/common/ipfs";
-import { useEmployeeCV } from "@contracts/useEmployeeCV";
-import { useSelector } from "react-redux";
-import { RootState } from "@redux/store";
 
 const ImportBlockchain = lazy(() => import("./ImportBlockchain"));
 
@@ -60,11 +56,11 @@ function Index() {
   };
   const handlePaste = () => {
     if (copy) {
-      let newId = getNewAutoCreatement();
+      const newId = getNewAutoCreatement();
       let newName = copy.type.toString();
       newName = newName[0].toUpperCase() + newName.slice(1);
       newName += " " + newId;
-      let temp = {
+      const temp = {
         ...copy,
         top: copy.top + 10,
         left: copy.left + 10,
@@ -150,7 +146,7 @@ function Index() {
       const fileReader = new FileReader();
       fileReader.readAsText(e.target.files[0], "UTF-8");
       fileReader.onload = (x: any) => {
-        let data = useToObject(x.target.result);
+        const data = useToObject(x.target.result);
         if (data) {
           setAutoCreatement(data.autoCreatement);
           setList(data.list);

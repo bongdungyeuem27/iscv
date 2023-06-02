@@ -1,28 +1,36 @@
-import { IMesssages } from "@redux/types/messages";
-import clsx from "clsx";
-import styles from "./styles.module.scss";
-import moment from "moment";
-import { useSelector } from "react-redux";
-import { RootState } from "@redux/store";
-import { IPFS_GATEWAY } from "@constants/index";
+import { IMesssages } from '@redux/types/messages'
+import clsx from 'clsx'
+import styles from './styles.module.scss'
+import moment from 'moment'
+import { useSelector } from 'react-redux'
+import { RootState } from '@redux/store'
+import { IPFS_GATEWAY } from '@constants/index'
+import { ERole } from 'src/types/messages'
 type Props = {
-  messages: IMesssages;
-};
+  messages: IMesssages
+}
 function ChatItem({ messages }: Props) {
-  const sourceImage = useSelector(
-    (state: RootState) => state.auth.employee
-  )?.sourceImage;
+  const employee = useSelector((state: RootState) => state.auth.employee)
+  const business = useSelector((state: RootState) => state.messages.recent).find(
+    (x) => x.id === messages.businessId
+  )
   return (
     <div className={clsx(styles.container, styles[messages.role])}>
       <div className={styles.info}>
         <div className={styles.icon}>
-          <img src={`${IPFS_GATEWAY}${sourceImage}`}></img>
+          <img
+            src={`${IPFS_GATEWAY}${
+              (messages.role === ERole.EMPLOYEE && employee?.sourceImage) ||
+              (messages.role === ERole.BUSINESS && business?.sourceImage)
+            }`}
+          ></img>
         </div>
         <div className={styles.text}>
-          <div className={styles.name}>{"profile.name"}</div>
-          <div className={styles.time}>
-            {moment(new Date(messages.time)).format("HH:mm")}
+          <div className={styles.name}>
+            {(messages.role === ERole.EMPLOYEE && employee?.name) ||
+              (messages.role === ERole.BUSINESS && business?.name)}
           </div>
+          <div className={styles.time}>{moment(new Date(messages.time)).format('HH:mm')}</div>
         </div>
       </div>
 
@@ -32,7 +40,7 @@ function ChatItem({ messages }: Props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default ChatItem;
+export default ChatItem

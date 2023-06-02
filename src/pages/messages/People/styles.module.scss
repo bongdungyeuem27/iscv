@@ -1,11 +1,12 @@
 @use '@styles/globalType/function' as function;
 @import '../variables.scss';
 .container {
-  width: $peopleWidth;
+  // width: $peopleWidth;
   height: 100%;
   border-right: 1px solid var(--color-border);
-  overflow: overlay;
+  overflow: hidden;
   flex-shrink: 0;
+
   .top {
     width: 100%;
     height: $topHeight;
@@ -18,18 +19,59 @@
     padding: 15px 15px;
     border-bottom: 1px solid var(--color-border);
 
-    .tools {
-      height: 100%;
+ 
+  }
+}
+
+.group {
+  margin: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+    .iconGroupName {
       display: flex;
       align-items: center;
-      flex-direction: row;
-      gap: 5px;
-      .plus {
+      width: 30px;
+      height: 20px;
+      transition: all 0.25s linear;
+      .icon {
         @include function.buttonRound;
+        border-radius: 10px;
+        padding: 2px 4px;
+        width: unset;
+        height: unset;
+        flex-shrink: 0;
+        background: var(--color-button-octane);
+        i {
+          color: var(--color-background-primary);
+        }
       }
-      .search {
-        @include function.buttonRound;
+      .name {
+        font-weight: 500;
+        color: var(--color-text-primary);
+        margin: 0px 10px;
+        flex: 1;
+
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
   }
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+  }
+}
+
+.expand {
+  // border-radius: 10px;
+  width: 200px!important;
 }

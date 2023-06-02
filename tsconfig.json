@@ -1,20 +1,21 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "ESNext", "ES2020"],
     "allowJs": true,
     "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": false,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
+    "noEmit": true,
     "jsx": "react-jsx",
+    "esModuleInterop": true,
     "baseUrl": ".",
-    "incremental": true,
     "paths": {
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
@@ -27,17 +28,13 @@
       "@helpers/*": ["./src/helpers/*"],
       "@contracts/*": ["./src/contracts/*"],
       "@graphql/*": ["./src/graphql/*"],
-      "@typechain/*": ["./src/typechain/*"],
-      "@middlewares/*": ["./src/middlewares/*"],
       "@redux/*": ["./src/redux/*"],
-      "@globalTypes/*": ["./src/globalTypes/*"]
+      "@globaltypes/*": ["src/globaltypes/*"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@typechain/*": ["src/typechain/*"],
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/pages/customcv/HeaderToolBox/ImportBlockchain/index.tsx"
-, "src/pages/customcv/config.js", "src/pages/customcv/config.js"  ],
-  "exclude": ["node_modules"]
+  "include": ["**/*.d.js", "**/*.js", "**/*.cjs", "**/*.mjs", "**/*.jsx", "**/*.tsx", "**/*.ts"],
+  "files": ["./declaration.d.ts"],
+  "exclude": ["node_modules", "dist", "build"]
 }

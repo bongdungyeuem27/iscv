@@ -46,12 +46,10 @@
   border-radius: 2.625rem;
   padding: 0.5rem 20px;
   font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   cursor: pointer;
   color: var(--color-text-secondary);
+  display: inline-block;
 }
 
 @mixin panel {
@@ -107,10 +105,25 @@
   align-items: center;
   cursor: pointer;
   flex-shrink: 0;
-  i {
-    width: 100%;
-    text-align: center;
+
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+
+  cursor: pointer;
+  // transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #2980b9;
   }
+
+  &:active {
+    background-color: #21618c;
+  }
+  &:hover {
+    transform: scale(1.05);
+  }
+  transition: transform 0.3s;
 }
 @mixin hideScrollbar {
   &::-webkit-scrollbar {

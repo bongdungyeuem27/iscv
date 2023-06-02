@@ -1,17 +1,19 @@
-import Chat from "./Chat";
-import ChatContextProvider from "./ChatContext";
-import People from "./People";
-import Tools from "./Tools";
-import styles from "./styles.module.scss";
+import Chat from './Chat'
+import ChatContextProvider from './ChatContext'
+import People from './People'
+import Tools from './Tools'
+import styles from './styles.module.scss'
 
 function Index() {
   return (
     <main className={styles.container}>
-      <People></People>
-      <Chat></Chat>
-      <Tools></Tools>
+      <div className="relative w-full flex">
+        <People></People>
+        <Chat></Chat>
+        <Tools></Tools>
+      </div>
     </main>
-  );
+  )
 }
 
 function Messages() {
@@ -19,6 +21,6 @@ function Messages() {
     <ChatContextProvider>
       <Index></Index>
     </ChatContextProvider>
-  );
+  )
 }
-export default Messages;
+export default Messages

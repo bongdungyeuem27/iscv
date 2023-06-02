@@ -1,0 +1,16 @@
+@use '@styles/globalType/function' as function;
+
+.tools {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+  .plus {
+    @include function.buttonRound;
+  }
+}
+
+.search {
+  @include function.buttonRound;
+}
