@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { io } from "socket.io-client";
+import { Socket, io } from "socket.io-client";
 
 import { AppDispatch, RootState } from "@redux/store";
-import { ISocketStore, SocketInput, SocketOutput } from "@redux/types/socket";
+import { ClientToServerEvents, ISocketStore, ServerToClientEvents, SocketInput, SocketOutput } from "@redux/types/socket";
 import { API_ENDPOINT_NODEJS } from "@constants/index";
+import { addItem } from "./messages";
 
 const initialState: ISocketStore = {
   client: undefined,
@@ -13,9 +14,16 @@ export const setClient = createAsyncThunk<
   SocketOutput,
   SocketInput,
   { dispatch: AppDispatch; state: RootState }
->("socket/setclient", async (data) => {
-  const client = io(API_ENDPOINT_NODEJS, {
-    query: { employeeId: data.employeeId },
+>("socket/setclient", async (data, thunkApi) => {
+  const client: Socket<ServerToClientEvents, ClientToServerEvents> = io(
+    API_ENDPOINT_NODEJS,
+    {
+      query: { employeeId: data.employeeId },
+    }
+  );
+  client.on("send", (args) => {
+    console.log(args);
+    thunkApi.dispatch(addItem(args as any))
   });
   return { client };
 });

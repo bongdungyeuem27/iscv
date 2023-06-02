@@ -2,6 +2,7 @@ import { LoadingContainer } from "@components/Loading";
 import { useGetEmployeeByUserQuery } from "@graphql/generated/schema";
 import { ToastContainer } from "@iscv/toast";
 import { connect } from "@redux/reducers/auth";
+import { addItem } from "@redux/reducers/messages";
 import { setClient } from "@redux/reducers/socket";
 import { RootState } from "@redux/store";
 import { useEffect } from "react";
@@ -12,7 +13,8 @@ function App() {
   const provider = useSelector((state: RootState) => state.auth.provider);
   const account = useSelector((state: RootState) => state.auth.account);
   const dispatch = useDispatch();
-  const { loading, error, data, refetch, subscribeToMore, client } =
+  const client = useSelector((state: RootState) => state.socket.client)
+  const { loading, error, data, refetch, subscribeToMore } =
     useGetEmployeeByUserQuery({ variables: { user: account } });
 
   useEffect(() => {
@@ -47,6 +49,15 @@ function App() {
       await dispatch<any>(setClient({ employeeId: data?.employeeByUser?.id }));
     })();
   }, [data?.employeeByUser?.id]);
+
+  useEffect(() => {
+    // if (client?.id === undefined) return
+    console.log(client?.id)
+    client?.on('send', (args) => {
+      console.log(args)
+      dispatch<any>(addItem(args as any))
+    })
+  }, [client?.id])
   return (
     <div className="App">
       <LoadingContainer></LoadingContainer>

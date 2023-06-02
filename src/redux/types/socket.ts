@@ -1,12 +1,13 @@
 import { Socket } from "socket.io-client";
 import { IMesssages } from "./messages";
+import { ERole } from "src/types/messages";
 
 type WithTimeoutAck<
   isSender extends boolean,
   args extends any[]
 > = isSender extends true ? [Error, ...args] : args;
 
-interface ClientToServerEvents<isSender extends boolean = false> {
+export interface ClientToServerEvents<isSender extends boolean = false> {
   receive: (
     arg: {
       businessId?: number;
@@ -21,7 +22,7 @@ interface ClientToServerEvents<isSender extends boolean = false> {
   ) => void;
 }
 
-interface ServerToClientEvents<isSender extends boolean = false> {
+export interface ServerToClientEvents<isSender extends boolean = false> {
   // ...
   noArg: () => void;
   send: (data: {
@@ -29,6 +30,7 @@ interface ServerToClientEvents<isSender extends boolean = false> {
     employeeId?: number;
     businessId?: number;
     content: string;
+    role: ERole
   }) => void;
   basicEmit: (a: number, b: string, c: Buffer) => void;
   withAck: (d: string, callback: (e: number) => void) => void;
