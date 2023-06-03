@@ -18,7 +18,7 @@ function Index({}: Props) {
       </div>
       <div className={styles.text}>
         <div className={styles.name}>{business?.name}</div>
-        <div className={styles.message}>{'active noew'}</div>
+        <div className={styles.message}>{'active now'}</div>
       </div>
     </div>
   )
