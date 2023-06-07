@@ -1,33 +1,44 @@
-import React, { useEffect, useState } from "react";
-import styles from "./styles.module.scss";
+import React, { useEffect, useState } from 'react'
+import styles from './styles.module.scss'
 
 type Props = {
-  initialMinute?: number;
-  initialSeconds?: number;
-};
+  initialMinute?: number
+  initialSeconds?: number
+  onStart?: () => void
+  onEnd?: () => void
+}
 
 const Timer = (props: Props) => {
-  const { initialMinute = 0, initialSeconds = 0 } = props;
-  const [minutes, setMinutes] = useState(initialMinute);
-  const [seconds, setSeconds] = useState(initialSeconds);
+  const { initialMinute = 0, initialSeconds = 0 } = props
+  const [minutes, setMinutes] = useState(initialMinute)
+  const [seconds, setSeconds] = useState(initialSeconds)
+
   useEffect(() => {
-    let myInterval = setInterval(() => {
+    setMinutes(initialMinute)
+    setSeconds(initialSeconds)
+  }, [initialMinute, initialSeconds])
+
+  useEffect(() => {
+    const myInterval = setInterval(() => {
       if (seconds > 0) {
-        setSeconds(seconds - 1);
+        setSeconds(seconds - 1)
       }
       if (seconds === 0) {
         if (minutes === 0) {
-          clearInterval(myInterval);
+          clearInterval(myInterval)
+          props.onEnd?.()
         } else {
-          setMinutes(minutes - 1);
-          setSeconds(59);
+          setMinutes(minutes - 1)
+          setSeconds(59)
         }
       }
-    }, 1000);
+    }, 1000)
+
     return () => {
-      clearInterval(myInterval);
-    };
-  });
+      clearInterval(myInterval)
+    }
+  }, [minutes, seconds, props.onEnd])
+
   return (
     <div className={styles.timer}>
       <div className={styles.record}></div>
@@ -39,7 +50,7 @@ const Timer = (props: Props) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Timer;
+export default Timer

@@ -1,70 +1,93 @@
-import { useQuery } from "@apollo/client";
-import { API_ENDPOINT_NODEJS, IPFS_GATEWAY } from "@constants/index";
-import { useEmployee } from "@contracts/useEmployee";
-import { useToast } from "@iscv/toast";
-import { RootState } from "@redux/store";
-import clsx from "clsx";
-import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { PostStatus } from "src/types/posts";
-import styles from "./styles.module.scss";
-import { useGetPostQuery } from "@graphql/generated/schema";
-import Video from "@components/Video";
-import { useLoading } from "@components/Loading";
+import { useQuery } from '@apollo/client'
+import { API_ENDPOINT_NODEJS, IPFS_GATEWAY } from '@constants/index'
+import { useEmployee } from '@contracts/useEmployee'
+import { useToast } from '@iscv/toast'
+import { RootState } from '@redux/store'
+import clsx from 'clsx'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { PostStatus } from 'src/types/posts'
+import styles from './styles.module.scss'
+import { useGetPostQuery } from '@graphql/generated/schema'
+import Video from '@components/Video'
+import { useLoading } from '@components/Loading'
+import { setInterviewAppointment } from '@apis/employee/interview/appointment'
+import { addItem } from '@redux/reducers/bot'
+import { ERole } from 'src/types/messages'
+import { EBotCategory } from '@redux/types/bot'
 
 type Props = {
-  postId: string;
-};
+  postId: string
+}
 function PagePost(props: Props) {
-  const { postId } = props;
-  const signer = useSelector((state: RootState) => state.auth.signer);
-  const id = useSelector((state: RootState) => state.auth.employee)?.id;
-  const loading = useLoading();
+  const { postId } = props
+  const signer = useSelector((state: RootState) => state.auth.signer)
+  const id = useSelector((state: RootState) => state.auth.employee)?.id
+  const loading = useLoading()
   const { data, refetch } = useGetPostQuery({
-    variables: { postId: String(postId), employeeId: id },
-  });
-  const { t } = useTranslation("component", { keyPrefix: "postItem.index" });
-  const toast = useToast();
-  const employeeContract = useEmployee(signer!);
+    variables: { postId: String(postId), employeeId: id }
+  })
+  const dispatch = useDispatch()
+  const { t } = useTranslation('component', { keyPrefix: 'postItem.index' })
+  const toast = useToast()
+  const employeeContract = useEmployee(signer!)
   const handleApply = async () => {
-    loading.open();
+    loading.open()
     await employeeContract
       .applyPost(id!, data?.post?.businessId!, data?.post?._id!)
       .then(async (tx) => {
         await tx
           .wait()
-          .then(() => {
-            toast.success();
-            refetch();
+          .then(async (apply) => {
+            await setInterviewAppointment(id!, data?.post?._id!)
+              .then(async (success) => {
+                const appointment = success.data
+                dispatch(
+                  addItem({
+                    _id: appointment._id,
+                    role: ERole.BUSINESS,
+                    category: EBotCategory.NEW_INTERVIEW,
+                    content: '',
+                    time: new Date(),
+                    metadata: {
+                      _id: appointment._id,
+                      fromTime: new Date(appointment.fromTime),
+                      toTime: new Date(appointment.toTime),
+                      businessImage: data?.post?.businessImage!,
+                      businessId: data?.post?.businessId!,
+                      businessName: data?.post?.businessName!
+                    }
+                  })
+                )
+              })
+              .catch((error) => console.log(error))
+
+            toast.success()
+
+            refetch()
           })
           .catch((error) => {
-            console.log(error);
-          });
+            console.log(error)
+          })
       })
       .catch((error) => {
-        console.error(error);
-        toast.error();
-      });
-    loading.close();
-  };
+        console.error(error)
+        toast.error()
+      })
+    loading.close()
+  }
 
-  if (!data) return null;
+  if (!data) return null
   return (
     <div className={clsx(styles.item)}>
       <div className={styles.head}>
         <div className={styles.personalWrapper}>
-          <Link
-            to={`/page/${data?.post?.businessId}`}
-            className={styles.avatarWrapper}
-          >
+          <Link to={`/page/${data?.post?.businessId}`} className={styles.avatarWrapper}>
             <img src={`${IPFS_GATEWAY}${data?.post?.businessImage}`}></img>
           </Link>
           <div className={styles.avatarTextWrapper}>
-            <Link
-              to={`/page/${data?.post?.businessId}`}
-              className={styles.name}
-            >
+            <Link to={`/page/${data?.post?.businessId}`} className={styles.name}>
               {data?.post?.businessImage}
             </Link>
             <div className={styles.date}>{new Date().toLocaleString()}</div>
@@ -97,7 +120,11 @@ function PagePost(props: Props) {
 
         <div className={styles.imageContent}>
           {data.post?.images?.at(0) && (
-            <img src={data.post.images.at(0) as string}></img>
+            <img
+              src={`${API_ENDPOINT_NODEJS}public/business/post/${
+                data.post?._id
+              }/${data.post?.images?.at(0)}.jpeg`}
+            ></img>
           )}
           {data.post?.videos?.at(0) && (
             <Video
@@ -111,37 +138,33 @@ function PagePost(props: Props) {
       <div className={styles.foot}>
         <div className={styles.footItem}>
           <i className="fa-regular fa-heart"></i>
-          <div className={styles.footItemTitle}> {t("like")}</div>
+          <div className={styles.footItemTitle}> {t('like')}</div>
         </div>
         <div className={styles.footItem}>
           <i className="fa-regular fa-comment"></i>
-          <div className={styles.footItemTitle}> {t("comment")}</div>
+          <div className={styles.footItemTitle}> {t('comment')}</div>
         </div>
         <div className={styles.footItem}>
           <i className="fa-regular fa-bookmark"></i>
-          <div className={styles.footItemTitle}> {t("bookmark")}</div>
+          <div className={styles.footItemTitle}> {t('bookmark')}</div>
         </div>
         <div className={styles.footItem}>
           <i className="fa-light fa-share-nodes"></i>
-          <div className={styles.footItemTitle}> {t("share")}</div>
+          <div className={styles.footItemTitle}> {t('share')}</div>
         </div>
-        {!data.post?.applied && PostStatus[data?.post?.status!] === "OPEN" && (
+        {!data.post?.applied && PostStatus[data?.post?.status!] === 'OPEN' && (
           <button onClick={handleApply} className={styles.footItem}>
-            <div className={styles.buttonApply}> {t("apply")}</div>
+            <div className={styles.buttonApply}> {t('apply')}</div>
           </button>
         )}
-        {data.post?.applied && PostStatus[data?.post?.status!] === "OPEN" && (
+        {data.post?.applied && PostStatus[data?.post?.status!] === 'OPEN' && (
           <button disabled={true} className={styles.footItem}>
-            <div className={clsx(styles.buttonApply, styles.applied)}>
-              {t("applied")}
-            </div>
+            <div className={clsx(styles.buttonApply, styles.applied)}>{t('applied')}</div>
           </button>
         )}
-        {PostStatus[data?.post?.status!] === "CLOSE" && (
+        {PostStatus[data?.post?.status!] === 'CLOSE' && (
           <button disabled={true} className={styles.footItem}>
-            <div className={clsx(styles.buttonApply, styles.applied)}>
-              {t("closed")}
-            </div>
+            <div className={clsx(styles.buttonApply, styles.applied)}>{t('closed')}</div>
           </button>
         )}
       </div>
@@ -166,7 +189,7 @@ function PagePost(props: Props) {
           <CommentItem key={0}></CommentItem>
         </div> */}
     </div>
-  );
+  )
 }
 
-export default PagePost;
+export default PagePost

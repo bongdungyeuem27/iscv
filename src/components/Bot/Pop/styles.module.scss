@@ -1,0 +1,77 @@
+.container {
+  height: 45px;
+  background: white;
+}
+.rainbow {
+  --border-size: 10px;
+  --border-angle: 0turn;
+  //   width: 60vmin;
+  //   height: 50vmin;
+  background-image: conic-gradient(from var(--border-angle), #213, #112 50%, #213),
+    conic-gradient(from var(--border-angle), transparent 20%, #08f, #f03);
+  background-size: calc(100% - (var(--border-size) * 4)) calc(100% - (var(--border-size) * 4)),
+    cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  animation: bg-spin 3s linear infinite;
+  @keyframes bg-spin {
+    0% {
+      --border-angle: 0turn;
+    }
+    7% {
+      --border-angle: 0.15turn;
+    }
+    30% {
+      --border-angle: 0.22turn;
+    }
+    45% {
+      --border-angle: 0.3turn;
+    }
+    65% {
+      --border-angle: 0.5turn;
+    }
+    72% {
+      --border-angle: 0.7turn;
+    }
+    80% {
+      --border-angle: 0.8turn;
+    }
+    100% {
+      --border-angle: 1turn;
+    }
+  }
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+@property --border-angle {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 0turn;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(-450%);
+  }
+}
+
+.banner {
+  // overflow: hidden;
+  width: 200%;
+  white-space: nowrap;
+  animation: marquee 50s linear infinite;
+  animation-play-state: running; /* Initial animation state */
+  // color: white;
+  // font-weight: 500;
+  // font-size: 16px;
+  &:hover {
+    animation-play-state: paused;
+  }
+}

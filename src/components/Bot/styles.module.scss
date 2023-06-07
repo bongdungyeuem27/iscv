@@ -297,4 +297,8 @@ $chatbot: white;
   height: 100%;
   background: var(--color-button-penitentiary);
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  transition: transform 0.4s;
+  &:hover {
+    transform: scale(1.1);
+  }
 }

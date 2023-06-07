@@ -2,6 +2,7 @@ query GetPost($postId: String!, $employeeId: Int) {
   post(id: $postId, employeeId: $employeeId) {
     _id
     businessId
+    businessName
     images
     videos
     content

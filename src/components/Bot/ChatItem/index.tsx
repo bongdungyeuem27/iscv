@@ -1,4 +1,4 @@
-import { IBotMessages } from '@redux/types/bot'
+import { EBotCategory, IBotMessages } from '@redux/types/bot'
 import clsx from 'clsx'
 import styles from './styles.module.scss'
 type Props = {

@@ -126,6 +126,7 @@ export type IPost = {
   applied?: Maybe<Scalars['Boolean']>;
   businessId?: Maybe<Scalars['Int']>;
   businessImage?: Maybe<Scalars['String']>;
+  businessName?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['Date']>;
   hashtag?: Maybe<Scalars['String']>;
@@ -293,7 +294,7 @@ export type IGetPostQueryVariables = Exact<{
 }>;
 
 
-export type IGetPostQuery = { __typename?: 'Query', post?: { __typename?: 'Post', _id?: string | null, businessId?: number | null, images?: Array<string | null> | null, videos?: Array<string | null> | null, content?: string | null, hashtag?: string | null, status?: number | null, job?: string | null, applied?: boolean | null, businessImage?: string | null, createdAt?: any | null, updatedAt?: any | null } | null };
+export type IGetPostQuery = { __typename?: 'Query', post?: { __typename?: 'Post', _id?: string | null, businessId?: number | null, businessName?: string | null, images?: Array<string | null> | null, videos?: Array<string | null> | null, content?: string | null, hashtag?: string | null, status?: number | null, job?: string | null, applied?: boolean | null, businessImage?: string | null, createdAt?: any | null, updatedAt?: any | null } | null };
 
 export type IGetPredictQueryVariables = Exact<{
   employeeId: Scalars['Int'];
@@ -708,6 +709,7 @@ export const GetPostDocument = gql`
   post(id: $postId, employeeId: $employeeId) {
     _id
     businessId
+    businessName
     images
     videos
     content

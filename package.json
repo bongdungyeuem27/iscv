@@ -7,7 +7,8 @@
     "start:scss": "pnpm typed-scss-modules src -w -p.~styles styles",
     "build": "react-app-rewired build",
     "codegen": "graphql-codegen --config codegen.ts",
-    "codegen:watch": "graphql-codegen --config codegen.ts --watch ./src/graphql/*.graphql"
+    "codegen:watch": "graphql-codegen --config codegen.ts --watch ./src/graphql/*.graphql",
+    "lint": "eslint --ext .tsx"
   },
   "dependencies": {
     "@apollo/client": "^3.7.7",
