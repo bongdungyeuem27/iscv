@@ -1,30 +1,42 @@
-import React, { useContext, useEffect, useRef, useState, useTransition } from 'react'
-import styles from './styles.module.scss'
-import clsx from 'clsx'
-import { Modal } from '@iscv/modal'
-import Question from './Question'
-import Webcam from 'react-webcam'
-import io from 'socket.io-client'
 import { API_ENDPOINT_NODEJS, IPFS_GATEWAY } from '@constants/index'
 import { useToast } from '@iscv/toast'
-import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@redux/store'
-import Timer from './Timer'
-import InterviewContextProvider, { EInterviewStatus, InterviewContext } from './InterviewContext'
-import { ERole } from 'src/types/messages'
-import { v4 } from 'uuid'
-import { addItem } from '@redux/reducers/bot'
-import { EBotCategory } from '@redux/types/bot'
+import clsx from 'clsx'
+import { useContext, useEffect, useRef, useState, useTransition } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import Dictaphone from './Dictaphone/Dictaphone'
+import { useDictaphone } from './Dictaphone/useDictaphone'
+import InterviewContextProvider, { EInterviewStatus, InterviewContext } from './InterviewContext'
+import Question from './Question'
+import Timer from './Timer'
+import styles from './styles.module.scss'
+import { useBot } from '@components/Bot/useBot'
+import { MAX_QUESTION, MatchedAnswer, MatchedSpeech } from '@redux/types/interview'
+import { addAnswer } from '@redux/reducers/interview'
+import { v4 } from 'uuid'
+import { debounce } from 'lodash'
+
+const diffOfDate = (time1: Date, time2: Date) => {
+  const timeDifference = Math.abs(time2.getTime() - time1.getTime())
+
+  // Convert the time difference to minutes and seconds
+  const minutes = Math.floor(timeDifference / (1000 * 60))
+  const seconds = Math.floor((timeDifference / 1000) % 60)
+  return {
+    minutes,
+    seconds
+  }
+}
 
 type Props = {}
 
 const Interview = (props: Props) => {
   const [expandVolume, setExpandVolume] = useState(false)
   const [micro, setMicro] = useState(false)
-  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
-
+  const dictaphone = useDictaphone()
   const toast = useToast()
   const employee = useSelector((state: RootState) => state.auth.employee)
   const { id } = useParams()
@@ -33,11 +45,39 @@ const Interview = (props: Props) => {
   const dispatch = useDispatch()
   const introductionAudioRef = useRef<HTMLAudioElement>(null)
   const mainAudioRef = useRef<HTMLAudioElement>(null)
+  const introductionDuration = useRef<
+    | {
+        minutes: number
+        seconds: number
+      }
+    | undefined
+  >(undefined)
+  const mainDuration = useRef<
+    | {
+        minutes: number
+        seconds: number
+      }
+    | undefined
+  >(undefined)
+  const currentQuestion = useRef<number>(0)
 
   const { socket, audioRef, status, setStatus } = useContext(InterviewContext)
+  const bot = useBot()
+
+  const handleNextQuestion = debounce(() => {
+    const nextQuestion = currentQuestion.current + 1
+    console.log(nextQuestion)
+    if (nextQuestion > MAX_QUESTION) {
+      socket?.emit('interview_stop', {}, () => {})
+      return
+    }
+    currentQuestion.current = nextQuestion
+    bot.stopAudioUrl()
+    bot.openAudioUrl(`${API_ENDPOINT_NODEJS}public/interview/sound/${nextQuestion}.mp3`)
+  }, 300)
 
   useEffect(() => {
-    async function setupCamera() {
+    async function setup() {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true
@@ -48,30 +88,39 @@ const Interview = (props: Props) => {
       const mediaRecorder = new MediaRecorder(stream, {
         mimeType: 'video/webm;codecs=h264,opus',
         audioBitsPerSecond: 128000,
-        videoBitsPerSecond: 2500000
+        videoBitsPerSecond: 2000000
       })
-      mediaRecorder.ondataavailable = (event) => {
-        // client?.emit("chunk-interview", event.data);
-      }
+      mediaRecorder.ondataavailable = (event) => {}
       mediaRecorder.onstop = () => {}
 
       mediaRecorderRef.current = mediaRecorder
     }
-
-    setupCamera()
+    setup()
+    return () => {
+      if (mediaRecorderRef.current) {
+        mediaRecorderRef.current.stop()
+      }
+    }
   }, [])
 
   useEffect(() => {
     if (!socket) return
-
-    socket.on('interview_main_end', (time) => {
-      setStatus?.(3)
-    })
     socket.on('interview_introduction_end', (time) => {
       mainAudioRef.current?.play()
       setTimeout(() => {
+        dictaphone.start()
+        mainDuration.current = diffOfDate(new Date(), new Date(time))
         setStatus?.(2)
+        handleNextQuestion()
       }, 1500)
+    })
+    socket.on('interview_main_end', (time) => {
+      mediaRecorderRef.current?.stop()
+      ;(videoRef.current?.srcObject as any)?.getTracks().forEach((track: { stop: () => void }) => {
+        track.stop()
+      })
+      dictaphone.stop()
+      setStatus?.(3)
     })
   }, [socket])
 
@@ -79,20 +128,10 @@ const Interview = (props: Props) => {
     if (status !== 1) return
     mediaRecorderRef.current!.ondataavailable = (event) => {
       console.log(event)
-      socket?.emit('interview_introduction_chunk', { data: event.data }, () => {})
+      socket?.emit('interview_chunk', { data: event.data }, () => {})
     }
     mediaRecorderRef.current!.onstop = () => {}
-  }, [status])
-
-  useEffect(() => {
-    if (status !== 2) return
-
-    mediaRecorderRef.current!.ondataavailable = (event) => {
-      socket?.emit('interview_main_chunk', { data: event.data }, () => {})
-    }
-    mediaRecorderRef.current!.onstop = () => {}
-  }, [status])
-  console.log(status)
+  }, [status === 1 || status === 2])
 
   const handleRunning = () => {
     if (!mediaRecorderRef.current) {
@@ -108,12 +147,16 @@ const Interview = (props: Props) => {
       socket?.emit('interview_start', { interviewId: id! }, (time) => {
         mediaRecorderRef.current?.start(500)
         console.log(time)
+        const diff = diffOfDate(new Date(), new Date(time))
+        console.log(diff)
+        introductionDuration.current = diff
         setStatus?.(EInterviewStatus.INTRODUCTION)
       })
     }, 1500)
 
     return
   }
+
   const handleMicro = () => {
     startTransition(() => {
       if (micro) {
@@ -132,6 +175,23 @@ const Interview = (props: Props) => {
     startTransition(() => {
       setVolume(newVolume)
     })
+  }
+  const handleTextChange = (text: string) => {
+    const words = text.split(/\s+/)
+    console.log(words)
+    const founded = words.find((x: string) => Object.values(MatchedAnswer).includes(x))
+    if (!founded) return
+    console.log('next')
+
+    const answerNumber = MatchedSpeech[founded as keyof typeof MatchedSpeech]
+    dispatch(
+      addAnswer({
+        id: v4(),
+        question: currentQuestion.current,
+        selected: answerNumber as keyof typeof MatchedAnswer
+      })
+    )
+    handleNextQuestion()
   }
 
   return (
@@ -184,10 +244,16 @@ const Interview = (props: Props) => {
             </div>
           </div>
           {status === EInterviewStatus.INTRODUCTION && (
-            <Timer initialMinute={1} initialSeconds={30}></Timer>
+            <Timer
+              initialMinute={introductionDuration.current?.minutes}
+              initialSeconds={introductionDuration.current?.seconds}
+            ></Timer>
           )}
           {status === EInterviewStatus.MAIN && (
-            <Timer initialMinute={13} initialSeconds={30}></Timer>
+            <Timer
+              initialMinute={mainDuration.current?.minutes}
+              initialSeconds={mainDuration.current?.seconds}
+            ></Timer>
           )}
 
           <div
@@ -200,6 +266,7 @@ const Interview = (props: Props) => {
             <i className="fa-solid fa-volume" onClick={() => setExpandVolume(!expandVolume)}></i>
           </div>
 
+          <Dictaphone onTextChange={handleTextChange} />
           <div className={styles.toolBar}>
             <button className={styles.toolItem}>
               <i className="fa-solid fa-expand"></i>
@@ -210,7 +277,7 @@ const Interview = (props: Props) => {
             <button className={styles.finish} onClick={handleRunning}>
               {status === 0 && <i className="fa-solid fa-play"></i>}
               {/* {status === 1 || status === 2 && <i className="fa-solid fa-stop" onClick={handleRunning}></i>} */}
-              {status !== 0 && <i className="fa-solid fa-minus"></i>}
+              {(status === 1 || status === 2) && <i className="fa-solid fa-minus"></i>}
             </button>
             <button className={styles.toolItem}>
               <i className="fa-solid fa-screencast"></i>

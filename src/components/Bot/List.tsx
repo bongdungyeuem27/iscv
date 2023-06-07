@@ -3,9 +3,12 @@ import { useSelector } from 'react-redux'
 import ChatItem from './ChatItem'
 import { EBotCategory } from '@redux/types/bot'
 import Task from './Task'
+import EventEmitter from 'events'
 type Props = {
   //
 }
+
+export const botListener = new EventEmitter()
 
 const List = (props: Props) => {
   const list = useSelector((state: RootState) => state.bot.list)

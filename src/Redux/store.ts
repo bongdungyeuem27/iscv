@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './reducers/auth'
 import socketReducer from './reducers/socket'
 import botReducer from './reducers/bot'
+import interviewReducer from './reducers/interview'
 import logger from 'redux-logger'
 import messagesReducer from './reducers/messages'
 
@@ -10,7 +11,8 @@ export const store = configureStore({
     auth: authReducer,
     socket: socketReducer,
     messages: messagesReducer,
-    bot: botReducer
+    bot: botReducer,
+    interview: interviewReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -8,6 +8,7 @@ import { Socket, io } from 'socket.io-client'
 import { ERole } from 'src/types/messages'
 import { v4 } from 'uuid'
 
+
 type IContext = {
   socket?: Socket<ServerToClientEvents, ClientToServerEvents>
   audioRef?: React.RefObject<HTMLAudioElement>
@@ -60,7 +61,7 @@ const InterviewContextProvider = ({ children }: Props) => {
         })
       )
       audioRef?.current?.play()
-    }, 3000)
+    }, 2000)
 
     return () => {
       clearTimeout(timeoutId)

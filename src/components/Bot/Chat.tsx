@@ -3,6 +3,7 @@ import { useContext, useRef } from 'react'
 import { BotContext } from './BotContext'
 import Main from './Main'
 import Top from './Top'
+import Audio from './Audio'
 
 type Props = {
   className?: string
@@ -23,6 +24,7 @@ const Chat = (props: Props) => {
         }
       )}
     >
+      <Audio></Audio>
       <Top></Top>
       <Main></Main>
     </div>
