@@ -31,15 +31,9 @@ export const setClient = createAsyncThunk<
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
   thunkApi.dispatch(crawl({ employeeId: store.getState().auth.employee?.id! }))
   thunkApi.dispatch(crawlBotMessages({ employeeId: store.getState().auth.employee?.id! }))
-  client.on('interview_result', () => {
-    thunkApi.dispatch(
-      addItemBot({
-        _id: v4(),
-        role: ERole.BUSINESS,
-        content: 'Bạn đã có kết quả phỏng vấn Big Five',
-        time: new Date()
-      })
-    )
+
+  client.on('bot_notification', (data) => {
+    thunkApi.dispatch(addItemBot(data))
   })
   client.on('send', (args) => {
     if (store.getState().messages.current === args.employeeId) {

@@ -41,26 +41,7 @@ function PagePost(props: Props) {
           .wait()
           .then(async (apply) => {
             await setInterviewAppointment(id!, data?.post?._id!)
-              .then(async (success) => {
-                const appointment = success.data
-                dispatch(
-                  addItem({
-                    _id: appointment._id,
-                    role: ERole.BUSINESS,
-                    category: EBotCategory.NEW_INTERVIEW,
-                    content: '',
-                    time: new Date(),
-                    metadata: {
-                      _id: appointment._id,
-                      fromTime: new Date(appointment.fromTime),
-                      toTime: new Date(appointment.toTime),
-                      businessImage: data?.post?.businessImage!,
-                      businessId: data?.post?.businessId!,
-                      businessName: data?.post?.businessName!
-                    }
-                  })
-                )
-              })
+              .then(async (success) => {})
               .catch((error) => console.log(error))
 
             toast.success()

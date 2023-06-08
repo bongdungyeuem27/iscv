@@ -1,6 +1,7 @@
 import { Socket } from 'socket.io-client'
 import { IMesssages } from './messages'
 import { ERole } from 'src/types/messages'
+import { IBotMessages } from './bot'
 
 type WithTimeoutAck<isSender extends boolean, args extends any[]> = isSender extends true
   ? [Error, ...args]
@@ -19,7 +20,6 @@ export interface ClientToServerEvents<isSender extends boolean = false> {
 }
 
 export interface ServerToClientEvents<isSender extends boolean = false> {
-  // ...
   noArg: () => void
   send: (data: {
     _id: string
@@ -28,8 +28,7 @@ export interface ServerToClientEvents<isSender extends boolean = false> {
     content: string
     role: ERole
   }) => void
-  interview_result: (args?: any) => void
-  basicEmit: (a: number, b: string, c: Buffer) => void
+  bot_notification: (data: IBotMessages) => void
   withAck: (d: string, callback: (e: number) => void) => void
 }
 

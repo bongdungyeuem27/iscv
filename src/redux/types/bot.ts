@@ -2,7 +2,8 @@ import { ERole } from 'src/types/messages'
 
 export enum EBotCategory {
   NEW_INTERVIEW,
-  INTERVIEW_DIRECTION
+  INTERVIEW_DIRECTION,
+  NEW_BIGFIVE_RESULT
 }
 
 export type IBotMetadata = {
@@ -19,8 +20,6 @@ export type IBotMessages = {
   role: ERole
   content: string
   isRead?: boolean
-  isResult?: boolean
-  isReadResult?: boolean
   time: Date
   category?: EBotCategory
   metadata?: IBotMetadata
