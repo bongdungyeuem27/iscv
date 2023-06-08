@@ -3,18 +3,25 @@ interface ClientToServerEvents<isSender extends boolean = false> {
     arg: {
       interviewId: string
     },
-    callback: (data: any) => void
+    callback?: (data: any) => void
   ) => void
 
   interview_chunk: (
-    arg: {
+    arg?: {
       data: Blob
     },
-    callback: (data: any) => void
+    callback?: (data: any) => void
   ) => void
   interview_stop: (
-    arg: {
+    arg?: {
       //
+    },
+    callback?: (data: any) => void
+  ) => void
+
+  interview_answer: (
+    arg: {
+      answer: number
     },
     callback: (data: any) => void
   ) => void

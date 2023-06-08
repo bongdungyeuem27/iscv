@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import styles from './styles.module.scss'
 import { botListener } from '../BotContext'
 import { ERole } from 'src/types/messages'
+import { readInterviewAppointment } from '@apis/employee/interview/appointment'
 
 type Props = {
   //
@@ -16,11 +17,14 @@ const Pop = (props: Props) => {
   const newest = useSelector((state: RootState) => state.bot.list).at(0)
   const [open, setOpen] = useState(false)
   useEffect(() => {
-    if (newest?.role === ERole.BUSINESS) setOpen(true)
+    if (newest?.role === ERole.BUSINESS && !newest?.isRead) setOpen(true)
   }, [newest])
   const handleOpen = () => {
     setOpen(false)
     botListener.emit('open')
+    if (newest?.category === EBotCategory.NEW_INTERVIEW) {
+      readInterviewAppointment(newest._id)
+    }
   }
   const text =
     newest?.category === EBotCategory.NEW_INTERVIEW

@@ -30,7 +30,7 @@ function Index(props: Props) {
   const resizeLayerGroup = useRef<any>();
 
   useEffect(() => {
-    let dy = Math.round(
+    const dy = Math.round(
       window.innerHeight - layerRef.current!.getBoundingClientRect!().top
     );
     if (dy < minHeight) return;

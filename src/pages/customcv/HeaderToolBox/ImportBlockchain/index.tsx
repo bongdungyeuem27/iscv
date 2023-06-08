@@ -18,7 +18,7 @@ function Index(props: Props) {
     if (!open) return;
   }, [open]);
   const handleSetList = (index: any) => {
-    let result = useToObject(listCV[index].data);
+    const result = useToObject(listCV[index].data);
     setAutoCreatement(result!.autoCreatement);
     setList(result!.list);
     setOpen(false);

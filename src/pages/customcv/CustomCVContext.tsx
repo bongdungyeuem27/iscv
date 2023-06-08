@@ -17,7 +17,7 @@ const CustomCVContextProvider = ({ children }: Props) => {
   const [copy, setCopy] = useState();
   const [autoCreatement, setAutoCreatement] = useState(1);
   const getNewAutoCreatement = () => {
-    let temp = autoCreatement;
+    const temp = autoCreatement;
     setAutoCreatement(autoCreatement + 1);
     return temp;
   };

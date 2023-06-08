@@ -8,7 +8,6 @@ import { Socket, io } from 'socket.io-client'
 import { ERole } from 'src/types/messages'
 import { v4 } from 'uuid'
 
-
 type IContext = {
   socket?: Socket<ServerToClientEvents, ClientToServerEvents>
   audioRef?: React.RefObject<HTMLAudioElement>
@@ -19,10 +18,11 @@ type IContext = {
 export const InterviewContext = createContext<IContext>({})
 
 export enum EInterviewStatus {
-  NONE,
-  INTRODUCTION,
-  MAIN,
-  STOPPED
+  NONE = 0,
+  WAITING_INTRODUCTION = 1.5,
+  INTRODUCTION = 1,
+  MAIN = 2,
+  STOPPED = 3
 }
 
 type Props = {

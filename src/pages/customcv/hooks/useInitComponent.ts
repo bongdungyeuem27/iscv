@@ -9,8 +9,8 @@ export default function (
   setList: any,
   setSelected: any
 ) {
-  let newId = getNewAutoCreatement();
-  let newData = {
+  const newId = getNewAutoCreatement();
+  const newData = {
     ...designTabComponents[type].data,
     top,
     left,

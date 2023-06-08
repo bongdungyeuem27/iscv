@@ -23,7 +23,7 @@ function Item(props: Props) {
   const [nft, setNFT] = useState<any>();
   useEffect(() => {}, []);
   const handleApply = async () => {
-    let result = useToObject(nft?.["data"]);
+    const result = useToObject(nft?.["data"]);
     setAutoCreatement(result?.autoCreatement);
     setList(result?.list);
     setOpenModal(false);

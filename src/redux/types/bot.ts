@@ -18,6 +18,9 @@ export type IBotMessages = {
   _id: string
   role: ERole
   content: string
+  isRead?: boolean
+  isResult?: boolean
+  isReadResult?: boolean
   time: Date
   category?: EBotCategory
   metadata?: IBotMetadata

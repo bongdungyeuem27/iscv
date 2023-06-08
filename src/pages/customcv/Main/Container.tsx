@@ -34,11 +34,11 @@ export default function Container(props: Props) {
       accept: "box",
       drop(item, monitor) {
         let left, top;
-        let boardPosition = {
+        const boardPosition = {
           left: boardDimension.left,
           top: boardDimension.top,
         };
-        let newBoxPosition = {
+        const newBoxPosition = {
           left: monitor?.getClientOffset()?.x,
           top: monitor.getClientOffset()?.y,
         };
@@ -66,7 +66,7 @@ export default function Container(props: Props) {
   useEffect(() => {
     setTimeout(() => {
       window.addEventListener("load", () => {
-        let scrollElement = document.getElementById("custom_board");
+        const scrollElement = document.getElementById("custom_board");
         scrollElement!.scrollLeft =
           (scrollElement!.scrollWidth - scrollElement!.clientWidth) / 2;
       });

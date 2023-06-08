@@ -12,3 +12,7 @@ export const setInterviewAppointment = (employeeId: number, postId: string) => {
     __v: number
   }>(`employee/interview/appointment/new`, { employeeId, postId })
 }
+
+export const readInterviewAppointment = (interviewId: string) => {
+  return axiosServices.get(`employee/interview/appointment/read?interview_id=${interviewId}`)
+}

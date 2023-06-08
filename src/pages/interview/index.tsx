@@ -71,10 +71,11 @@ const Interview = (props: Props) => {
       socket?.emit('interview_stop', {}, () => {})
       return
     }
+
     currentQuestion.current = nextQuestion
     bot.stopAudioUrl()
     bot.openAudioUrl(`${API_ENDPOINT_NODEJS}public/interview/sound/${nextQuestion}.mp3`)
-  }, 300)
+  }, 200)
 
   useEffect(() => {
     async function setup() {
@@ -140,7 +141,7 @@ const Interview = (props: Props) => {
     }
 
     if (status !== 0) return
-
+    setStatus?.(EInterviewStatus.WAITING_INTRODUCTION)
     audioRef?.current?.pause()
     introductionAudioRef.current?.play()
     setTimeout(() => {
@@ -179,18 +180,27 @@ const Interview = (props: Props) => {
   const handleTextChange = (text: string) => {
     const words = text.split(/\s+/)
     console.log(words)
-    const founded = words.find((x: string) => Object.values(MatchedAnswer).includes(x))
-    if (!founded) return
+    let founded: keyof typeof MatchedAnswer | undefined = undefined
+    const foundedString = words.find((x: string) => Object.values(MatchedAnswer).includes(x))
+    const foundedNumber = words.find((x: string) => Object.keys(MatchedAnswer).includes(x))
+    if (foundedString !== undefined)
+      founded = MatchedSpeech[
+        foundedString as keyof typeof MatchedSpeech
+      ] as keyof typeof MatchedAnswer
+    else if (foundedNumber !== undefined)
+      founded = Number(foundedNumber) as keyof typeof MatchedAnswer
+    if (founded === undefined) return
     console.log('next')
 
-    const answerNumber = MatchedSpeech[founded as keyof typeof MatchedSpeech]
     dispatch(
       addAnswer({
         id: v4(),
         question: currentQuestion.current,
-        selected: answerNumber as keyof typeof MatchedAnswer
+        selected: founded
       })
     )
+    console.log(founded)
+    socket?.emit('interview_answer', { answer: founded }, () => {})
     handleNextQuestion()
   }
 
@@ -211,9 +221,9 @@ const Interview = (props: Props) => {
         autoPlay={false}
       />
       <div className={styles.left}>
-        <div className={styles.header}>
+        {/* <div className={styles.header}>
           <h3>Lorem ipsum dolor sit amet</h3>
-        </div>
+        </div> */}
 
         {/* <div className={styles.invite}>
           <div className={styles.inviteLeft}>
@@ -276,6 +286,7 @@ const Interview = (props: Props) => {
             </button>
             <button className={styles.finish} onClick={handleRunning}>
               {status === 0 && <i className="fa-solid fa-play"></i>}
+              {status === 1.5 && <i className="fa-regular fa-loader"></i>}
               {/* {status === 1 || status === 2 && <i className="fa-solid fa-stop" onClick={handleRunning}></i>} */}
               {(status === 1 || status === 2) && <i className="fa-solid fa-minus"></i>}
             </button>

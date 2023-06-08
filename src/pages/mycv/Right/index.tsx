@@ -13,7 +13,7 @@ function Right() {
     <div className={styles.container}>
       <div className={styles.panel}>
         {(() => {
-          let active = tab ?? 'default'
+          const active = tab ?? 'default'
           return Object.keys(routes).map((key) => {
             return (
               <Link

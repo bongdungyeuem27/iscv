@@ -12,10 +12,10 @@ export const InfoPanelContent = (props: Props) => {
   const { panelRef, showInfoPanel, setShowInfoPanel } = useContext(InfoPanelContext)
   useEffect(() => {
     function handleClickOutside(event: any) {
-      let data = [panelRef?.current, ...Array.from(document.querySelectorAll('[id=header_button]'))]
+      const data = [panelRef?.current, ...Array.from(document.querySelectorAll('[id=header_button]'))]
       if (!showInfoPanel?.show) return
 
-      var yes = true
+      let yes = true
       for (let i = 0; i < data.length; i++) {
         if ((data as Element[])[i].contains(event.target)) yes = false
       }

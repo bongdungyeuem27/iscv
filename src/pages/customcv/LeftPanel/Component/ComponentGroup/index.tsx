@@ -14,7 +14,7 @@ function Index(props: Props) {
   const toolboxRef = useRef<any>(null);
   useEffect(() => {
     if (layerGroupDimension && toolboxRef.current) {
-      let dy = Math.round(
+      const dy = Math.round(
         layerGroupDimension.top - toolboxRef.current.offsetTop!
       );
       toolboxRef.current.style!.height = dy + "px";
