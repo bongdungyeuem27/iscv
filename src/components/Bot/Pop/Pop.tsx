@@ -50,6 +50,9 @@ const Pop = (props: Props) => {
           'DD/MM/YYYY'
         )} đến ${moment(newest.metadata?.toTime).format('DD/MM/YYYY')}`
         return
+      case EBotCategory.NEW_BIGFIVE_RESULT:
+        text.current = 'Bạn có một kết quả từ khảo sát Big Five'
+        return
       default:
         text.current = newest?.content || ''
         return

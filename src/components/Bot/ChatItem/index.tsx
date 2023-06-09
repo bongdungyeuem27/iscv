@@ -1,6 +1,7 @@
 import { EBotCategory, IBotMessages } from '@redux/types/bot'
 import clsx from 'clsx'
 import styles from './styles.module.scss'
+import { useRef } from 'react'
 type Props = {
   messages: IBotMessages
 }

@@ -21,7 +21,6 @@
     "@iscv/modal": "^1.0.16",
     "@iscv/toast": "^1.1.24",
     "@metamask/detect-provider": "^1.2.0",
-    "@pdftron/webviewer": "^10.1.1",
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
     "@reduxjs/toolkit": "^1.9.2",

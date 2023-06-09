@@ -15,7 +15,10 @@ const List = (props: Props) => {
   return (
     <div className="flex-1 w-full max-h-full bg-blue-50 overflow-hidden overflow-y-scroll p-3 gap-3 flex flex-col-reverse">
       {list?.map((value) => {
-        if (value.category === EBotCategory.NEW_INTERVIEW)
+        if (
+          value.category === EBotCategory.NEW_INTERVIEW ||
+          value.category === EBotCategory.NEW_BIGFIVE_RESULT
+        )
           return <Task key={value._id} messages={value}></Task>
         return <ChatItem key={value._id} messages={value}></ChatItem>
       })}

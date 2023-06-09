@@ -69,6 +69,7 @@ const Interview = (props: Props) => {
     console.log(nextQuestion)
     if (nextQuestion > MAX_QUESTION) {
       socket?.emit('interview_stop', {}, () => {})
+      socket?.disconnect()
       return
     }
 
@@ -146,7 +147,7 @@ const Interview = (props: Props) => {
     introductionAudioRef.current?.play()
     setTimeout(() => {
       socket?.emit('interview_start', { interviewId: id! }, (time) => {
-        mediaRecorderRef.current?.start(500)
+        mediaRecorderRef.current?.start(1500)
         console.log(time)
         const diff = diffOfDate(new Date(), new Date(time))
         console.log(diff)
