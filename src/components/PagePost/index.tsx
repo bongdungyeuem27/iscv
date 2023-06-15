@@ -69,7 +69,7 @@ function PagePost(props: Props) {
           </Link>
           <div className={styles.avatarTextWrapper}>
             <Link to={`/page/${data?.post?.businessId}`} className={styles.name}>
-              {data?.post?.businessImage}
+              {data?.post?.businessName}
             </Link>
             <div className={styles.date}>{new Date().toLocaleString()}</div>
             {data?.post?.status && (

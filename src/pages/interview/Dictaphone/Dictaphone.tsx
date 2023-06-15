@@ -3,7 +3,22 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import styles from '../styles.module.scss'
 import clsx from 'clsx'
 import EventEmitter from 'events'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import createSpeechServicesPonyfill from 'web-speech-cognitive-services';
+// const appId = '5d3ce84a-b1be-4ce5-8208-5876f3473407'
+// const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId)
+// SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition)
 
+const SUBSCRIPTION_KEY = '037cbb4f37874089bd38dfdf538165d3';
+const REGION = 'southeastasia';
+const { SpeechRecognition: AzureSpeechRecognition } = createSpeechServicesPonyfill({
+  credentials: {
+    region: REGION,
+    subscriptionKey: SUBSCRIPTION_KEY,
+  }
+});
+SpeechRecognition.applyPolyfill(AzureSpeechRecognition)
 function getLastSevenWords(str: string) {
   // Split the string into an array of words
   const words = str.split(' ')

@@ -29,10 +29,10 @@ class AxiosServices {
   post<T = any>(url: string, data?: any, config?: AxiosRequestConfig<any> | undefined) {
     return this.instance.post<T>(url, data, config)
   }
-  put<T = any>(url: string, data: any, config: AxiosRequestConfig<any> | undefined) {
+  put<T = any>(url: string, data?: any, config?: AxiosRequestConfig<any> | undefined) {
     return this.instance.put<T>(url, data, config)
   }
-  delete<T = any>(url: string, config: AxiosRequestConfig<any> | undefined) {
+  delete<T = any>(url: string, config?: AxiosRequestConfig<any> | undefined) {
     return this.instance.delete<T>(url, config)
   }
 }

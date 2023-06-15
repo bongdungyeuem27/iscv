@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react'
-import styles from './styles.module.scss'
+import { useGetBusinessQuery } from '@graphql/generated/schema'
+import { useSearchParams } from 'react-router-dom'
 import Name from '../../Components/Name'
-import Pin from '../../Components/Pin'
-import { useSelector } from 'react-redux'
-import { RootState } from '@redux/store'
+import styles from './styles.module.scss'
 
-type Props={
+type Props = {}
 
-}
-
-function Top({  }: Props) {
-
+function Top({}: Props) {
+ 
   return (
     <div className={styles.top}>
       <div className={styles.info}>

@@ -76,12 +76,18 @@ const Interview = (props: Props) => {
     currentQuestion.current = nextQuestion
     bot.stopAudioUrl()
     bot.openAudioUrl(`${API_ENDPOINT_NODEJS}public/interview/sound/${nextQuestion}.mp3`)
-  }, 200)
+  }, 400)
 
   useEffect(() => {
     async function setup() {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
+        video: {
+          frameRate: {
+            min: 16, // very important to define min value here
+            ideal: 16,
+            max: 16
+          }
+        },
         audio: true
       })
 
@@ -89,8 +95,8 @@ const Interview = (props: Props) => {
       videoRef.current!.muted = true
       const mediaRecorder = new MediaRecorder(stream, {
         mimeType: 'video/webm;codecs=h264,opus',
-        audioBitsPerSecond: 128000,
-        videoBitsPerSecond: 2000000
+        audioBitsPerSecond: 64000,
+        videoBitsPerSecond: 1500000
       })
       mediaRecorder.ondataavailable = (event) => {}
       mediaRecorder.onstop = () => {}

@@ -5,7 +5,7 @@ import styles from './styles.module.scss'
 
 function Index() {
   const location = useLocation()
-  const { t } = useTranslation('layout', { keyPrefix: 'page.social.feed.index' })
+  const { t } = useTranslation('page', { keyPrefix: 'feed.index' })
   return (
     <div className={styles.container}>
       <NavLink
