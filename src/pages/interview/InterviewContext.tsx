@@ -1,4 +1,5 @@
 import { API_ENDPOINT_NODEJS } from '@constants/index'
+import { useEmployee } from '@contracts/useEmployee'
 import { addItem } from '@redux/reducers/bot'
 import { RootState } from '@redux/store'
 import { EBotCategory } from '@redux/types/bot'
@@ -34,6 +35,7 @@ const InterviewContextProvider = ({ children }: Props) => {
   >(undefined)
   const [status, setStatus] = useState(EInterviewStatus.NONE)
   const employee = useSelector((state: RootState) => state.auth.employee)
+  const signer = useSelector((state: RootState) => state.auth.signer)
   const dispatch = useDispatch()
   const audioRef = useRef<HTMLAudioElement>(null)
   const data = {
@@ -43,30 +45,37 @@ const InterviewContextProvider = ({ children }: Props) => {
     setStatus
   }
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout | undefined = undefined
     if (employee?.id === undefined) return
-    const client: Socket<ServerToClientEvents, ClientToServerEvents> = io(API_ENDPOINT_NODEJS, {
-      query: { employeeId: employee?.id }
-    })
-    setSocket(client)
+    if (!signer) return
+    ;(async () => {
+      const contractEmployee = useEmployee(signer)
+      const tx = await contractEmployee.startStartSession(employee?.id)
+      await tx.wait()
+      const client: Socket<ServerToClientEvents, ClientToServerEvents> = io(API_ENDPOINT_NODEJS, {
+        query: { employeeId: employee?.id }
+      })
+      setSocket(client)
 
-    const timeoutId = setTimeout(() => {
-      dispatch(
-        addItem({
-          _id: v4(),
-          role: ERole.BUSINESS,
-          category: EBotCategory.INTERVIEW_DIRECTION,
-          content:
-            'Xin chào bạn đến với phỏng vấn của ISCV, bạn sẽ có 15 phút, sau khi nghe hiệu lệnh bắt đầu, bạn sẽ có 1 phút 30 giây để tự giới thiệu bản thân. Sau đó bạn sẽ có 13 phút 30 giây để hỏi và trả lời các câu hỏi. Bạn sẽ có 5 lựa chọn 1 là không đồng ý, 2 là hơi đồng ý, 3 là trung lập, 4 là hơi đồng ý, 5 là rất đồng ý. Bạn sẽ phải chọn 1 trong 5 con số.  Mỗi câu hỏi sẽ trả lời một lần duy nhất. Nếu bạn đã sẵn sàng, bấm vào nút Play để bắt đầu',
-          time: new Date()
-        })
-      )
-      audioRef?.current?.play()
-    }, 2000)
+      timeoutId = setTimeout(() => {
+        dispatch(
+          addItem({
+            _id: v4(),
+            role: ERole.BUSINESS,
+            category: EBotCategory.INTERVIEW_DIRECTION,
+            content:
+              'Xin chào bạn đến với phỏng vấn của ISCV, bạn sẽ có 15 phút, sau khi nghe hiệu lệnh bắt đầu, bạn sẽ có 1 phút 30 giây để tự giới thiệu bản thân. Sau đó bạn sẽ có 13 phút 30 giây để hỏi và trả lời các câu hỏi. Bạn sẽ có 5 lựa chọn 1 là không đồng ý, 2 là hơi đồng ý, 3 là trung lập, 4 là hơi đồng ý, 5 là rất đồng ý. Bạn sẽ phải chọn 1 trong 5 con số.  Mỗi câu hỏi sẽ trả lời một lần duy nhất. Nếu bạn đã sẵn sàng, bấm vào nút Play để bắt đầu',
+            time: new Date()
+          })
+        )
+        audioRef?.current?.play()
+      }, 2000)
+    })().catch((error) => console.log(error))
 
     return () => {
-      clearTimeout(timeoutId)
+      if (timeoutId) clearTimeout(timeoutId)
     }
-  }, [employee?.id])
+  }, [employee?.id, signer])
 
   return (
     <InterviewContext.Provider value={data}>

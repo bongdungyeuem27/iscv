@@ -99,6 +99,7 @@ export interface BusinessControllerInterface extends utils.Interface {
     "destroy()": FunctionFragment;
     "getAllApplies()": FunctionFragment;
     "getAllProfile()": FunctionFragment;
+    "getApply(uint256)": FunctionFragment;
     "getProfile(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
@@ -114,6 +115,7 @@ export interface BusinessControllerInterface extends utils.Interface {
       | "destroy"
       | "getAllApplies"
       | "getAllProfile"
+      | "getApply"
       | "getProfile"
       | "owner"
       | "transferOwnership"
@@ -157,6 +159,10 @@ export interface BusinessControllerInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "getApply",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "getProfile",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -195,6 +201,7 @@ export interface BusinessControllerInterface extends utils.Interface {
     functionFragment: "getAllProfile",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getApply", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getProfile", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
@@ -289,6 +296,11 @@ export interface BusinessController extends BaseContract {
 
     getAllProfile(overrides?: CallOverrides): Promise<[ProfileStructOutput[]]>;
 
+    getApply(
+      id: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BusinessApplyStructOutput]>;
+
     getProfile(
       id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -343,6 +355,11 @@ export interface BusinessController extends BaseContract {
 
   getAllProfile(overrides?: CallOverrides): Promise<ProfileStructOutput[]>;
 
+  getApply(
+    id: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BusinessApplyStructOutput>;
+
   getProfile(
     id: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -394,6 +411,11 @@ export interface BusinessController extends BaseContract {
     ): Promise<BusinessApplyStructOutput[]>;
 
     getAllProfile(overrides?: CallOverrides): Promise<ProfileStructOutput[]>;
+
+    getApply(
+      id: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BusinessApplyStructOutput>;
 
     getProfile(
       id: PromiseOrValue<BigNumberish>,
@@ -459,6 +481,11 @@ export interface BusinessController extends BaseContract {
 
     getAllProfile(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getApply(
+      id: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getProfile(
       id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -513,6 +540,11 @@ export interface BusinessController extends BaseContract {
     getAllApplies(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getAllProfile(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getApply(
+      id: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     getProfile(
       id: PromiseOrValue<BigNumberish>,

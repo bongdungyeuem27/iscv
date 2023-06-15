@@ -8,7 +8,6 @@ import styles from './styles.module.scss'
 import { botListener } from '../BotContext'
 import { ERole } from 'src/types/messages'
 import { readInterviewAppointment } from '@apis/employee/interview/appointment'
-import { readBigFive } from '@apis/employee/bigfive'
 
 type Props = {
   //
@@ -40,7 +39,7 @@ const Pop = (props: Props) => {
         readInterviewAppointment(newest._id)
         return
       case EBotCategory.NEW_BIGFIVE_RESULT:
-        readBigFive(newest._id)
+        // readBigFive(newest._id)
         return
       default:
         return

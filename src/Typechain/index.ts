@@ -26,6 +26,8 @@ export type { ListBusinessApplyCursor } from "./cursor/business/apply/ListBusine
 export { ListBusinessApplyCursor__factory } from "./factories/cursor/business/apply/ListBusinessApplyCursor__factory";
 export type { ListBusinessCursor } from "./cursor/business/ListBusinessCursor";
 export { ListBusinessCursor__factory } from "./factories/cursor/business/ListBusinessCursor__factory";
+export type { ListBigFiveCursor } from "./cursor/employee/bigfive/ListBigFiveCursor";
+export { ListBigFiveCursor__factory } from "./factories/cursor/employee/bigfive/ListBigFiveCursor__factory";
 export type { ListEmployeeCursor } from "./cursor/employee/ListEmployeeCursor";
 export { ListEmployeeCursor__factory } from "./factories/cursor/employee/ListEmployeeCursor__factory";
 export type { ListEmployeeSkillCursor } from "./cursor/employee/ListEmployeeSkillCursor";
@@ -40,6 +42,8 @@ export type { ListIIGSWResult } from "./database/business/igg/ListIIGSWResult";
 export { ListIIGSWResult__factory } from "./factories/database/business/igg/ListIIGSWResult__factory";
 export type { ListBusiness } from "./database/business/ListBusiness";
 export { ListBusiness__factory } from "./factories/database/business/ListBusiness__factory";
+export type { ListBigFive } from "./database/employee/bigfive/ListBigFive";
+export { ListBigFive__factory } from "./factories/database/employee/bigfive/ListBigFive__factory";
 export type { ListEmployeeCV } from "./database/employee/cv/ListEmployeeCV";
 export { ListEmployeeCV__factory } from "./factories/database/employee/cv/ListEmployeeCV__factory";
 export type { ListEmployee } from "./database/employee/ListEmployee";

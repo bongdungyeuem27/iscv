@@ -45,6 +45,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ListBusinessCursor__factory>;
     getContractFactory(
+      name: "ListBigFiveCursor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ListBigFiveCursor__factory>;
+    getContractFactory(
       name: "ListEmployeeCursor",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ListEmployeeCursor__factory>;
@@ -72,6 +76,10 @@ declare module "hardhat/types/runtime" {
       name: "ListBusiness",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ListBusiness__factory>;
+    getContractFactory(
+      name: "ListBigFive",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ListBigFive__factory>;
     getContractFactory(
       name: "ListEmployeeCV",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -126,6 +134,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.ListBusinessCursor>;
     getContractAt(
+      name: "ListBigFiveCursor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ListBigFiveCursor>;
+    getContractAt(
       name: "ListEmployeeCursor",
       address: string,
       signer?: ethers.Signer
@@ -160,6 +173,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ListBusiness>;
+    getContractAt(
+      name: "ListBigFive",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ListBigFive>;
     getContractAt(
       name: "ListEmployeeCV",
       address: string,
