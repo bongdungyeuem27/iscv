@@ -4,7 +4,6 @@ import { RootState } from '@redux/store'
 import clsx from 'clsx'
 import { useContext, useEffect, useRef, useState, useTransition } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
 import Dictaphone from './Dictaphone/Dictaphone'
 import { useDictaphone } from './Dictaphone/useDictaphone'
 import InterviewContextProvider, { EInterviewStatus, InterviewContext } from './InterviewContext'
@@ -16,6 +15,8 @@ import { MAX_QUESTION, MatchedAnswer, MatchedSpeech } from '@redux/types/intervi
 import { addAnswer } from '@redux/reducers/interview'
 import { v4 } from 'uuid'
 import { debounce } from 'lodash'
+import { useEmployee } from '@contracts/useEmployee'
+import { getLastestSessionId } from '@apis/employee/bigfive'
 
 const diffOfDate = (time1: Date, time2: Date) => {
   const timeDifference = Math.abs(time2.getTime() - time1.getTime())
@@ -39,12 +40,13 @@ const Interview = (props: Props) => {
   const dictaphone = useDictaphone()
   const toast = useToast()
   const employee = useSelector((state: RootState) => state.auth.employee)
-  const { id } = useParams()
   const [isPending, startTransition] = useTransition()
   const [volume, setVolume] = useState(0)
   const dispatch = useDispatch()
   const introductionAudioRef = useRef<HTMLAudioElement>(null)
   const mainAudioRef = useRef<HTMLAudioElement>(null)
+  const signer = useSelector((state: RootState) => state.auth.signer)
+
   const introductionDuration = useRef<
     | {
         minutes: number
@@ -61,7 +63,7 @@ const Interview = (props: Props) => {
   >(undefined)
   const currentQuestion = useRef<number>(0)
 
-  const { socket, audioRef, status, setStatus } = useContext(InterviewContext)
+  const { socket, audioRef, status, setStatus, sessionId } = useContext(InterviewContext)
   const bot = useBot()
 
   const handleNextQuestion = debounce(() => {
@@ -79,6 +81,7 @@ const Interview = (props: Props) => {
   }, 400)
 
   useEffect(() => {
+    if (sessionId == undefined) return
     async function setup() {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
@@ -109,7 +112,7 @@ const Interview = (props: Props) => {
         mediaRecorderRef.current.stop()
       }
     }
-  }, [])
+  }, [sessionId])
 
   useEffect(() => {
     if (!socket) return
@@ -141,7 +144,7 @@ const Interview = (props: Props) => {
     mediaRecorderRef.current!.onstop = () => {}
   }, [status === 1 || status === 2])
 
-  const handleRunning = () => {
+  const handleRunning = async () => {
     if (!mediaRecorderRef.current) {
       toast.warning('Camera chưa sẵn sàng')
       return
@@ -149,18 +152,35 @@ const Interview = (props: Props) => {
 
     if (status !== 0) return
     setStatus?.(EInterviewStatus.WAITING_INTRODUCTION)
-    audioRef?.current?.pause()
-    introductionAudioRef.current?.play()
-    setTimeout(() => {
-      socket?.emit('interview_start', { interviewId: id! }, (time) => {
-        mediaRecorderRef.current?.start(1500)
-        console.log(time)
-        const diff = diffOfDate(new Date(), new Date(time))
-        console.log(diff)
-        introductionDuration.current = diff
-        setStatus?.(EInterviewStatus.INTRODUCTION)
+    const contractEmployee = useEmployee(signer!)
+    const tx = await contractEmployee.startStartSession(employee!.id).catch((error) => {
+      console.log(error)
+      if (error.message.includes('not different 7 days')) {
+        toast.error('Khoảng cách giữa 2 lần phỏng vấn phải ít nhất 7 ngày')
+      }
+    })
+    if (!tx) return
+    await tx
+      .wait()
+      .then(async (success) => {
+        const sessionLastestId = await getLastestSessionId(employee!.id).then(
+          (success) => success.data
+        )
+        sessionId!.current = sessionLastestId
+        audioRef?.current?.pause()
+        introductionAudioRef.current?.play()
+        setTimeout(() => {
+          socket?.emit('interview_start', { sessionId: sessionId!.current! }, (time) => {
+            mediaRecorderRef.current?.start(1500)
+            console.log(time)
+            const diff = diffOfDate(new Date(), new Date(time))
+            console.log(diff)
+            introductionDuration.current = diff
+            setStatus?.(EInterviewStatus.INTRODUCTION)
+          })
+        }, 1500)
       })
-    }, 1500)
+      .catch((error) => console.log(error))
 
     return
   }

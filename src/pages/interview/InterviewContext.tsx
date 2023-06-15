@@ -1,5 +1,7 @@
+import { getLastestSessionId } from '@apis/employee/bigfive'
 import { API_ENDPOINT_NODEJS } from '@constants/index'
 import { useEmployee } from '@contracts/useEmployee'
+import { useToast } from '@iscv/toast'
 import { addItem } from '@redux/reducers/bot'
 import { RootState } from '@redux/store'
 import { EBotCategory } from '@redux/types/bot'
@@ -14,6 +16,7 @@ type IContext = {
   audioRef?: React.RefObject<HTMLAudioElement>
   status?: EInterviewStatus
   setStatus?: React.Dispatch<React.SetStateAction<EInterviewStatus>>
+  sessionId?: React.MutableRefObject<number | undefined>
 }
 
 export const InterviewContext = createContext<IContext>({})
@@ -35,23 +38,21 @@ const InterviewContextProvider = ({ children }: Props) => {
   >(undefined)
   const [status, setStatus] = useState(EInterviewStatus.NONE)
   const employee = useSelector((state: RootState) => state.auth.employee)
-  const signer = useSelector((state: RootState) => state.auth.signer)
+  const sessionId = useRef<number | undefined>(undefined)
   const dispatch = useDispatch()
+  const toast = useToast()
   const audioRef = useRef<HTMLAudioElement>(null)
   const data = {
     socket,
     audioRef,
     status,
-    setStatus
+    setStatus,
+    sessionId
   }
   useEffect(() => {
+    if (sessionId === undefined) return
     let timeoutId: NodeJS.Timeout | undefined = undefined
-    if (employee?.id === undefined) return
-    if (!signer) return
     ;(async () => {
-      const contractEmployee = useEmployee(signer)
-      const tx = await contractEmployee.startStartSession(employee?.id)
-      await tx.wait()
       const client: Socket<ServerToClientEvents, ClientToServerEvents> = io(API_ENDPOINT_NODEJS, {
         query: { employeeId: employee?.id }
       })
@@ -70,12 +71,16 @@ const InterviewContextProvider = ({ children }: Props) => {
         )
         audioRef?.current?.play()
       }, 2000)
-    })().catch((error) => console.log(error))
+    })().catch((error) => {
+      console.log(error)
+      if (error.message.includes('not different 7 days'))
+        toast.error('Khoảng cách giữa 2 lần phỏng vấn phải ít nhất 7 ngày')
+    })
 
     return () => {
       if (timeoutId) clearTimeout(timeoutId)
     }
-  }, [employee?.id, signer])
+  }, [sessionId])
 
   return (
     <InterviewContext.Provider value={data}>

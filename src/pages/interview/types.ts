@@ -1,7 +1,7 @@
 interface ClientToServerEvents<isSender extends boolean = false> {
   interview_start: (
     arg: {
-      interviewId: string
+      sessionId: number
     },
     callback?: (data: any) => void
   ) => void

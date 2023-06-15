@@ -51,6 +51,11 @@ function Index(props: Props) {
             {t('custom_cv')}
           </Link>
         )}
+        {owner && (
+          <Link to="/interview" className={styles.button}>
+            {t('bigfive')}
+          </Link>
+        )}
 
         <button onClick={handlePDF} className={styles.button}>
           {t('save_to_pdf')}

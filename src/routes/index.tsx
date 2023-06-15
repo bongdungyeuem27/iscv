@@ -85,7 +85,7 @@ export const routes = [
                 ]
               },
               {
-                path: '/interview/:id',
+                path: '/interview',
                 name: 'interview',
                 element: <Interview></Interview>
               },
