@@ -1,0 +1,9 @@
+query BigFiveEmployee($employeeId: Int!) {
+  bigFiveEmployee(employeeId: $employeeId) {
+    id
+    employeeId
+    startTime
+    endTime
+    cid
+  }
+}

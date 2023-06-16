@@ -70,7 +70,6 @@ const Interview = (props: Props) => {
     const nextQuestion = currentQuestion.current + 1
     console.log(nextQuestion)
     if (nextQuestion > MAX_QUESTION) {
-      socket?.emit('interview_stop', {}, () => {})
       socket?.disconnect()
       return
     }
@@ -167,6 +166,7 @@ const Interview = (props: Props) => {
         const sessionLastestId = await getLastestSessionId(employee!.id).then(
           (success) => success.data
         )
+        console.log(sessionLastestId)
         sessionId!.current = sessionLastestId
         audioRef?.current?.pause()
         introductionAudioRef.current?.play()

@@ -16,6 +16,15 @@ export type Scalars = {
   Date: any;
 };
 
+export type IBigFive = {
+  __typename?: 'BigFive';
+  cid?: Maybe<Scalars['String']>;
+  employeeId?: Maybe<Scalars['Int']>;
+  endTime?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  startTime?: Maybe<Scalars['Int']>;
+};
+
 export type IBook = {
   __typename?: 'Book';
   author?: Maybe<Scalars['String']>;
@@ -139,6 +148,7 @@ export type IPost = {
 
 export type IQuery = {
   __typename?: 'Query';
+  bigFiveEmployee?: Maybe<IBigFive>;
   book?: Maybe<IBook>;
   books?: Maybe<Array<Maybe<IBook>>>;
   business?: Maybe<IBusiness>;
@@ -154,6 +164,11 @@ export type IQuery = {
   prediction?: Maybe<Array<Maybe<IPost>>>;
   requestStatus?: Maybe<IIigStatus>;
   skillsByEmployee?: Maybe<Array<Maybe<ISkill>>>;
+};
+
+
+export type IQueryBigFiveEmployeeArgs = {
+  employeeId: Scalars['Int'];
 };
 
 
@@ -231,6 +246,13 @@ export type ISkill = {
   level?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
 };
+
+export type IBigFiveEmployeeQueryVariables = Exact<{
+  employeeId: Scalars['Int'];
+}>;
+
+
+export type IBigFiveEmployeeQuery = { __typename?: 'Query', bigFiveEmployee?: { __typename?: 'BigFive', id?: number | null, employeeId?: number | null, startTime?: number | null, endTime?: number | null, cid?: string | null } | null };
 
 export type IGetBusinessByUserQueryVariables = Exact<{
   user: Scalars['String'];
@@ -311,6 +333,45 @@ export type IGetSkillsByEmployeeQueryVariables = Exact<{
 export type IGetSkillsByEmployeeQuery = { __typename?: 'Query', skillsByEmployee?: Array<{ __typename?: 'Skill', id?: number | null, employeeId?: number | null, title?: string | null, level?: number | null } | null> | null };
 
 
+export const BigFiveEmployeeDocument = gql`
+    query BigFiveEmployee($employeeId: Int!) {
+  bigFiveEmployee(employeeId: $employeeId) {
+    id
+    employeeId
+    startTime
+    endTime
+    cid
+  }
+}
+    `;
+
+/**
+ * __useBigFiveEmployeeQuery__
+ *
+ * To run a query within a React component, call `useBigFiveEmployeeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBigFiveEmployeeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBigFiveEmployeeQuery({
+ *   variables: {
+ *      employeeId: // value for 'employeeId'
+ *   },
+ * });
+ */
+export function useBigFiveEmployeeQuery(baseOptions: Apollo.QueryHookOptions<IBigFiveEmployeeQuery, IBigFiveEmployeeQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IBigFiveEmployeeQuery, IBigFiveEmployeeQueryVariables>(BigFiveEmployeeDocument, options);
+      }
+export function useBigFiveEmployeeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IBigFiveEmployeeQuery, IBigFiveEmployeeQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IBigFiveEmployeeQuery, IBigFiveEmployeeQueryVariables>(BigFiveEmployeeDocument, options);
+        }
+export type BigFiveEmployeeQueryHookResult = ReturnType<typeof useBigFiveEmployeeQuery>;
+export type BigFiveEmployeeLazyQueryHookResult = ReturnType<typeof useBigFiveEmployeeLazyQuery>;
+export type BigFiveEmployeeQueryResult = Apollo.QueryResult<IBigFiveEmployeeQuery, IBigFiveEmployeeQueryVariables>;
 export const GetBusinessByUserDocument = gql`
     query GetBusinessByUser($user: String!) {
   businessByUser(user: $user) {
