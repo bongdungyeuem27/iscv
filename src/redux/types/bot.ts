@@ -8,6 +8,7 @@ export enum EBotCategory {
 
 export type IBotMetadata = {
   _id: string
+  cid?: string
   fromTime?: Date
   toTime?: Date
   businessImage?: string
@@ -20,6 +21,7 @@ export type IBotMessages = {
   role: ERole
   content: string
   isRead?: boolean
+  sessionId?: number
   time: Date
   category?: EBotCategory
   metadata?: IBotMetadata

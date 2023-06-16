@@ -37,7 +37,7 @@ export const useRegister = async (
       values.github,
       values.linkedin,
       imageSource,
-      { from: signer._address }
+      { gasLimit: 5000000 }
     )
     await tx.wait().then(async (success) => {
       await refresh()

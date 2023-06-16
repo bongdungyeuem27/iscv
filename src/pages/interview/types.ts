@@ -3,7 +3,7 @@ interface ClientToServerEvents<isSender extends boolean = false> {
     arg: {
       sessionId: number
     },
-    callback?: (data: any) => void
+    callback?: (data: number, status: boolean) => void
   ) => void
 
   interview_chunk: (

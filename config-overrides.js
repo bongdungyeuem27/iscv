@@ -27,7 +27,7 @@ module.exports = function override(config, env) {
     '@redux': path.resolve(__dirname, 'src/redux'),
     '@typechain': path.resolve(__dirname, 'src/typechain'),
     '@middlewares': path.resolve(__dirname, 'src/middlewares'),
-    '@globalTypes': path.resolve(__dirname, 'src/globalTypes'),
+    '@globaltypes': path.resolve(__dirname, 'src/globaltypes'),
     '@': path.resolve(__dirname, 'src')
   })(config, env)
   // config.resolve.fallback = fallback

@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 
 export const useEmployeeCV = (signer: ethers.providers.JsonRpcSigner) => {
   return EmployeeCVController__factory.connect(
-    "0x1CBaBa95bD5E94cE60CED72393Fa5b115943d072",
+    "0xb5CD614893bA24e46017f0deD73B51DB213F062e",
     signer
   );
 };

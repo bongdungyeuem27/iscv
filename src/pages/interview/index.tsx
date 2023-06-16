@@ -84,13 +84,14 @@ const Interview = (props: Props) => {
     if (sessionId == undefined) return
     async function setup() {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          frameRate: {
-            min: 16, // very important to define min value here
-            ideal: 16,
-            max: 16
-          }
-        },
+        video: true,
+        // {
+        //   frameRate: {
+        //     min: 16, // very important to define min value here
+        //     ideal: 16,
+        //     max: 16
+        //   }
+        // },
         audio: true
       })
 
@@ -98,7 +99,7 @@ const Interview = (props: Props) => {
       videoRef.current!.muted = true
       const mediaRecorder = new MediaRecorder(stream, {
         mimeType: 'video/webm;codecs=h264,opus',
-        audioBitsPerSecond: 64000,
+        // audioBitsPerSecond: 64000,
         videoBitsPerSecond: 1500000
       })
       mediaRecorder.ondataavailable = (event) => {}
@@ -170,7 +171,8 @@ const Interview = (props: Props) => {
         audioRef?.current?.pause()
         introductionAudioRef.current?.play()
         setTimeout(() => {
-          socket?.emit('interview_start', { sessionId: sessionId!.current! }, (time) => {
+          socket?.emit('interview_start', { sessionId: sessionId!.current! }, (time, status) => {
+            if (!status) return
             mediaRecorderRef.current?.start(1500)
             console.log(time)
             const diff = diffOfDate(new Date(), new Date(time))

@@ -9,10 +9,14 @@ import { RootState } from '@redux/store'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
+import '@react-pdf-viewer/core/lib/styles/index.css'
+import '@react-pdf-viewer/default-layout/lib/styles/index.css'
+import { crawlBotMessages } from '@redux/reducers/bot'
 
 function App() {
   const provider = useSelector((state: RootState) => state.auth.provider)
   const account = useSelector((state: RootState) => state.auth.account)
+  const employee = useSelector((state: RootState) => state.auth.employee)
   const dispatch = useDispatch()
   const client = useSelector((state: RootState) => state.socket.client)
   const { loading, error, data, refetch, subscribeToMore } = useGetEmployeeByUserQuery({
@@ -56,6 +60,10 @@ function App() {
       dispatch<any>(addItem(args as any))
     })
   }, [client?.id])
+  useEffect(() => {
+    if (!employee) return
+    dispatch<any>(crawlBotMessages({ employeeId: employee.id }))
+  }, [employee])
   return (
     <div className="App">
       <LoadingContainer></LoadingContainer>

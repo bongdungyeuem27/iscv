@@ -1,6 +1,8 @@
-import { useQuery } from '@apollo/client'
+import { useLoading } from '@components/Loading'
+import Video from '@components/Video'
 import { API_ENDPOINT_NODEJS, IPFS_GATEWAY } from '@constants/index'
 import { useEmployee } from '@contracts/useEmployee'
+import { useGetPostQuery } from '@graphql/generated/schema'
 import { useToast } from '@iscv/toast'
 import { RootState } from '@redux/store'
 import clsx from 'clsx'
@@ -9,13 +11,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { PostStatus } from 'src/types/posts'
 import styles from './styles.module.scss'
-import { useGetPostQuery } from '@graphql/generated/schema'
-import Video from '@components/Video'
-import { useLoading } from '@components/Loading'
-import { setInterviewAppointment } from '@apis/employee/interview/appointment'
-import { addItem } from '@redux/reducers/bot'
-import { ERole } from 'src/types/messages'
-import { EBotCategory } from '@redux/types/bot'
 
 type Props = {
   postId: string
@@ -40,10 +35,6 @@ function PagePost(props: Props) {
         await tx
           .wait()
           .then(async (apply) => {
-            await setInterviewAppointment(id!, data?.post?._id!)
-              .then(async (success) => {})
-              .catch((error) => console.log(error))
-
             toast.success()
 
             refetch()
