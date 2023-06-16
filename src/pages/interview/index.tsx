@@ -125,7 +125,15 @@ const Interview = (props: Props) => {
         handleNextQuestion()
       }, 1500)
     })
-    socket.on('interview_main_end', (time) => {
+    // socket.on('interview_main_end', (time) => {
+    //   // mediaRecorderRef.current?.stop()
+    //   // ;(videoRef.current?.srcObject as any)?.getTracks().forEach((track: { stop: () => void }) => {
+    //   //   track.stop()
+    //   // })
+    //   // dictaphone.stop()
+    //   // setStatus?.(3)
+    // })
+    socket.on('disconnect', () => {
       mediaRecorderRef.current?.stop()
       ;(videoRef.current?.srcObject as any)?.getTracks().forEach((track: { stop: () => void }) => {
         track.stop()

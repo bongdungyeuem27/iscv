@@ -12,5 +12,8 @@
   "default_cv": "Default CV",
   "phone": "Phone",
   "email": "Email",
-  "home": "Home"
+  "home": "Home",
+  "save_to_png": "Save PNG",
+  "bigfive": "Create CV Big Five",
+  "create_custom_cv": "Create Custom CV"
 }

@@ -23,7 +23,7 @@ function IIGRequestPanel() {
   const loading = useLoading()
   const employee = useSelector((state: RootState) => state.auth.employee)
   const { data, refetch } = useGetIigRequestStatusQuery({
-    variables: { employeeId: employee?.id || -1 }
+    variables: { employeeId: employee?.id ?? -1 }
   })
 
   const { control, handleSubmit, setValue } = useForm<IForm>({
@@ -33,6 +33,7 @@ function IIGRequestPanel() {
       examId: undefined
     }
   })
+  console.log(data)
 
   const onSubmit = async (data: IForm) => {
     loading.open()
@@ -65,9 +66,10 @@ function IIGRequestPanel() {
               control={control}
               render={({ field, fieldState }) => {
                 return (
-                  <div>
+                  <div className='flex flex-col gap-2'>
+                    <h6>Mã số dự thi</h6>
                     <Input
-                      className=" w-full h-12"
+                      className=" w-full h-8"
                       value={field.value?.toString()}
                       onChange={field.onChange}
                     ></Input>

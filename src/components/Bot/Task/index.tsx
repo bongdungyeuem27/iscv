@@ -72,9 +72,15 @@ const Task = ({ messages }: Props) => {
                       await tx
                         .wait()
                         .then((success) => console.log(success))
-                        .catch((error) => console.log(error))
+                        .catch((error) => {
+                          console.log(error)
+                          toast.error()
+                        })
                     })
-                    .catch((error) => console.log(error))
+                    .catch((error) => {
+                      console.log(error)
+                      toast.error()
+                    })
                   loading.close()
                 }}
               >

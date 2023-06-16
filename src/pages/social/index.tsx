@@ -1,23 +1,29 @@
-import { useQuery } from "@apollo/client";
-import PagePost from "@components/PagePost";
+import { useQuery } from '@apollo/client'
+import PagePost from '@components/PagePost'
 
-import { RootState } from "@redux/store";
-import { useSelector } from "react-redux";
-import styles from "./styles.module.scss";
-import { Exact, useGetPredictQuery } from "@graphql/generated/schema";
+import { RootState } from '@redux/store'
+import { useSelector } from 'react-redux'
+import styles from './styles.module.scss'
+import { Exact, useGetPredictQuery } from '@graphql/generated/schema'
+import { ContentLoader } from '@components/ContentLoader'
 
-type Props = {};
+type Props = {}
 
 const Social = (props: Props) => {
-  const id = useSelector((state: RootState) => state.auth.employee)?.id;
-  const query = useGetPredictQuery({variables: { employeeId: id!  }})
+  const id = useSelector((state: RootState) => state.auth.employee)?.id
+  const query = useGetPredictQuery({ variables: { employeeId: id! } })
   return (
     <div className={styles.container}>
+      {query.loading && (
+        <div className="w-full">
+          <ContentLoader></ContentLoader>
+        </div>
+      )}
       {query.data?.prediction?.map((value) => {
-        return <PagePost postId={value?._id!} key={value?._id}></PagePost>;
+        return <PagePost postId={value?._id!} key={value?._id}></PagePost>
       })}
     </div>
-  );
-};
+  )
+}
 
-export default Social;
+export default Social

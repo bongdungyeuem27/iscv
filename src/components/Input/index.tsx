@@ -1,25 +1,25 @@
-import React from "react";
-import clsx from "clsx";
+import React from 'react'
+import clsx from 'clsx'
 
 type Props = {
-  value: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-  className?: string;
-  placeholder?: string;
-};
+  value: string
+  onChange: React.ChangeEventHandler<HTMLInputElement>
+  className?: string
+  placeholder?: string
+}
 
 const Input = (props: Props) => {
   return (
     <input
       className={clsx(
         props.className,
-        "focus:outline-pink-300 rounded-xl bg-white"
+        'focus:outline-pink-300 rounded-xl bg-white border-pink-200 border-spacing-1 border-2 px-3 py-2'
       )}
       value={props.value}
       placeholder={props.placeholder}
       onChange={props.onChange}
     ></input>
-  );
-};
+  )
+}
 
-export default Input;
+export default Input

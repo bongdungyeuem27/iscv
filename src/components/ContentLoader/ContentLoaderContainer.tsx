@@ -1,11 +1,27 @@
-import React from 'react'
+import clsx from 'clsx'
 import styles from './styles.module.scss'
-import { MoonLoader } from 'react-spinners'
 
-function Contentloader() {
+type Props = {
+  className?: string
+}
+
+function Contentloader(props: Props) {
   return (
-    <div className={styles.container}>
-      <MoonLoader color="#36d7b7" />
+    <div className={clsx(styles.container, props.className)}>
+      <div className={styles['lds-default']}>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   )
 }
