@@ -30,7 +30,7 @@ function Index() {
         </div>
 
         <div className={styles.main}>
-          {recent.map((value) => {
+          {recent?.map((value) => {
             return <CompactItem key={value.id} data={value} expand={expand}></CompactItem>
           })}
         </div>

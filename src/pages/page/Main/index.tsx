@@ -1,34 +1,29 @@
-import { useQuery } from "@apollo/client";
-import styles from "./styles.module.scss";
-import { useParams } from "react-router-dom";
-import PagePost from "@components/PagePost";
-import { useSelector } from "react-redux";
-import { RootState } from "@redux/store";
-import { ContentLoader } from "@components/ContentLoader";
+import { ContentLoader } from '@components/ContentLoader'
+import PagePost from '@components/PagePost'
+import { useGetBusinessPostsQuery } from '@graphql/generated/schema'
+import { RootState } from '@redux/store'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import styles from './styles.module.scss'
 // Page/Post/CenterSocial/index
 function Main() {
-  const params = useParams();
-  const id = Number(params.id);
-  const account = useSelector((state: RootState) => state.auth.account);
+  const params = useParams()
+  const id = Number(params.id)
 
-  // const { loading, data } = useQuery<GetPostsIdByBusinessId>(getPostsIdByBusinessId, {
-  //   variables: { businessId: id },
-  // })
+  const query = useGetBusinessPostsQuery({ variables: { businessId: id! } })
 
   return (
     <div className={styles.container}>
-      {/* {loading && <ContentLoader></ContentLoader>}
-      {!loading &&
-        data?.postsByBusinessId.map((value, index) => {
-          return (
-            <PagePost
-              key={value.id + index}
-              postId={value.id}
-            ></PagePost>
-          )
-        })} */}
+      {query.loading && (
+        <div className="w-full">
+          <ContentLoader></ContentLoader>
+        </div>
+      )}
+      {query.data?.posts?.map((value) => {
+        return <PagePost postId={value?._id!} key={value?._id}></PagePost>
+      })}
     </div>
-  );
+  )
 }
 
-export default Main;
+export default Main

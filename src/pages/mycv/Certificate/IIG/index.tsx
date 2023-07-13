@@ -12,9 +12,10 @@ type Props = {
 }
 
 function Index({ id, data }: Props) {
+
   return (
     <div className={styles.container}>
-      {<div className={styles.title}>IGG VietNam</div>}
+      {<div className={styles.title}>IIG VietNam</div>}
       {data.lr?.id != null && (
         <div className={styles.group}>
           <Item

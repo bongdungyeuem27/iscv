@@ -21,7 +21,7 @@
   "min0": "Tối thiểu 0",
   "max4": "Tối đa 4",
   "max495": "Tối đa 495",
-  "max195": "Tối đa 195",
+  "max195": "Tối đa 200",
   "integer": "Phải là số nguyên",
   "greater_equal_now": "Phải lớn hơn hoặc bằng",
   "less_equal_now": "Phải lớn hơn hoặc bằng",

@@ -11,7 +11,6 @@ type Props = {
 }
 
 function Index({ id, data }: Props) {
-
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -19,7 +18,7 @@ function Index({ id, data }: Props) {
       </div>
 
       <div className={styles.group}>
-        {data.iig?.lr != null || (data.iig?.sw != null && <IIG id={id} data={data.iig}></IIG>)}
+        {(data.iig?.lr != null || data.iig?.sw != null) && <IIG id={id} data={data.iig}></IIG>}
       </div>
     </div>
   )

@@ -21,7 +21,7 @@
   "min0": "Minimum is 0",
   "max4": "Maximum is 4",
   "max495": "Maximum is 495",
-  "max195": "Maximum is 195",
+  "max195": "Maximum is 200",
   "integer": "Must be an integer",
   "greater_equal_now": "Must be greater than or equal to",
   "less_equal_now": "Must be less than or equal to",

@@ -161,6 +161,7 @@ export type IQuery = {
   employeeByUser?: Maybe<IEmployee>;
   employees?: Maybe<Array<Maybe<IEmployee>>>;
   post?: Maybe<IPost>;
+  posts?: Maybe<Array<Maybe<IPost>>>;
   prediction?: Maybe<Array<Maybe<IPost>>>;
   requestStatus?: Maybe<IIigStatus>;
   skillsByEmployee?: Maybe<Array<Maybe<ISkill>>>;
@@ -210,6 +211,11 @@ export type IQueryEmployeeByUserArgs = {
 export type IQueryPostArgs = {
   employeeId?: InputMaybe<Scalars['Int']>;
   id: Scalars['String'];
+};
+
+
+export type IQueryPostsArgs = {
+  businessId: Scalars['Int'];
 };
 
 
@@ -317,6 +323,13 @@ export type IGetPostQueryVariables = Exact<{
 
 
 export type IGetPostQuery = { __typename?: 'Query', post?: { __typename?: 'Post', _id?: string | null, businessId?: number | null, businessName?: string | null, images?: Array<string | null> | null, videos?: Array<string | null> | null, content?: string | null, hashtag?: string | null, status?: number | null, job?: string | null, applied?: boolean | null, businessImage?: string | null, createdAt?: any | null, updatedAt?: any | null } | null };
+
+export type IGetBusinessPostsQueryVariables = Exact<{
+  businessId: Scalars['Int'];
+}>;
+
+
+export type IGetBusinessPostsQuery = { __typename?: 'Query', posts?: Array<{ __typename?: 'Post', _id?: string | null } | null> | null };
 
 export type IGetPredictQueryVariables = Exact<{
   employeeId: Scalars['Int'];
@@ -813,6 +826,41 @@ export function useGetPostLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IG
 export type GetPostQueryHookResult = ReturnType<typeof useGetPostQuery>;
 export type GetPostLazyQueryHookResult = ReturnType<typeof useGetPostLazyQuery>;
 export type GetPostQueryResult = Apollo.QueryResult<IGetPostQuery, IGetPostQueryVariables>;
+export const GetBusinessPostsDocument = gql`
+    query GetBusinessPosts($businessId: Int!) {
+  posts(businessId: $businessId) {
+    _id
+  }
+}
+    `;
+
+/**
+ * __useGetBusinessPostsQuery__
+ *
+ * To run a query within a React component, call `useGetBusinessPostsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBusinessPostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBusinessPostsQuery({
+ *   variables: {
+ *      businessId: // value for 'businessId'
+ *   },
+ * });
+ */
+export function useGetBusinessPostsQuery(baseOptions: Apollo.QueryHookOptions<IGetBusinessPostsQuery, IGetBusinessPostsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IGetBusinessPostsQuery, IGetBusinessPostsQueryVariables>(GetBusinessPostsDocument, options);
+      }
+export function useGetBusinessPostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IGetBusinessPostsQuery, IGetBusinessPostsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IGetBusinessPostsQuery, IGetBusinessPostsQueryVariables>(GetBusinessPostsDocument, options);
+        }
+export type GetBusinessPostsQueryHookResult = ReturnType<typeof useGetBusinessPostsQuery>;
+export type GetBusinessPostsLazyQueryHookResult = ReturnType<typeof useGetBusinessPostsLazyQuery>;
+export type GetBusinessPostsQueryResult = Apollo.QueryResult<IGetBusinessPostsQuery, IGetBusinessPostsQueryVariables>;
 export const GetPredictDocument = gql`
     query GetPredict($employeeId: Int!) {
   prediction(id: $employeeId) {

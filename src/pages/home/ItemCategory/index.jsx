@@ -21,7 +21,7 @@ function Index({ image, name, list }) {
         })}
       </div>
       <div className={styles.result}>
-        <a>1001 Members</a>
+        {/* <a>1001 Members</a> */}
       </div>
     </div>
   )

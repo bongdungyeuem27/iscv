@@ -12,8 +12,10 @@ const Question = (props: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <h3>Histories</h3>
-        {/* <span>View all</span> */}
+        <p>
+          Bạn sẽ có 5 lựa chọn 1 là không đồng ý, 2 là hơi đồng ý, 3 là trung lập, 4 là hơi đồng ý,
+          5 là rất đồng ý. Bạn sẽ phải chọn 1 trong 5 con số.
+        </p>
       </div>
       <div className={styles.content}>
         {answers.map((answer, index) => {

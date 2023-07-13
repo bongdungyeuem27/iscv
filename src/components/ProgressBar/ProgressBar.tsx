@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 function Index({
   percent,
   color,
-  className,
+  className
 }: {
   percent: number
   color?: string
@@ -15,8 +15,8 @@ function Index({
       <span
         style={
           {
-            '--percent': Math.round(percent) + '%',
-            backgroundColor: color,
+            '--percent': (percent < 100 ? Math.round(percent) : 100) + '%',
+            backgroundColor: color
           } as React.CSSProperties
         }
       ></span>

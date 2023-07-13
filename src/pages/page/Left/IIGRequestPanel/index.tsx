@@ -33,7 +33,6 @@ function IIGRequestPanel() {
       examId: undefined
     }
   })
-  console.log(data)
 
   const onSubmit = async (data: IForm) => {
     loading.open()
@@ -66,7 +65,7 @@ function IIGRequestPanel() {
               control={control}
               render={({ field, fieldState }) => {
                 return (
-                  <div className='flex flex-col gap-2'>
+                  <div className="flex flex-col gap-2">
                     <h6>Mã số dự thi</h6>
                     <Input
                       className=" w-full h-8"
@@ -96,7 +95,7 @@ function IIGRequestPanel() {
                   setOpenAdd(true)
                 }}
               >
-                <label>{t('certificate')} Listening & Reading</label>
+                <label>Listening & Reading</label>
                 <i className="fa-solid fa-play"></i>
               </button>
               <button
@@ -109,7 +108,7 @@ function IIGRequestPanel() {
                   setOpenAdd(true)
                 }}
               >
-                <label>{t('certificate')} Speaking & Writing</label>
+                <label>Speaking & Writing</label>
                 <i className="fa-solid fa-play"></i>
               </button>
             </div>

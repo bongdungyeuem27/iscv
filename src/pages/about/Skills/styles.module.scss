@@ -21,8 +21,7 @@
       .toolTitleWrapper {
         @include function.buttonRound;
         i {
-          @include function.textGradient;
-          background: var(--color-button-secondary);
+          color: white;
         }
       }
     }

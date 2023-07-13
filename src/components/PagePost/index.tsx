@@ -11,12 +11,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { PostStatus } from 'src/types/posts'
 import styles from './styles.module.scss'
+import { useRef, useState } from 'react'
+import { checkDiff } from '@apis/employee/bigfive'
+import { addItem } from '@redux/reducers/bot'
+import { ERole } from 'src/types/messages'
+import { v4 } from 'uuid'
+import { EBotCategory } from '@redux/types/bot'
+import { calculateRelativeTime } from 'src/utils/date'
 
 type Props = {
   postId: string
 }
 function PagePost(props: Props) {
   const { postId } = props
+  const [isCollapsed, setIsCollapsed] = useState(true)
+
   const signer = useSelector((state: RootState) => state.auth.signer)
   const id = useSelector((state: RootState) => state.auth.employee)?.id
   const loading = useLoading()
@@ -36,6 +45,21 @@ function PagePost(props: Props) {
           .wait()
           .then(async (apply) => {
             toast.success()
+            checkDiff(id!)
+              .then((success) => {
+                if (!success.data.hadBigfive) {
+                  dispatch(
+                    addItem({
+                      _id: v4(),
+                      role: ERole.BUSINESS,
+                      content: '',
+                      time: new Date(),
+                      category: EBotCategory.NEW_INTERVIEW
+                    })
+                  )
+                }
+              })
+              .catch((error) => console.log(error))
 
             refetch()
           })
@@ -49,7 +73,9 @@ function PagePost(props: Props) {
       })
     loading.close()
   }
-
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed)
+  }
   if (!data) return null
   return (
     <div className={clsx(styles.item)}>
@@ -62,7 +88,9 @@ function PagePost(props: Props) {
             <Link to={`/page/${data?.post?.businessId}`} className={styles.name}>
               {data?.post?.businessName}
             </Link>
-            <div className={styles.date}>{new Date().toLocaleString()}</div>
+            <div className={styles.date}>
+              {calculateRelativeTime(new Date(data.post?.createdAt), new Date())}
+            </div>
             {data?.post?.status && (
               <div
                 className={clsx(
@@ -88,24 +116,33 @@ function PagePost(props: Props) {
         <a>{data?.post?.job}</a>
       </div>
       <div className={styles.contentWrapper}>
-        <p>{data?.post?.content}</p>
-
-        <div className={styles.imageContent}>
-          {data.post?.images?.at(0) && (
+        <p className={`${styles.mydiv} ${isCollapsed ? styles.collapsed : ''}`}>
+          {data?.post?.content}
+        </p>
+        {(data.post?.content?.length || 0) > 500 && (
+          <button className=" text-blue-500 mb-2 mt-0" onClick={toggleCollapse}>
+            {isCollapsed ? 'Expand' : 'Collapse'}
+          </button>
+        )}
+        {data.post?.images?.at(0) && (
+          <div className={styles.imageContent}>
             <img
               src={`${API_ENDPOINT_NODEJS}public/business/post/${
                 data.post?._id
               }/${data.post?.images?.at(0)}.jpeg`}
             ></img>
-          )}
-          {data.post?.videos?.at(0) && (
+          </div>
+        )}
+
+        {data.post?.videos?.at(0) && (
+          <div className={styles.imageContent}>
             <Video
               video={`${API_ENDPOINT_NODEJS}public/business/post/${
                 data.post?._id
               }/${data.post?.videos?.at(0)}.mp4`}
             ></Video>
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <div className={styles.foot}>
         <div className={styles.footItem}>

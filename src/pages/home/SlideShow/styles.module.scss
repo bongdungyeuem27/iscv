@@ -1,9 +1,9 @@
 .container {
   margin: 0px auto;
-//   width: 80%;
+  //   width: 80%;
   position: relative;
   height: 100px;
-    overflow: hidden;
+  overflow: hidden;
 
   .loop {
     display: flex;
@@ -23,9 +23,9 @@
       height: 100px;
       padding: 0 30px;
       img {
-        max-width: 100%;
-        width: auto;
-        // object-fit: scale-down;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
     }
   }

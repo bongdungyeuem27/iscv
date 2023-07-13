@@ -1,64 +1,60 @@
-import { memo, useRef, useContext, useState } from "react";
-import { useDrag } from "react-dnd";
-import { getEmptyImage } from "react-dnd-html5-backend";
+import { memo, useRef, useContext, useState } from 'react'
+import { useDrag } from 'react-dnd'
+import { getEmptyImage } from 'react-dnd-html5-backend'
 // import { designTabComponents } from '@page/CustomCV/ItemTypes'
 
-import { CustomCVContext } from "../CustomCVContext";
-import styles from "./styles.module.scss";
-import clsx from "clsx";
-import { Rnd } from "react-rnd";
+import { CustomCVContext } from '../CustomCVContext'
+import styles from './styles.module.scss'
+import clsx from 'clsx'
+import { Rnd } from 'react-rnd'
 
-import update from "immutability-helper";
-import SelectIconModal from "./Component/SelectIconModal";
-import { designTabComponents } from "../ItemTypes";
-import { useSelector } from "react-redux";
-import { RootState } from "@redux/store";
+import update from 'immutability-helper'
+import SelectIconModal from './Component/SelectIconModal'
+import { designTabComponents } from '../ItemTypes'
+import { useSelector } from 'react-redux'
+import { RootState } from '@redux/store'
 
 type Props = {
-  id: string;
-};
+  id: string
+}
 
 export const DraggableBox = memo(function DraggableBox(props: Props) {
-  const { id } = props;
-  const { list, setList, selected, setSelected, setSelectedFor } =
-    useContext(CustomCVContext);
-  const profile = useSelector((state: RootState) => state.auth.employee);
-  const preWDrag = useRef(null);
-  const preHDrag = useRef(null);
-  const [openIcon, setOpenIcon] = useState(false);
+  const { id } = props
+  const { list, setList, selected, setSelected, cv } = useContext(CustomCVContext)
+  const profile = useSelector((state: RootState) => state.auth.employee)
+  const preWDrag = useRef(null)
+  const preHDrag = useRef(null)
+  const [openIcon, setOpenIcon] = useState(false)
   const handleClick = (e: any) => {
-    if (list[id].lock) return;
+    if (list[id].lock) return
     if (selected != id) {
-      setSelected(id);
-      return;
+      setSelected(id)
+      return
     }
     if (e.detail == 2) {
-      if (list[id].type == "icon") {
-        setOpenIcon(true);
-        return;
+      if (list[id].type == 'icon') {
+        setOpenIcon(true)
+        return
       }
-      if (list[id].type == "text") {
-        setList(update(list, { [id]: { $merge: { typing: true } } }));
-        return;
+      if (list[id].type == 'text') {
+        setList(update(list, { [id]: { $merge: { typing: true } } }))
+        return
       }
     }
-  };
+  }
   return (
     <>
-      <SelectIconModal
-        id={id}
-        state={[openIcon, setOpenIcon]}
-      ></SelectIconModal>
+      <SelectIconModal id={id} state={[openIcon, setOpenIcon]}></SelectIconModal>
       <Rnd
         style={{
-          display: "flex",
-          borderRadius: list[id].borderRadius,
+          display: 'flex',
+          borderRadius: list[id].borderRadius
         }}
         size={{ width: list[id].width, height: list[id].height }}
         position={{ x: list[id].left, y: list[id].top }}
         onResizeStart={(e, d, ref) => {
-          preWDrag.current = list[id].width;
-          preHDrag.current = list[id].height;
+          preWDrag.current = list[id].width
+          preHDrag.current = list[id].height
         }}
         onResize={(e, dir, ref, delta, position) => {
           setList(
@@ -68,11 +64,11 @@ export const DraggableBox = memo(function DraggableBox(props: Props) {
                   left: position.x,
                   top: position.y,
                   width: preWDrag!.current! + delta.width,
-                  height: preHDrag.current! + delta.height,
-                },
-              },
+                  height: preHDrag.current! + delta.height
+                }
+              }
             })
-          );
+          )
         }}
         onResizeStop={(e, direction, ref, delta, position) => {}}
         onDrag={(e, d) => {
@@ -82,11 +78,11 @@ export const DraggableBox = memo(function DraggableBox(props: Props) {
                 [id]: {
                   $merge: {
                     top: d.y,
-                    left: d.x,
-                  },
-                },
+                    left: d.x
+                  }
+                }
               })
-            );
+            )
         }}
         enableResizing={selected == id && !list[id].lock}
         onDragStop={(e, d) => {}}
@@ -103,9 +99,10 @@ export const DraggableBox = memo(function DraggableBox(props: Props) {
           profile,
           selected,
           list,
-          setList
+          setList,
+          cv
         )}
       </Rnd>
     </>
-  );
-});
+  )
+})

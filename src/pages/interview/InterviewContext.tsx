@@ -54,7 +54,10 @@ const InterviewContextProvider = ({ children }: Props) => {
     let timeoutId: NodeJS.Timeout | undefined = undefined
     ;(async () => {
       const client: Socket<ServerToClientEvents, ClientToServerEvents> = io(API_ENDPOINT_NODEJS, {
-        query: { employeeId: employee?.id }
+        query: { employeeId: employee?.id },
+        path: '/socket.io',
+        transports: ['websocket'],
+        secure: true
       })
       setSocket(client)
 

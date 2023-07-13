@@ -5,7 +5,7 @@ import { list } from '@components/Header/list'
 import { IRecent } from 'src/types/messages'
 import { AppDispatch, RootState, store } from '@redux/store'
 import { getBusiness } from '@apis/business'
-import { getRecent } from '@apis/messages'
+import { getHistory, getRecent } from '@apis/messages'
 // import { AppDispatch, RootState } from '../store'
 // import { IConnectData } from '../types/messages'
 const loading = useLoading()
@@ -41,6 +41,22 @@ export const crawl = createAsyncThunk<
   }
 })
 
+export const history = createAsyncThunk<
+  { histories: IMesssages[] | void },
+  {
+    employeeId: number
+    businessId: number
+  },
+  { dispatch: AppDispatch; state: RootState }
+>('messages/history', async ({ employeeId, businessId }) => {
+  const histories = await getHistory(employeeId, businessId)
+    .then((success) => success.data)
+    .catch((error) => console.log(error))
+  return {
+    histories
+  }
+})
+
 export const newRecent = createAsyncThunk<
   { recentItem: IRecent } | undefined,
   {
@@ -48,9 +64,9 @@ export const newRecent = createAsyncThunk<
     updatedAt: Date
   },
   { dispatch: AppDispatch; state: RootState }
->('messages/newrecent', async ({ businessId, updatedAt }) => {
-  if (store.getState().messages.recent.findIndex((x) => x.id === businessId) !== -1) return
+>('messages/newrecent', async ({ businessId, updatedAt }, thunkApi) => {
   const employee = await getBusiness(businessId).then((success) => success.data)
+  thunkApi.dispatch(history({ employeeId: store.getState().auth.employee?.id!, businessId }))
   return {
     recentItem: { ...employee, updatedAt }
   }
@@ -75,8 +91,19 @@ export const messagesReducer = createSlice({
       })
       .addCase(crawl.rejected, (state, action) => {})
     builder
+      .addCase(history.fulfilled, (state, action) => {
+        state.list = action.payload.histories || []
+      })
+      .addCase(history.rejected, (state, action) => {})
+    builder
       .addCase(newRecent.fulfilled, (state, action) => {
-        if (action.payload?.recentItem) state.recent.push(action.payload.recentItem)
+        if (action.payload?.recentItem) {
+          if (state.recent.findIndex((x) => x.id === action.payload?.recentItem.id) === -1) {
+            console.log(action.payload?.recentItem)
+            state.recent.unshift(action.payload.recentItem)
+          }
+          state.current = action.payload.recentItem.id
+        }
       })
       .addCase(newRecent.rejected, (state, action) => {})
   }

@@ -130,7 +130,6 @@ function Index() {
         return;
       }
       const employeeCVContract = useEmployeeCV(signer);
-
       await employeeCVContract.addCV(employee?.id, cid).then(async (tx) => {
         await tx.wait();
         toast.success();

@@ -36,7 +36,7 @@ const Pop = (props: Props) => {
 
     switch (newest?.category) {
       case EBotCategory.NEW_INTERVIEW:
-        readInterviewAppointment(newest._id)
+        // readInterviewAppointment(newest._id)
         return
       case EBotCategory.NEW_BIGFIVE_RESULT:
         // readBigFive(newest._id)
@@ -49,9 +49,7 @@ const Pop = (props: Props) => {
   useEffect(() => {
     switch (newest?.category) {
       case EBotCategory.NEW_INTERVIEW:
-        text.current = `Bạn có một lịch phỏng vấn mới từ ${moment(newest.metadata?.fromTime).format(
-          'DD/MM/YYYY'
-        )} đến ${moment(newest.metadata?.toTime).format('DD/MM/YYYY')}`
+        text.current = `Bạn hãy tham gia phỏng vấn Big Five để biết tính cách và công việc phù hợp nhé`
         return
       case EBotCategory.NEW_BIGFIVE_RESULT:
         text.current = 'Bạn có một kết quả từ khảo sát Big Five'

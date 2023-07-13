@@ -1,32 +1,27 @@
-import React from "react";
 import {
-  Player,
+  BigPlayButton,
   ControlBar,
-  ReplayControl,
-  ForwardControl,
-  CurrentTimeDisplay,
-  TimeDivider,
-  PlaybackRateMenuButton,
-  VolumeMenuButton,
   LoadingSpinner,
   PlayToggle,
-  BigPlayButton,
-} from "video-react";
-
+  Player,
+  VolumeMenuButton
+} from 'video-react'
+import thumbnail from '@assets/video/thumbnail.jpg'
 type Props = {
-  className?: string;
-  video: string;
-};
+  className?: string
+  video: string
+}
 
 const Video = (props: Props) => {
-  const { className, video } = props;
+  const { className, video } = props
   return (
     <Player
       // width={100}
       // height={100}
-      poster="/assets/poster.png"
+      poster={thumbnail}
       autoPlay
       src={video}
+      muted={true}
       // aspectRatio="auto"
     >
       {/* <source src={URL.createObjectURL(video)} /> */}
@@ -42,7 +37,7 @@ const Video = (props: Props) => {
         <VolumeMenuButton />
       </ControlBar>
     </Player>
-  );
-};
+  )
+}
 
-export default Video;
+export default Video

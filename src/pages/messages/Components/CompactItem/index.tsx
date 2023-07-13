@@ -1,7 +1,7 @@
 import avatarDefault from '@assets/avatar.png'
 import clsx from 'clsx'
 import { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import styles from './styles.module.scss'
 import { IRecent } from 'src/types/messages'
 import { IPFS_GATEWAY } from '@constants/index'
@@ -16,12 +16,19 @@ type Props = {
   onClick?: () => any
 }
 function Index({ expand, data, onClick }: Props) {
-  const dispatch = useDispatch()
+  const [searchParams, setSearchParams] = useSearchParams()
   const current = useSelector((state: RootState) => state.messages.current)
   return (
     <button
       onClick={() => {
-        onClick ? onClick() : dispatch(setCurrent({ businessId: data.id }))
+        onClick
+          ? onClick()
+          : (() => {
+              if (data?.id?.toString()) {
+                searchParams.set('business_id', data?.id?.toString())
+                setSearchParams(searchParams)
+              }
+            })()
       }}
       className={clsx(styles.container, {
         [styles.active]: current === data.id,

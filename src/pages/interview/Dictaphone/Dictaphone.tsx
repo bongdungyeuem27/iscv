@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef } from 'react'
+import React, { memo, useEffect, useRef, useState } from 'react'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 import styles from '../styles.module.scss'
 import clsx from 'clsx'
@@ -40,7 +40,7 @@ export const dictaphoneListener = new EventEmitter()
 const Dictaphone = ({
   onTextChange
 }: {
-  onTextChange: (newText: string, currentText: string) => void
+  onTextChange: (newText: string, currentText?: string) => void
 }) => {
   const {
     transcript,
@@ -51,13 +51,15 @@ const Dictaphone = ({
   } = useSpeechRecognition({
     clearTranscriptOnListen: true
   })
-  const previousTranscriptRef = useRef('')
+  const [sevenText, setSevenText] = useState('')
 
   useEffect(() => {
-    const newTranscript = transcript.replace(previousTranscriptRef.current, '')
-    previousTranscriptRef.current = transcript
-    if (newTranscript.trim() !== '') {
-      onTextChange(newTranscript, transcript)
+    if (transcript.trim() !== '') {
+      const temp = getLastSevenWords(sevenText.concat(' ' + transcript))
+      setSevenText(temp)
+      onTextChange(transcript)
+
+      resetTranscript()
     }
   }, [transcript])
 
@@ -95,7 +97,7 @@ const Dictaphone = ({
       <button onClick={SpeechRecognition.stopListening}>Stop</button>
       <button onClick={resetTranscript}>Reset</button> */}
       <div className="">
-        <p className="text-white">{getLastSevenWords(transcript)}</p>
+        <p className="text-white">{sevenText}</p>
       </div>
       {/* <p>{transcript}</p> */}
     </div>

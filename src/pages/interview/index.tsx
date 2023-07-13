@@ -17,6 +17,7 @@ import { v4 } from 'uuid'
 import { debounce } from 'lodash'
 import { useEmployee } from '@contracts/useEmployee'
 import { getLastestSessionId } from '@apis/employee/bigfive'
+import _ from 'lodash'
 
 const diffOfDate = (time1: Date, time2: Date) => {
   const timeDifference = Math.abs(time2.getTime() - time1.getTime())
@@ -66,7 +67,7 @@ const Interview = (props: Props) => {
   const { socket, audioRef, status, setStatus, sessionId } = useContext(InterviewContext)
   const bot = useBot()
 
-  const handleNextQuestion = debounce(() => {
+  const handleNextQuestion = _.throttle(() => {
     const nextQuestion = currentQuestion.current + 1
     console.log(nextQuestion)
     if (nextQuestion > MAX_QUESTION) {

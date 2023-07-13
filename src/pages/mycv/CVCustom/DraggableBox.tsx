@@ -4,13 +4,12 @@ import { memo, useRef, useContext, useState } from 'react'
 export const DraggableBox = memo(function DraggableBox({
   id,
   data,
-  profile,
+  profile
 }: {
   id: string
   data: any
   profile: any
 }) {
-
   return (
     <div
       style={{
@@ -18,10 +17,18 @@ export const DraggableBox = memo(function DraggableBox({
         marginTop: data.top + 'px',
         marginLeft: data.left + 'px',
         width: data.width + 'px',
-        height: data.height + 'px',
+        height: data.height + 'px'
       }}
     >
-      {designTabComponents[data.type].view(id, data, profile)}
+      {designTabComponents[data.type].view(
+        id,
+        data,
+        profile,
+        undefined,
+        undefined,
+        undefined,
+        profile
+      )}
     </div>
   )
 })

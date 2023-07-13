@@ -113,6 +113,7 @@ function Skills() {
               <Item
                 key={value!.id}
                 id={value!.id!}
+                querySkills={querySkills}
                 owner={employee?.id === id}
                 employeeId={value!.employeeId!}
                 skill={value!.title!}

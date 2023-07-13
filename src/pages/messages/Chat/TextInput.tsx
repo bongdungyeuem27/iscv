@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@redux/store'
@@ -12,7 +12,11 @@ const TextInput = (props: Props) => {
   const [input, setInput] = useState<string>('')
   const client = useSelector((state: RootState) => state.socket.client)
   const employeeId = useSelector((state: RootState) => state.auth.employee)?.id!
+  const current = useSelector((state: RootState) => state.messages.current)
   const dispatch = useDispatch()
+  useEffect(() => {
+    setInput('')
+  }, [current])
   return (
     <div className={styles.chatInput}>
       <div className={styles.chatType}>
@@ -29,7 +33,8 @@ const TextInput = (props: Props) => {
       </div>
       <div
         onClick={() => {
-          client?.emit('receive', { businessId: 0, employeeId, content: input }, (data) => {
+          if (current === undefined || current === null) return
+          client?.emit('receive', { businessId: current, employeeId, content: input }, (data) => {
             dispatch(addItem(data))
           })
 

@@ -1,6 +1,6 @@
 export const SCOREMAX = {
   LISTENING: 495,
   READING: 495,
-  SPEAKING: 195,
-  WRITING: 195,
+  SPEAKING: 200,
+  WRITING: 200,
 };

@@ -1,19 +1,20 @@
-import { API_ENDPOINT_NODEJS, IPFS_GATEWAY } from '@constants/index'
-import { EBotCategory, IBotMessages } from '@redux/types/bot'
-import React, { memo, useEffect, useRef, useState } from 'react'
-import styles from './styles.module.scss'
-import moment from 'moment'
-import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { RootState } from '@redux/store'
-import clsx from 'clsx'
-import Modal from '@components/Modal'
-import { Viewer, Worker } from '@react-pdf-viewer/core'
-import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'
+import { readBigFive } from '@apis/employee/bigfive'
 import Button from '@components/Button'
 import { useLoading } from '@components/Loading'
-import { useToast } from '@iscv/toast'
+import Modal from '@components/Modal'
+import { API_ENDPOINT_NODEJS } from '@constants/index'
 import { useEmployee } from '@contracts/useEmployee'
+import { useToast } from '@iscv/toast'
+import { Viewer, Worker } from '@react-pdf-viewer/core'
+import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'
+import { RootState } from '@redux/store'
+import { EBotCategory, IBotMessages } from '@redux/types/bot'
+import clsx from 'clsx'
+import moment from 'moment'
+import { memo, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import styles from './styles.module.scss'
 
 type Props = {
   messages: IBotMessages
@@ -45,7 +46,7 @@ const Task = ({ messages }: Props) => {
   const handleClick = () => {
     switch (messages.category) {
       case EBotCategory.NEW_INTERVIEW:
-        navigate(`/interview/${messages.metadata?._id}`)
+        navigate(`/interview`)
         break
       case EBotCategory.NEW_BIGFIVE_RESULT:
         setShowModal(true)
@@ -65,13 +66,14 @@ const Task = ({ messages }: Props) => {
                   loading.open()
 
                   const contractEmployee = useEmployee(signer!)
-                  console.log(employeeId, messages.sessionId!, messages.metadata!.cid!)
                   await contractEmployee
                     .addBigFive(employeeId, messages.sessionId!, messages.metadata!.cid!)
                     .then(async (tx) => {
                       await tx
                         .wait()
-                        .then((success) => console.log(success))
+                        .then((success) => {
+                          readBigFive(employeeId).catch((error) => console.log(error))
+                        })
                         .catch((error) => {
                           console.log(error)
                           toast.error()
@@ -110,10 +112,10 @@ const Task = ({ messages }: Props) => {
           )}
           onClick={handleClick}
         >
-          <img
+          {/* <img
             src={`${IPFS_GATEWAY}${messages.metadata?.businessImage}`}
             className=" h-full min-h-8 aspect-square rounded-full object-cover"
-          ></img>
+          ></img> */}
           <div className="flex px-2 py-1 rounded-t-2xl  gap-3 items-center overflow-hidden">
             <div className="rounded-2xl">
               <p className={styles.banner}>{text.current}</p>

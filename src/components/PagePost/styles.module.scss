@@ -95,6 +95,7 @@
     }
     a {
       font-weight: 500;
+      white-space: pre-line;
     }
   }
   .job {
@@ -111,6 +112,7 @@
     }
     a {
       font-weight: 500;
+      white-space: pre-line;
     }
   }
   .foot {
@@ -210,6 +212,7 @@
   text-align: center;
   a {
     text-transform: capitalize;
+    white-space: pre-line;
   }
 }
 .open {
@@ -220,4 +223,18 @@
 }
 .upcoming {
   background: var(--color-button-secondary);
+}
+
+.mydiv {
+  max-height: 200px;
+  overflow: hidden;
+  word-break: break-word !important;
+  word-wrap: break-word !important;
+  transition: max-height 0.3s ease;
+  display: inline-block;
+  white-space: pre-line;
+}
+
+.collapsed {
+  max-height: 80px !important;
 }

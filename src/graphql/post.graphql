@@ -15,3 +15,9 @@ query GetPost($postId: String!, $employeeId: Int) {
     updatedAt
   }
 }
+
+query GetBusinessPosts($businessId: Int!) {
+  posts(businessId: $businessId) {
+    _id
+  }
+}

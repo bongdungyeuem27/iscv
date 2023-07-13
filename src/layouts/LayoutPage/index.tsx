@@ -22,7 +22,7 @@ function LayoutPage() {
     }
   })
   useEffect(() => {
-    if (!employee?.id) return
+    if (employee?.id === undefined || employee?.id === null) return
     getData()
   }, [employee?.id])
   return (

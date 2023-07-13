@@ -26,7 +26,10 @@ export const setClient = createAsyncThunk<
   { dispatch: AppDispatch; state: RootState }
 >('socket/setclient', async (data, thunkApi) => {
   const client: Socket<ServerToClientEvents, ClientToServerEvents> = io(API_ENDPOINT_NODEJS, {
-    query: { employeeId: data.employeeId }
+    query: { employeeId: data.employeeId },
+    path: '/socket.io',
+    transports: ['websocket'],
+    secure: true
   })
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
   thunkApi.dispatch(crawl({ employeeId: store.getState().auth.employee?.id! }))
