@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 @import '../../variables.scss';
 .top {
   position: absolute;
@@ -25,10 +25,10 @@
       flex-direction: row;
       gap: 5px;
       .plus {
-        @include function.buttonRound;
+        @include utils.buttonRound;
       }
       .search {
-        @include function.buttonRound;
+        @include utils.buttonRound;
       }
     }
   }

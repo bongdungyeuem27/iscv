@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 $itemBorderRadius: 15px;
 $boxShadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px,
   rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px,
@@ -21,7 +21,7 @@ $boxShadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30p
       aspect-ratio: 1/1;
       flex-shrink: 0;
       img {
-        @include function.imageRound;
+        @include utils.imageRound;
       }
     }
     .text {

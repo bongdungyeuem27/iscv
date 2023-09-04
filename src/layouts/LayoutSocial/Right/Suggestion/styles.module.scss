@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 @use '../../mixins.scss' as mixin;
 .container {
   @include mixin.container;
@@ -45,7 +45,7 @@
     }
     .moreInfo {
       i {
-        @include function.textGradient;
+        @include utils.textGradient;
         font-size: 20px;
         background: var(--color-button-tertiary);
       }

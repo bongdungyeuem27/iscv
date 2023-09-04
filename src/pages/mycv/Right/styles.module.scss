@@ -1,5 +1,5 @@
 @use '@styles/abtracts/variables' as variable;
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 
 .container {
   flex-basis: 0;
@@ -7,7 +7,7 @@
   flex-shrink: 0;
   padding: variable.$paddingGap;
   .panel {
-    @include function.panel;
+    @include utils.panel;
     padding: variable.$paddingGap;
     width: 100%;
     display: flex;
@@ -15,7 +15,7 @@
     gap: variable.$paddingGap;
     .button {
       width: 100%;
-      @include function.button;
+      @include utils.button;
       background: var(--color-background-primary);
       border: 2px solid var(--color-border);
       color: var(--color-text-primary);

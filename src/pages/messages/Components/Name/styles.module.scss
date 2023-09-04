@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 .container {
   flex: 1;
   display: flex;
@@ -28,7 +28,7 @@
       font-weight: 500;
     }
     .message {
-      @include function.truncate;
+      @include utils.truncate;
       width: 100%;
       font-size: 0.75rem;
       font-weight: 400;

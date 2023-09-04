@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 @import '../variables.scss';
 
 .container {
@@ -19,7 +19,7 @@
       justify-content: flex-end;
       margin: 0px 20px 0px 0px;
       .toolTitleWrapper {
-        @include function.buttonRound;
+        @include utils.buttonRound;
         i {
           color: white;
         }
@@ -49,13 +49,13 @@
       font-weight: 500;
     }
     input {
-      @include function.inputStyle;
+      @include utils.inputStyle;
       width: 100%;
       color: var(--color-text-grey);
       text-transform: uppercase;
     }
     p {
-      @include function.errorInput;
+      @include utils.errorInput;
     }
   }
 }

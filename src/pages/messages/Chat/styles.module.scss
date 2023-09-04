@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 @import '../variables.scss';
 .container {
   position: relative;
@@ -43,7 +43,7 @@
       display: flex;
       align-items: center;
       textarea {
-        @include function.inputStyle;
+        @include utils.inputStyle;
         border-radius: 15px;
         width: 100%;
         resize: none;
@@ -60,7 +60,7 @@
 
       i {
         cursor: pointer;
-        @include function.textGradient;
+        @include utils.textGradient;
         background: var(--color-button-secondary);
         width: 30px;
         font-size: 20px;

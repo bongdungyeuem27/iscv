@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 .itemWrapper {
   display: flex;
   justify-content: space-between;
@@ -40,7 +40,7 @@
     display: flex;
     gap: 15px;
     i {
-      @include function.textGradient;
+      @include utils.textGradient;
       cursor: pointer;
       &:nth-child(1) {
         background: var(--color-button-heptan);
@@ -72,9 +72,9 @@
     padding: 5px 20px;
   }
   input {
-    @include function.inputStyle;
+    @include utils.inputStyle;
   }
   p {
-    @include function.errorInput;
+    @include utils.errorInput;
   }
 }

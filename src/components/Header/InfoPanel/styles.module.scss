@@ -1,4 +1,4 @@
-@use "@styles/globalType/function" as function;
+@use "@styles/globalType/function" as utils;
 @use "@styles/abtracts/mixins" as mixin;
 .container {
   position: fixed;
@@ -39,7 +39,7 @@
   justify-content: center;
   gap: 10px;
   i {
-    @include function.textGradient;
+    @include utils.textGradient;
     background: var(--color-button-secondary);
   }
 }

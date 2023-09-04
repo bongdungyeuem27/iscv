@@ -1,4 +1,4 @@
-@use "@styles/globalType/function" as function;
+@use "@styles/globalType/function" as utils;
 .container {
   display: flex;
   position: relative;
@@ -15,7 +15,7 @@
     gap: 15px;
     cursor: pointer;
     i {
-      @include function.textGradient;
+      @include utils.textGradient;
       font-size: 30px;
       width: 40px;
       flex-shrink: 0;

@@ -1,7 +1,7 @@
-@use '../../../../Style/globalType/function' as function;
+@use '../../../../Style/globalType/function' as utils;
 @import '../../variables.scss';
 .container {
-  @include function.panel;
+  @include utils.panel;
   display: flex;
   flex-direction: column;
   padding: 20px 30px;
@@ -31,13 +31,13 @@
         gap: 10px;
         padding: 5px 10px;
         i {
-          @include function.textGradient;
+          @include utils.textGradient;
           background: var(--color-button-hexatiary);
           font-size: 20px;
         }
       }
       .inputShow {
-        @include function.inputStyle;
+        @include utils.inputStyle;
         flex: 1;
         margin: 3px 0px 0px 20px;
         border-radius: $borderRadius;
@@ -59,7 +59,7 @@
       .sendWrapper {
         flex-shrink: 0;
         i {
-          @include function.textGradient;
+          @include utils.textGradient;
           font-weight: bold;
           font-size: 30px;
           cursor: pointer;

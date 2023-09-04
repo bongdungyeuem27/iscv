@@ -1,5 +1,5 @@
 @use '@styles/abtracts/mixins' as mixin;
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 %label {
   margin: 0px 0px 0px 10px;
   font-size: 15px;
@@ -9,7 +9,7 @@
   margin: 7px 0px;
 }
 %input {
-  @include function.inputStyle;
+  @include utils.inputStyle;
   background: var(--color-background-primary);
   font-size: 15px;
   font-weight: 450;
@@ -19,7 +19,7 @@
   margin: 5px 0px 0px 0px;
   overflow: scroll;
   white-space: nowrap;
-  //   @include function.truncate;
+  //   @include utils.truncate;
   &:focus {
     outline: 2px solid var(--color-active-primary);
   }
@@ -40,7 +40,7 @@
     display: flex;
     justify-content: flex-start;
     .language {
-      @include function.button;
+      @include utils.button;
       background: var(--color-button-tertiary);
     }
   }
@@ -126,7 +126,7 @@
       i {
         cursor: pointer;
         font-size: 50px;
-        @include function.textGradient;
+        @include utils.textGradient;
         background: var(--color-button-secondary);
         -webkit-text-stroke: 2px var(--color-background-primary);
       }
@@ -140,6 +140,6 @@
   }
 }
 .error {
-  @include function.errorInput;
+  @include utils.errorInput;
   height: 20px;
 }

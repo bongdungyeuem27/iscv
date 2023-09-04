@@ -1,5 +1,5 @@
 @use '@styles/abtracts/mixins' as mixin;
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 @import './variables.scss';
 
 .container {
@@ -54,7 +54,7 @@
           font-weight: bold;
         }
         .messages {
-          @include function.button;
+          @include utils.button;
           padding: 7px 15px;
           max-width: max-content;
         }
@@ -88,7 +88,7 @@
   overflow: inherit;
   background: var(--color-background-primary);
   .tab {
-    @include function.button;
+    @include utils.button;
     border-radius: unset;
     min-width: 100px;
     background: transparent;

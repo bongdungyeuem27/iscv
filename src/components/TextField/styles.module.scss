@@ -1,6 +1,6 @@
-@use '../../Style/globalType/function' as function;
+@use '../../Style/globalType/function' as utils;
 .container {
-  @include function.panel;
+  @include utils.panel;
   width: 100%;
   resize: none;
   padding: 5px 5px;

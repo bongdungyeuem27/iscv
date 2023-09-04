@@ -1,4 +1,4 @@
-@use '../../Style/globalType/function' as function;
+@use '../../Style/globalType/function' as utils;
 .container {
   display: flex;
   width: 100%;
@@ -10,7 +10,7 @@
     display: flex;
   }
   .commentText {
-    @include function.inputStyle;
+    @include utils.inputStyle;
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -21,7 +21,7 @@
     outline: unset;
     background-color: var(--color-background-primary);
     .showCommentWrapper {
-      @include function.panel;
+      @include utils.panel;
       width: 100%;
       padding: 5px 10px;
       color: var(--color-text-grey);
@@ -49,7 +49,7 @@
           font-size: 13px;
           line-height: 13px;
         }
-        @include function.textGradient;
+        @include utils.textGradient;
       }
     }
   }

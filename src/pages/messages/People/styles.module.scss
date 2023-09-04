@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 @import '../variables.scss';
 .container {
   // width: $peopleWidth;
@@ -41,7 +41,7 @@
       height: 20px;
       transition: all 0.25s linear;
       .icon {
-        @include function.buttonRound;
+        @include utils.buttonRound;
         border-radius: 10px;
         padding: 2px 4px;
         width: unset;

@@ -137,7 +137,7 @@ $bg-green-bold: #00a389;
           position: relative;
 
           &::after {
-            content: '';
+            content: "";
             position: absolute;
             background: red;
             top: 50%;
@@ -148,15 +148,6 @@ $bg-green-bold: #00a389;
             border-radius: 100%;
             animation: beat 1.5s ease-in-out -1s infinite alternate forwards;
 
-            @keyframes beat {
-              from {
-                width: 5px;
-              }
-
-              to {
-                width: 12px;
-              }
-            }
           }
         }
 
@@ -303,4 +294,15 @@ $bg-green-bold: #00a389;
 
 .blur {
   @extend %blur;
+}
+
+
+@keyframes beat {
+  from {
+    width: 5px;
+  }
+
+  to {
+    width: 12px;
+  }
 }

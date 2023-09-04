@@ -1,14 +1,14 @@
-@use "@styles/globalType/function" as function;
+@use "@styles/globalType/function" as utils;
 @import "../../variables.scss";
 .container {
-  @include function.panel;
+  @include utils.panel;
   padding: 10px 15px;
   .title {
-    @include function.panelTitle;
+    @include utils.panelTitle;
     padding: 5px 10px;
   }
   .item {
-    @include function.button;
+    @include utils.button;
     margin: 7px 0px;
     width: 100%;
     display: flex;

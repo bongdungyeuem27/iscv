@@ -1,4 +1,4 @@
-@use "@styles/globalType/function" as function;
+@use "@styles/globalType/function" as utils;
 .container{
     padding: 10px;
     min-width: 30vw;
@@ -9,10 +9,10 @@
         display: flex;
         flex-direction: column;
         input{
-            @include function.inputStyle;
+            @include utils.inputStyle;
         }
         p{
-            @include function.errorInput;
+            @include utils.errorInput;
         }
     }
 }

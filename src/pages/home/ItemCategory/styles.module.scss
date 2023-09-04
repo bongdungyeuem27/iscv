@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 @use '@styles/abtracts/mixins' as mixin;
 $space: 20px;
 .container {
@@ -53,7 +53,7 @@ $space: 20px;
 
     background-color: var(--color-background-primary);
     a {
-      @include function.textGradient;
+      @include utils.textGradient;
       font-weight: bold;
     }
   }

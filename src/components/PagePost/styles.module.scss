@@ -1,6 +1,6 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 .item {
-  @include function.panel;
+  @include utils.panel;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -88,7 +88,7 @@
     margin: 10px 0px;
     align-items: center;
     i {
-      @include function.textGradient;
+      @include utils.textGradient;
       background: var(--color-button-octane);
       font-size: 20px;
       width: 20px;
@@ -105,7 +105,7 @@
     line-height: 18px;
     align-items: center;
     i {
-      @include function.textGradient;
+      @include utils.textGradient;
       background: var(--color-button-tertiary);
       font-size: 20px;
       width: 20px;
@@ -137,7 +137,7 @@
         font-weight: 500;
       }
       .buttonApply {
-        @include function.button;
+        @include utils.button;
       }
       .applied {
         background: var(--color-button-green);
@@ -168,7 +168,7 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
-        @include function.inputStyle;
+        @include utils.inputStyle;
 
         background-color: var(--color-background-primary);
         textarea {
@@ -181,13 +181,13 @@
             font-size: 20px;
             background: var(--color-button-secondary);
             cursor: pointer;
-            @include function.textGradient;
+            @include utils.textGradient;
           }
           .commentLike {
             font-size: 20px;
             background: var(--color-button-tertiary);
             cursor: pointer;
-            @include function.textGradient;
+            @include utils.textGradient;
           }
         }
       }

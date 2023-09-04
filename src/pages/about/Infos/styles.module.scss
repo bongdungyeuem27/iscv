@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 @import '../variables.scss';
 .personalWrapper {
   margin: 20px 0px;
@@ -29,7 +29,7 @@
           font-weight: 450;
         }
         .iconWrapper {
-          @include function.buttonRound;
+          @include utils.buttonRound;
           background: var(--color-button-primary);
           i {
             font-size: 20px;
@@ -38,7 +38,7 @@
         }
       }
       .tool {
-        @include function.buttonRound;
+        @include utils.buttonRound;
         gap: 15px;
         background: var(--color-hover-primary);
 

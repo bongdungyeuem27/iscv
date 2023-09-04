@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 .container {
   width: 100%;
   height: 100%;
@@ -112,7 +112,7 @@
           align-items: center;
           justify-content: center;
           a {
-            @include function.button;
+            @include utils.button;
           }
         }
       }
@@ -160,13 +160,13 @@
         }
         .buy {
           .buttonBuy {
-            @include function.button;
+            @include utils.button;
             background: var(--color-button-primary);
           }
         }
         .apply {
           .buttonApply {
-            @include function.button;
+            @include utils.button;
             background: var(--color-button-secondary);
           }
         }

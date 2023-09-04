@@ -1,7 +1,7 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 
 .container {
-  @include function.panel;
+  @include utils.panel;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -21,7 +21,7 @@
     }
   }
   .calendarWrapper {
-    @include function.panel;
+    @include utils.panel;
     background: var(--color-calendar-primary);
     padding: 10px 10px;
   }

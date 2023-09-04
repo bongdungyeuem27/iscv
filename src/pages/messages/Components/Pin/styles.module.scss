@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 @import '../../variables.scss';
 .container {
   width: 100%;
@@ -19,7 +19,7 @@
     align-items: center;
     justify-content: center;
     i {
-      @include function.textGradient;
+      @include utils.textGradient;
       background: var(--color-button-secondary);
     }
   }
@@ -33,7 +33,7 @@
       font-size: 0.9rem;
     }
     .contentPin {
-      @include function.truncate;
+      @include utils.truncate;
       font-size: 0.8rem;
       display: flex;
       gap: 15px;
@@ -47,7 +47,7 @@
     display: flex;
     gap: 10px;
     .appointmentTime {
-      @include function.button;
+      @include utils.button;
     }
   }
 }

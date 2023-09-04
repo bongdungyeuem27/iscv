@@ -85,7 +85,7 @@ module.exports = {
         'gradient-black':
           'linear-gradient(335deg, rgba(34,34,34,1) 30%, rgba(54,54,54,1) 72%, rgba(71,71,71,1) 92%)',
         'gradient-gray':
-          'linear-gradient(335deg, rgba(217,217,217,1) 30%, rgba(223,223,223,1) 72%, rgba(237,237,237,1) 92%);',
+          'linear-gradient(335deg, rgba(217,217,217,1) 30%, rgba(223,223,223,1) 72%, rgba(237,237,237,1) 92%)',
         'gradient-white':
           'linear-gradient(347deg, rgba(233,233,233,1) 30%, rgba(254,254,254,1) 68%, rgba(255,255,255,1) 92%)'
       },

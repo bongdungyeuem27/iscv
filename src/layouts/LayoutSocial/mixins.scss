@@ -1,4 +1,4 @@
-@use '@styles/globalType/function' as function;
+@use '@styles/globalType/function' as utils;
 @import './variables.scss';
 
 @mixin title {
@@ -9,7 +9,7 @@
 }
 
 @mixin container {
-  @include function.panel;
+  @include utils.panel;
   width: 100%;
   background: var(--color-background-primary);
   border-radius: $borderRadiusItem;
